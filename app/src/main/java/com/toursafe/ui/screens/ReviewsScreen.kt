@@ -1,5 +1,9 @@
 package com.toursafe.ui.screens
 
+import com.toursafe.R
+
+import androidx.compose.ui.res.stringResource
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -40,13 +44,13 @@ fun ReviewsScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { showDialog = true },
-                containerColor = AccentCyan,
-                contentColor = Color.Black
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
             ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add Review")
+                Icon(imageVector = Icons.Default.Add, contentDescription = stringResource(R.string.cd_add_review))
             }
         },
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -80,7 +84,7 @@ private fun ReviewCard(review: PropertyReview) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(SurfaceNavy, RoundedCornerShape(16.dp))
+            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(16.dp))
             .padding(16.dp)
     ) {
         Column {
@@ -93,18 +97,18 @@ private fun ReviewCard(review: PropertyReview) {
                     Text(
                         text = review.userName,
                         style = MaterialTheme.typography.titleMedium,
-                        color = TextPrimary
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
-                        text = "Verified Traveler • ${review.userCountry}",
+                        text = stringResource(R.string.verified_traveler, review.userCountry),
                         style = MaterialTheme.typography.bodySmall,
-                        color = TextSecondary
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
                 Text(
                     text = review.date,
                     style = MaterialTheme.typography.bodySmall,
-                    color = TextMuted
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -117,7 +121,7 @@ private fun ReviewCard(review: PropertyReview) {
             Text(
                 text = review.comment,
                 style = MaterialTheme.typography.bodyMedium,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }
@@ -134,21 +138,21 @@ private fun AddReviewDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        containerColor = SurfaceNavy,
-        title = { Text("Write Safety Review", color = TextPrimary) },
+        containerColor = MaterialTheme.colorScheme.surface,
+        title = { Text(stringResource(R.string.write_review), color = MaterialTheme.colorScheme.onSurface) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("Your Name", color = TextSecondary) },
+                    label = { Text(stringResource(R.string.your_name_label), color = MaterialTheme.colorScheme.onSurfaceVariant) },
                     singleLine = true,
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = TextPrimary, unfocusedTextColor = TextPrimary
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface, unfocusedTextColor = MaterialTheme.colorScheme.onSurface
                     )
                 )
 
-                Text("Rating:", style = MaterialTheme.typography.bodyMedium, color = TextPrimary)
+                Text(stringResource(R.string.rating_label), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurface)
                 StarRatingBar(
                     rating = userRating,
                     starSize = 28.dp,
@@ -158,10 +162,10 @@ private fun AddReviewDialog(
                 OutlinedTextField(
                     value = comment,
                     onValueChange = { comment = it },
-                    label = { Text("Safety Comments & Experience", color = TextSecondary) },
+                    label = { Text(stringResource(R.string.safety_comments_label), color = MaterialTheme.colorScheme.onSurfaceVariant) },
                     maxLines = 3,
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = TextPrimary, unfocusedTextColor = TextPrimary
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface, unfocusedTextColor = MaterialTheme.colorScheme.onSurface
                     )
                 )
             }
@@ -173,14 +177,14 @@ private fun AddReviewDialog(
                         onSubmit(name, userRating, comment)
                     }
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = AccentCyan)
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
-                Text("Submit Review", color = Color.Black)
+                Text(stringResource(R.string.submit_review), color = MaterialTheme.colorScheme.onPrimary)
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancel", color = TextSecondary)
+                Text(stringResource(R.string.cancel), color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     )

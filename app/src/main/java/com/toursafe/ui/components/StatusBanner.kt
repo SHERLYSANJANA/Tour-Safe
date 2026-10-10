@@ -31,10 +31,10 @@ fun StatusBanner(
     onCheckInClick: () -> Unit
 ) {
     val (bgColor, borderColor, statusText, iconVector) = when (status.level) {
-        SafetyLevel.SAFE -> Quadruple(SafetyGreenBg, SafetyGreen, "I'm Safe", Icons.Default.CheckCircle)
-        SafetyLevel.MOVING_TO_SAFETY -> Quadruple(WarningAmberBg, WarningAmber, "Moving to Safety", Icons.AutoMirrored.Filled.DirectionsRun)
-        SafetyLevel.NEED_HELP -> Quadruple(AlertRedBg, AlertRed, "I Need Help", Icons.Default.Warning)
-        SafetyLevel.CRITICAL_WARNING -> Quadruple(AlertRedBg, AlertRed, "Critical Hazard Zone", Icons.Default.Warning)
+        SafetyLevel.SAFE -> Quadruple(MaterialTheme.tourSafe.safeContainer, MaterialTheme.tourSafe.safe, stringResource(R.string.status_im_safe), Icons.Default.CheckCircle)
+        SafetyLevel.MOVING_TO_SAFETY -> Quadruple(MaterialTheme.tourSafe.warningContainer, MaterialTheme.tourSafe.warning, stringResource(R.string.status_moving_to_safety), Icons.AutoMirrored.Filled.DirectionsRun)
+        SafetyLevel.NEED_HELP -> Quadruple(MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.error, stringResource(R.string.status_i_need_help), Icons.Default.Warning)
+        SafetyLevel.CRITICAL_WARNING -> Quadruple(MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.error, stringResource(R.string.status_critical_warning), Icons.Default.Warning)
     }
 
     Box(
@@ -63,12 +63,12 @@ fun StatusBanner(
                         Text(
                             text = stringResource(R.string.safety_status_header),
                             style = MaterialTheme.typography.labelSmall,
-                            color = TextSecondary
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
                             text = statusText,
                             style = MaterialTheme.typography.titleLarge,
-                            color = TextPrimary
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
@@ -80,7 +80,7 @@ fun StatusBanner(
                 ) {
                     Text(
                         text = stringResource(R.string.update),
-                        color = Color.Black,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.labelLarge
                     )
                 }
@@ -91,7 +91,7 @@ fun StatusBanner(
             Text(
                 text = "📍 ${status.locationName} (${status.coordinates})",
                 style = MaterialTheme.typography.bodySmall,
-                color = TextSecondary
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             Spacer(modifier = Modifier.height(4.dp))
@@ -99,7 +99,7 @@ fun StatusBanner(
             Text(
                 text = status.statusMessage,
                 style = MaterialTheme.typography.bodyMedium,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }

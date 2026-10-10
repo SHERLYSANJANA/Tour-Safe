@@ -19,9 +19,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.toursafe.R
-import com.toursafe.ui.theme.BackgroundNavy
-import com.toursafe.ui.theme.TextPrimary
-import com.toursafe.ui.theme.TextSecondary
 import kotlinx.coroutines.delay
 
 @Composable
@@ -42,7 +39,7 @@ fun SplashScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackgroundNavy),
+            .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -61,7 +58,7 @@ fun SplashScreen(
             Text(
                 text = stringResource(R.string.splash_tagline),
                 style = MaterialTheme.typography.bodyMedium,
-                color = TextSecondary
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }

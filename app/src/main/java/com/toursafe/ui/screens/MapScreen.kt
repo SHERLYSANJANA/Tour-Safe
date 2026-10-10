@@ -118,7 +118,7 @@ fun MapScreen(
                 title = stringResource(R.string.interactive_safety_map)
             )
         },
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -165,16 +165,16 @@ fun MapScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(SurfaceNavy, RoundedCornerShape(12.dp))
+                        .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(12.dp))
                         .padding(12.dp),
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    LegendDot(color = AlertRed, label = stringResource(R.string.legend_hazard_zone))
-                    LegendDot(color = SafetyGreen, label = stringResource(R.string.legend_free_shelter))
-                    LegendDot(color = ServiceViolet, label = stringResource(R.string.legend_emergency_service))
-                    LegendDot(color = AccentCyan, label = stringResource(R.string.legend_safe_hotel))
-                    LegendDot(color = AccentBlue, label = stringResource(R.string.legend_you))
+                    LegendDot(color = MaterialTheme.colorScheme.error, label = stringResource(R.string.legend_hazard_zone))
+                    LegendDot(color = MaterialTheme.tourSafe.safe, label = stringResource(R.string.legend_free_shelter))
+                    LegendDot(color = MaterialTheme.tourSafe.service, label = stringResource(R.string.legend_emergency_service))
+                    LegendDot(color = MaterialTheme.colorScheme.primary, label = stringResource(R.string.legend_safe_hotel))
+                    LegendDot(color = MaterialTheme.colorScheme.secondary, label = stringResource(R.string.legend_you))
                 }
 
                 if (!demoModeEnabled) {
@@ -187,8 +187,8 @@ fun MapScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(16.dp))
-                            .background(SurfaceNavy)
-                            .border(1.dp, SurfaceVariantNavy, RoundedCornerShape(16.dp))
+                            .background(MaterialTheme.colorScheme.surface)
+                            .border(1.dp, MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(16.dp))
                             .padding(16.dp)
                     ) {
                         Column {
@@ -200,12 +200,12 @@ fun MapScreen(
                                 Text(
                                     text = marker.title,
                                     style = MaterialTheme.typography.titleMedium,
-                                    color = TextPrimary
+                                    color = MaterialTheme.colorScheme.onSurface
                                 )
                                 Text(
                                     text = stringResource(R.string.km_away, marker.distanceKm),
                                     style = MaterialTheme.typography.labelSmall,
-                                    color = AccentCyan
+                                    color = MaterialTheme.colorScheme.primary
                                 )
                             }
 
@@ -214,7 +214,7 @@ fun MapScreen(
                             Text(
                                 text = marker.description,
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = TextSecondary
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
 
                             Spacer(modifier = Modifier.height(12.dp))
@@ -227,12 +227,12 @@ fun MapScreen(
                                     Button(
                                         onClick = onNavigateToShelters,
                                         modifier = Modifier.weight(1f),
-                                        colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                                         shape = RoundedCornerShape(12.dp)
                                     ) {
                                         Text(
                                             text = stringResource(R.string.view_safe_accommodations),
-                                            color = Color.Black,
+                                            color = MaterialTheme.colorScheme.onPrimary,
                                             style = MaterialTheme.typography.labelLarge
                                         )
                                     }
@@ -248,14 +248,14 @@ fun MapScreen(
                                             isDemoRecord = marker.isDemo
                                         )
                                     },
-                                    colors = ButtonDefaults.buttonColors(containerColor = SurfaceVariantNavy),
+                                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
                                     shape = RoundedCornerShape(12.dp)
                                 ) {
-                                    Icon(imageVector = Icons.Default.Directions, contentDescription = null, tint = TextPrimary)
+                                    Icon(imageVector = Icons.Default.Directions, contentDescription = null, tint = MaterialTheme.colorScheme.onSurface)
                                     Spacer(modifier = Modifier.width(6.dp))
                                     Text(
                                         text = stringResource(R.string.directions),
-                                        color = TextPrimary,
+                                        color = MaterialTheme.colorScheme.onSurface,
                                         style = MaterialTheme.typography.labelLarge
                                     )
                                 }
@@ -270,9 +270,9 @@ fun MapScreen(
         if (showPermissionExplanation) {
             AlertDialog(
                 onDismissRequest = { showPermissionExplanation = false },
-                containerColor = SurfaceNavy,
-                title = { Text(stringResource(R.string.location_permission_explanation_title), color = TextPrimary) },
-                text = { Text(stringResource(R.string.location_permission_explanation_desc), color = TextSecondary) },
+                containerColor = MaterialTheme.colorScheme.surface,
+                title = { Text(stringResource(R.string.location_permission_explanation_title), color = MaterialTheme.colorScheme.onSurface) },
+                text = { Text(stringResource(R.string.location_permission_explanation_desc), color = MaterialTheme.colorScheme.onSurfaceVariant) },
                 confirmButton = {
                     Button(
                         onClick = {
@@ -284,14 +284,14 @@ fun MapScreen(
                                 )
                             )
                         },
-                        colors = ButtonDefaults.buttonColors(containerColor = AccentCyan)
+                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                     ) {
-                        Text(stringResource(R.string.use_my_location), color = Color.Black)
+                        Text(stringResource(R.string.use_my_location), color = MaterialTheme.colorScheme.onPrimary)
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { showPermissionExplanation = false }) {
-                        Text(stringResource(R.string.cancel), color = TextSecondary)
+                        Text(stringResource(R.string.cancel), color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             )
@@ -310,8 +310,8 @@ private fun GpsControlPanel(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(SurfaceNavy)
-            .border(1.dp, SurfaceVariantNavy, RoundedCornerShape(16.dp))
+            .background(MaterialTheme.colorScheme.surface)
+            .border(1.dp, MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(16.dp))
             .padding(14.dp)
     ) {
         when (locationState) {
@@ -322,20 +322,20 @@ private fun GpsControlPanel(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(imageVector = Icons.Default.LocationOn, contentDescription = null, tint = AccentCyan)
+                        Icon(imageVector = Icons.Default.LocationOn, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                         Spacer(modifier = Modifier.width(10.dp))
                         Text(
-                            text = "GPS Location",
+                            text = stringResource(R.string.gps_location_label),
                             style = MaterialTheme.typography.titleMedium,
-                            color = TextPrimary
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                     Button(
                         onClick = onUseLocationClick,
-                        colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                         shape = RoundedCornerShape(10.dp)
                     ) {
-                        Text(stringResource(R.string.use_my_location), color = Color.Black, style = MaterialTheme.typography.labelMedium)
+                        Text(stringResource(R.string.use_my_location), color = MaterialTheme.colorScheme.onPrimary, style = MaterialTheme.typography.labelMedium)
                     }
                 }
             }
@@ -345,12 +345,12 @@ private fun GpsControlPanel(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    CircularProgressIndicator(modifier = Modifier.size(24.dp), color = AccentCyan, strokeWidth = 2.dp)
+                    CircularProgressIndicator(modifier = Modifier.size(24.dp), color = MaterialTheme.colorScheme.primary, strokeWidth = 2.dp)
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(
                         text = stringResource(R.string.gps_acquiring),
                         style = MaterialTheme.typography.bodyMedium,
-                        color = TextSecondary
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
@@ -364,28 +364,28 @@ private fun GpsControlPanel(
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(imageVector = Icons.Default.GpsFixed, contentDescription = null, tint = SafetyGreen)
+                            Icon(imageVector = Icons.Default.GpsFixed, contentDescription = null, tint = MaterialTheme.tourSafe.safe)
                             Spacer(modifier = Modifier.width(8.dp))
                             BadgeChip(
                                 text = if (loc.isApproximate) stringResource(R.string.approximate_gps_badge) else stringResource(R.string.precise_gps_badge),
-                                bgColor = if (loc.isApproximate) WarningAmberBg else SafetyGreenBg,
-                                textColor = if (loc.isApproximate) WarningAmber else SafetyGreen
+                                bgColor = if (loc.isApproximate) MaterialTheme.tourSafe.warningContainer else MaterialTheme.tourSafe.safeContainer,
+                                textColor = if (loc.isApproximate) MaterialTheme.tourSafe.warning else MaterialTheme.tourSafe.safe
                             )
                         }
                         IconButton(onClick = onRefreshClick) {
-                            Icon(imageVector = Icons.Default.Refresh, contentDescription = stringResource(R.string.refresh_location), tint = AccentCyan)
+                            Icon(imageVector = Icons.Default.Refresh, contentDescription = stringResource(R.string.refresh_location), tint = MaterialTheme.colorScheme.primary)
                         }
                     }
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
                         text = "Lat: ${"%.4f".format(loc.latitude)}, Lng: ${"%.4f".format(loc.longitude)}",
                         style = MaterialTheme.typography.titleSmall,
-                        color = TextPrimary
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
                         text = stringResource(R.string.location_accuracy, loc.accuracyMeters),
                         style = MaterialTheme.typography.bodySmall,
-                        color = TextSecondary
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Text(
                         text = stringResource(
@@ -397,7 +397,7 @@ private fun GpsControlPanel(
                             ).toString()
                         ),
                         style = MaterialTheme.typography.bodySmall,
-                        color = TextSecondary
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
@@ -405,27 +405,27 @@ private fun GpsControlPanel(
             is LocationState.GpsDisabled -> {
                 Column {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(imageVector = Icons.Default.Warning, contentDescription = null, tint = WarningAmber)
+                        Icon(imageVector = Icons.Default.Warning, contentDescription = null, tint = MaterialTheme.tourSafe.warning)
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = stringResource(R.string.gps_disabled_title),
                             style = MaterialTheme.typography.titleSmall,
-                            color = WarningAmber
+                            color = MaterialTheme.tourSafe.warning
                         )
                     }
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = stringResource(R.string.gps_disabled_desc),
                         style = MaterialTheme.typography.bodySmall,
-                        color = TextSecondary
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Button(
                         onClick = onOpenSettingsClick,
-                        colors = ButtonDefaults.buttonColors(containerColor = WarningAmber),
+                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.tourSafe.warning),
                         shape = RoundedCornerShape(10.dp)
                     ) {
-                        Text(stringResource(R.string.open_location_settings), color = Color.Black, style = MaterialTheme.typography.labelMedium)
+                        Text(stringResource(R.string.open_location_settings), color = MaterialTheme.colorScheme.onPrimary, style = MaterialTheme.typography.labelMedium)
                     }
                 }
             }
@@ -439,15 +439,15 @@ private fun GpsControlPanel(
                     Text(
                         text = locationState.message,
                         style = MaterialTheme.typography.bodySmall,
-                        color = AlertRed,
+                        color = MaterialTheme.colorScheme.error,
                         modifier = Modifier.weight(1f)
                     )
                     Button(
                         onClick = onRefreshClick,
-                        colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                         shape = RoundedCornerShape(10.dp)
                     ) {
-                        Text(stringResource(R.string.refresh_location), color = Color.Black, style = MaterialTheme.typography.labelSmall)
+                        Text(stringResource(R.string.refresh_location), color = MaterialTheme.colorScheme.onPrimary, style = MaterialTheme.typography.labelSmall)
                     }
                 }
             }
@@ -487,7 +487,7 @@ private fun LegendDot(
         Text(
             text = label,
             style = MaterialTheme.typography.bodySmall,
-            color = TextSecondary
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }

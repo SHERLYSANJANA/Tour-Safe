@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
@@ -27,12 +26,19 @@ fun InteractiveMapCanvas(
     selectedMarker: MapMarker?,
     onMarkerSelect: (MapMarker) -> Unit
 ) {
+    // Theme colors must be read in composable scope; the draw lambda below is not composable.
+    val gridColor = MaterialTheme.colorScheme.outlineVariant
+    val hazardColor = MaterialTheme.colorScheme.error
+    val userColor = MaterialTheme.tourSafe.userLocation
+    val shelterColor = MaterialTheme.tourSafe.safe
+    val accommodationColor = MaterialTheme.colorScheme.primary
+    val serviceColor = MaterialTheme.tourSafe.service
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(320.dp)
             .clip(RoundedCornerShape(16.dp))
-            .background(Color(0xFF0D1B2A))
+            .background(MaterialTheme.colorScheme.surfaceVariant)
     ) {
         Canvas(
             modifier = Modifier
@@ -57,7 +63,6 @@ fun InteractiveMapCanvas(
             val h = size.height
 
             // 1. Draw Grid Lines simulating map roads/coastal grid
-            val gridColor = Color(0xFF1E293B)
             for (i in 1..8) {
                 drawLine(
                     color = gridColor,
@@ -80,12 +85,12 @@ fun InteractiveMapCanvas(
                 val r = zone.radiusNormalized * w
 
                 drawCircle(
-                    color = AlertRed.copy(alpha = 0.25f),
+                    color = hazardColor.copy(alpha = 0.25f),
                     radius = r,
                     center = Offset(cx, cy)
                 )
                 drawCircle(
-                    color = AlertRed,
+                    color = hazardColor,
                     radius = r,
                     center = Offset(cx, cy),
                     style = Stroke(width = 2f)
@@ -99,11 +104,11 @@ fun InteractiveMapCanvas(
                 val isSelected = marker.id == selectedMarker?.id
 
                 val markerColor = when (marker.type) {
-                    MarkerType.USER_LOCATION -> AccentBlue
-                    MarkerType.HAZARD_ZONE -> AlertRed
-                    MarkerType.EMERGENCY_SHELTER -> SafetyGreen
-                    MarkerType.SAFE_ACCOMMODATION -> AccentCyan
-                    MarkerType.EMERGENCY_SERVICE -> ServiceViolet
+                    MarkerType.USER_LOCATION -> userColor
+                    MarkerType.HAZARD_ZONE -> hazardColor
+                    MarkerType.EMERGENCY_SHELTER -> shelterColor
+                    MarkerType.SAFE_ACCOMMODATION -> accommodationColor
+                    MarkerType.EMERGENCY_SERVICE -> serviceColor
                 }
 
                 // Halo circle for selected

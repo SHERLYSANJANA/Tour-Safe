@@ -37,7 +37,7 @@ fun AlertDetailsScreen(
                 onBackClick = onBackClick
             )
         },
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         if (alert == null) {
             Box(
@@ -47,16 +47,16 @@ fun AlertDetailsScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Alert details not found.",
+                    text = stringResource(R.string.alert_not_found),
                     style = MaterialTheme.typography.bodyLarge,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         } else {
             val (badgeBg, badgeColor, severityLabel) = when (alert.severity) {
-                AlertSeverity.CRITICAL -> Triple(AlertRedBg, AlertRed, stringResource(R.string.severity_critical))
-                AlertSeverity.WARNING -> Triple(WarningAmberBg, WarningAmber, stringResource(R.string.severity_warning))
-                AlertSeverity.INFO -> Triple(SurfaceVariantNavy, AccentCyan, stringResource(R.string.severity_info))
+                AlertSeverity.CRITICAL -> Triple(MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.error, stringResource(R.string.severity_critical))
+                AlertSeverity.WARNING -> Triple(MaterialTheme.tourSafe.warningContainer, MaterialTheme.tourSafe.warning, stringResource(R.string.severity_warning))
+                AlertSeverity.INFO -> Triple(MaterialTheme.colorScheme.surfaceVariant, MaterialTheme.colorScheme.primary, stringResource(R.string.severity_info))
             }
 
             Column(
@@ -95,13 +95,13 @@ fun AlertDetailsScreen(
                         Text(
                             text = alert.title,
                             style = MaterialTheme.typography.headlineMedium,
-                            color = TextPrimary
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = alert.sourceLabel,
                             style = MaterialTheme.typography.labelMedium,
-                            color = WarningAmber
+                            color = MaterialTheme.tourSafe.warning
                         )
                     }
                 }
@@ -110,26 +110,26 @@ fun AlertDetailsScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(SurfaceNavy, RoundedCornerShape(16.dp))
+                        .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(16.dp))
                         .padding(16.dp)
                 ) {
                     Column {
                         Text(
                             text = stringResource(R.string.affected_area_label, alert.affectedArea),
                             style = MaterialTheme.typography.titleSmall,
-                            color = TextPrimary
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = stringResource(R.string.distance_from_location, alert.distanceKm),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = TextSecondary
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Spacer(modifier = Modifier.height(12.dp))
                         Text(
                             text = alert.description,
                             style = MaterialTheme.typography.bodyLarge,
-                            color = TextPrimary
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }
@@ -138,14 +138,14 @@ fun AlertDetailsScreen(
                 Text(
                     text = stringResource(R.string.official_instructions_title),
                     style = MaterialTheme.typography.titleLarge,
-                    color = TextPrimary
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     alert.officialInstructions.forEach { instruction ->
                         InstructionRow(
                             text = instruction,
-                            iconColor = AlertRed
+                            iconColor = MaterialTheme.colorScheme.error
                         )
                     }
                 }
@@ -154,14 +154,14 @@ fun AlertDetailsScreen(
                 Text(
                     text = stringResource(R.string.recommended_actions_title),
                     style = MaterialTheme.typography.titleLarge,
-                    color = TextPrimary
+                    color = MaterialTheme.colorScheme.onSurface
                 )
 
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     alert.recommendedActions.forEach { action ->
                         InstructionRow(
                             text = action,
-                            iconColor = SafetyGreen
+                            iconColor = MaterialTheme.tourSafe.safe
                         )
                     }
                 }
@@ -171,12 +171,12 @@ fun AlertDetailsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(54.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                     shape = RoundedCornerShape(16.dp)
                 ) {
                     Text(
                         text = stringResource(R.string.find_safe_places_near_you),
-                        color = Color.Black,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.titleMedium
                     )
                 }
@@ -193,7 +193,7 @@ private fun InstructionRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(SurfaceNavy, RoundedCornerShape(12.dp))
+            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(12.dp))
             .padding(14.dp),
         verticalAlignment = Alignment.Top
     ) {
@@ -209,7 +209,7 @@ private fun InstructionRow(
         Text(
             text = text,
             style = MaterialTheme.typography.bodyMedium,
-            color = TextPrimary
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }

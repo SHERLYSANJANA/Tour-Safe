@@ -86,6 +86,15 @@ TourSafe is intended to support access to safety information, not replace offici
 
 Always follow official local emergency instructions and contact the appropriate emergency service directly when needed.
 
+## Design System
+
+- **Theme:** light-first forest-green Material 3 scheme with a matching dark scheme (`ui/theme`). Appearance can follow the system or be set to Light/Dark in Settings.
+- **Colors:** read them only through `MaterialTheme.colorScheme` or `MaterialTheme.tourSafe` (safe, warning, info, service, user-location). Do not hardcode colors in screens. Red is reserved for emergency actions and critical warnings.
+- **Tokens:** spacing and touch-target sizes live in `ui/theme/Dimens.kt`.
+- **Shared components:** `EmergencySosButton`, `SectionHeader`, `QuickActionButton`, `StatusBanner`, `AlertCard`, `DataStatusPanel`.
+- **Emergency access:** the bottom bar has a dedicated SOS tab, and Home has a prominent SOS button. Both only open the SOS screen, which keeps its own review/confirm step.
+- **Strings:** all UI text must be a localized string resource in all eight locales.
+
 ##  Development
 
 To keep development organized:

@@ -1,5 +1,6 @@
 package com.toursafe.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -24,6 +25,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toursafe.R
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.ContentScale
+import com.toursafe.ui.components.EmergencySosButton
+import com.toursafe.ui.components.QuickActionButton
+import com.toursafe.ui.components.SectionHeader
 import com.toursafe.navigation.Screen
 import com.toursafe.ui.components.AlertCard
 import com.toursafe.ui.components.DataStatusPanel
@@ -64,50 +71,71 @@ fun HomeScreen(
     val alerts by viewModel.alerts.collectAsState()
     val alertsStatus by viewModel.alertsStatus.collectAsState()
 
+    // The bundled logo is black artwork; use the white variant on dark backgrounds.
+    val isDarkBackground = MaterialTheme.colorScheme.background.luminance() < 0.5f
+
     Scaffold(
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .padding(horizontal = 20.dp, vertical = 12.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+                .padding(horizontal = Dimens.ScreenPadding, vertical = Dimens.SpaceMd),
+            verticalArrangement = Arrangement.spacedBy(Dimens.SectionSpacing)
         ) {
-            // Header Row
+            // Header: identity, current location, shortcuts
             item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column {
-                        Text(
-                            text = stringResource(R.string.dashboard_title),
-                            style = MaterialTheme.typography.headlineMedium,
-                            color = TextPrimary
-                        )
-                        Text(
-                            text = status.locationName,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = TextSecondary
-                        )
-                    }
-
-                    IconButton(
-                        onClick = { onNavigate(Screen.NotificationHistory.route) },
-                        modifier = Modifier.background(SurfaceNavy, RoundedCornerShape(12.dp))
+                    Row(
+                        modifier = Modifier.weight(1f),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
+                        Image(
+                            painter = painterResource(
+                                if (isDarkBackground) R.drawable.logo_toursafe_white else R.drawable.logo_toursafe
+                            ),
+                            contentDescription = stringResource(R.string.app_name),
+                            contentScale = ContentScale.Fit,
+                            modifier = Modifier.size(48.dp)
+                        )
+                        Spacer(modifier = Modifier.width(Dimens.ItemSpacing))
+                        Column {
+                            Text(
+                                text = stringResource(R.string.dashboard_title),
+                                style = MaterialTheme.typography.titleLarge,
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+                            Text(
+                                text = status.locationName,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                maxLines = 2
+                            )
+                        }
+                    }
+                    IconButton(onClick = { onNavigate(Screen.NotificationHistory.route) }) {
                         Icon(
                             imageVector = Icons.Default.Notifications,
-                            contentDescription = "Notifications",
-                            tint = AccentCyan
+                            contentDescription = stringResource(R.string.notification_history_title),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    IconButton(onClick = { onNavigate(Screen.Profile.route) }) {
+                        Icon(
+                            imageVector = Icons.Default.Person,
+                            contentDescription = stringResource(R.string.nav_profile),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
             }
 
-            // Current Safety Status Card
+            // Current status + location
             item {
                 StatusBanner(
                     status = status,
@@ -115,70 +143,70 @@ fun HomeScreen(
                 )
             }
 
-            // Quick Actions Grid
+            // Emergency: one prominent button, and an honest note about what it does
             item {
-                Text(
-                    text = stringResource(R.string.quick_actions_header),
-                    style = MaterialTheme.typography.titleLarge,
-                    color = TextPrimary
-                )
-                Spacer(modifier = Modifier.height(12.dp))
-                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        QuickActionButton(
-                            modifier = Modifier.weight(1f),
-                            title = stringResource(R.string.emergency_sos),
-                            subtitle = stringResource(R.string.sos_subtitle),
-                            icon = Icons.Default.Sos,
-                            bgColor = AlertRedBg,
-                            borderColor = AlertRed,
-                            iconTint = AlertRed,
-                            onClick = { onNavigate(Screen.EmergencySos.route) }
-                        )
-                        QuickActionButton(
-                            modifier = Modifier.weight(1f),
-                            title = stringResource(R.string.voice_sos_tab),
-                            subtitle = stringResource(R.string.start_voice_sos),
-                            icon = Icons.Default.Mic,
-                            bgColor = SurfaceNavy,
-                            borderColor = AccentCyan,
-                            iconTint = AccentCyan,
-                            onClick = { onNavigate(Screen.EmergencySos.route) }
-                        )
-                    }
-                    QuickActionButton(
-                        modifier = Modifier.fillMaxWidth(),
-                        title = stringResource(R.string.safe_places),
-                        subtitle = stringResource(R.string.shelters_hotels_subtitle),
-                        icon = Icons.Default.Hotel,
-                        bgColor = SurfaceNavy,
-                        borderColor = AccentCyan,
-                        iconTint = AccentCyan,
-                        onClick = { onNavigate(Screen.SafeAccommodation.route) }
+                Column(verticalArrangement = Arrangement.spacedBy(Dimens.SpaceSm)) {
+                    EmergencySosButton(onClick = { onNavigate(Screen.EmergencySos.route) })
+                    Text(
+                        text = stringResource(R.string.home_sos_explainer),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
 
-            // Active Disaster Alerts Header
+            // Quick actions (2 x 2)
             item {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = stringResource(R.string.active_disaster_alerts),
-                        style = MaterialTheme.typography.titleLarge,
-                        color = TextPrimary
-                    )
-                    TextTextButton(
-                        text = "${stringResource(R.string.view_all)} (${alerts.size})",
-                        onClick = { onNavigate(Screen.Alerts.route) }
-                    )
+                Column(verticalArrangement = Arrangement.spacedBy(Dimens.ItemSpacing)) {
+                    SectionHeader(title = stringResource(R.string.quick_actions_header))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.ItemSpacing)
+                    ) {
+                        QuickActionButton(
+                            modifier = Modifier.weight(1f),
+                            label = stringResource(R.string.nav_map),
+                            icon = Icons.Default.Map,
+                            tint = MaterialTheme.colorScheme.primary,
+                            onClick = { onNavigate(Screen.Map.route) }
+                        )
+                        QuickActionButton(
+                            modifier = Modifier.weight(1f),
+                            label = stringResource(R.string.safe_places),
+                            icon = Icons.Default.Hotel,
+                            tint = MaterialTheme.colorScheme.primary,
+                            onClick = { onNavigate(Screen.SafeAccommodation.route) }
+                        )
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(Dimens.ItemSpacing)
+                    ) {
+                        QuickActionButton(
+                            modifier = Modifier.weight(1f),
+                            label = stringResource(R.string.nav_alerts),
+                            icon = Icons.Default.Warning,
+                            tint = MaterialTheme.tourSafe.warning,
+                            onClick = { onNavigate(Screen.Alerts.route) }
+                        )
+                        QuickActionButton(
+                            modifier = Modifier.weight(1f),
+                            label = stringResource(R.string.check_in_screen_title),
+                            icon = Icons.Default.CheckCircle,
+                            tint = MaterialTheme.tourSafe.safe,
+                            onClick = { onNavigate(Screen.EmergencyCheckIn.route) }
+                        )
+                    }
                 }
+            }
+
+            // Alerts for the current area
+            item {
+                SectionHeader(
+                    title = stringResource(R.string.active_disaster_alerts),
+                    actionLabel = "${stringResource(R.string.view_all)} (${alerts.size})",
+                    onAction = { onNavigate(Screen.Alerts.route) }
+                )
             }
 
             if (alerts.isEmpty()) {
@@ -197,60 +225,33 @@ fun HomeScreen(
                     )
                 }
             }
+
+            // Compact, static travel tip (general advice, not a data claim)
+            item {
+                Surface(
+                    shape = MaterialTheme.shapes.medium,
+                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(
+                        modifier = Modifier.padding(Dimens.SpaceMd),
+                        verticalAlignment = Alignment.Top
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Lightbulb,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(Dimens.IconMd)
+                        )
+                        Spacer(modifier = Modifier.width(Dimens.ItemSpacing))
+                        Text(
+                            text = stringResource(R.string.home_safety_tip),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+            }
         }
     }
-}
-
-@Composable
-private fun QuickActionButton(
-    modifier: Modifier = Modifier,
-    title: String,
-    subtitle: String,
-    icon: ImageVector,
-    bgColor: Color,
-    borderColor: Color,
-    iconTint: Color,
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(16.dp))
-            .background(bgColor)
-            .border(1.5.dp, borderColor, RoundedCornerShape(16.dp))
-            .clickable { onClick() }
-            .padding(16.dp)
-    ) {
-        Column {
-            Icon(
-                imageVector = icon,
-                contentDescription = null,
-                tint = iconTint,
-                modifier = Modifier.size(32.dp)
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleMedium,
-                color = TextPrimary
-            )
-            Text(
-                text = subtitle,
-                style = MaterialTheme.typography.bodySmall,
-                color = TextSecondary
-            )
-        }
-    }
-}
-
-@Composable
-private fun TextTextButton(
-    text: String,
-    onClick: () -> Unit
-) {
-    Text(
-        text = text,
-        style = MaterialTheme.typography.labelMedium,
-        color = AccentCyan,
-        modifier = Modifier.clickable { onClick() }
-    )
 }

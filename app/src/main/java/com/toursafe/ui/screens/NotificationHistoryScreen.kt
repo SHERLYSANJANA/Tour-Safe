@@ -30,7 +30,7 @@ fun NotificationHistoryScreen(
                 onBackClick = onBackClick
             )
         },
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -43,14 +43,14 @@ fun NotificationHistoryScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(SurfaceNavy, RoundedCornerShape(16.dp))
+                    .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(16.dp))
                     .padding(20.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "No notification history recorded.",
+                    text = stringResource(R.string.notification_history_empty),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }

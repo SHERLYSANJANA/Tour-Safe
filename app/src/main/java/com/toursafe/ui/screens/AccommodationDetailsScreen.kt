@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.toursafe.R
@@ -24,6 +25,7 @@ import com.toursafe.data.models.SafeAccommodation
 import com.toursafe.ui.components.StarRatingBar
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
+import com.toursafe.util.LocationUtils
 
 @Composable
 fun AccommodationDetailsScreen(
@@ -31,6 +33,8 @@ fun AccommodationDetailsScreen(
     onBackClick: () -> Unit,
     onViewReviewsClick: () -> Unit
 ) {
+    val context = LocalContext.current
+
     Scaffold(
         topBar = {
             TourSafeTopBar(
@@ -207,7 +211,14 @@ fun AccommodationDetailsScreen(
                     }
 
                     Button(
-                        onClick = { /* Simulated Navigation Directions */ },
+                        onClick = {
+                            LocationUtils.openMapsDirections(
+                                context = context,
+                                destinationLat = accommodation.latitude,
+                                destinationLng = accommodation.longitude,
+                                destinationName = accommodation.name
+                            )
+                        },
                         modifier = Modifier
                             .weight(1f)
                             .height(52.dp),

@@ -10,6 +10,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Directions
 import androidx.compose.material.icons.filled.GpsFixed
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Refresh
@@ -33,6 +34,7 @@ import com.toursafe.ui.components.InteractiveMapCanvas
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
 import com.toursafe.util.LocationState
+import com.toursafe.util.LocationUtils
 import com.toursafe.viewmodels.GpsLocationViewModel
 
 @Composable
@@ -163,16 +165,42 @@ fun MapScreen(
 
                         Spacer(modifier = Modifier.height(12.dp))
 
-                        if (marker.type == MarkerType.SAFE_ACCOMMODATION || marker.type == MarkerType.EMERGENCY_SHELTER) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp)
+                        ) {
+                            if (marker.type == MarkerType.SAFE_ACCOMMODATION || marker.type == MarkerType.EMERGENCY_SHELTER) {
+                                Button(
+                                    onClick = onNavigateToShelters,
+                                    modifier = Modifier.weight(1f),
+                                    colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                                    shape = RoundedCornerShape(12.dp)
+                                ) {
+                                    Text(
+                                        text = stringResource(R.string.view_safe_accommodations),
+                                        color = Color.Black,
+                                        style = MaterialTheme.typography.labelLarge
+                                    )
+                                }
+                            }
+
                             Button(
-                                onClick = onNavigateToShelters,
-                                modifier = Modifier.fillMaxWidth(),
-                                colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                                onClick = {
+                                    LocationUtils.openMapsDirections(
+                                        context = context,
+                                        destinationLat = marker.latitude,
+                                        destinationLng = marker.longitude,
+                                        destinationName = marker.title
+                                    )
+                                },
+                                colors = ButtonDefaults.buttonColors(containerColor = SurfaceVariantNavy),
                                 shape = RoundedCornerShape(12.dp)
                             ) {
+                                Icon(imageVector = Icons.Default.Directions, contentDescription = null, tint = TextPrimary)
+                                Spacer(modifier = Modifier.width(6.dp))
                                 Text(
-                                    text = stringResource(R.string.view_safe_accommodations),
-                                    color = Color.Black,
+                                    text = stringResource(R.string.directions),
+                                    color = TextPrimary,
                                     style = MaterialTheme.typography.labelLarge
                                 )
                             }

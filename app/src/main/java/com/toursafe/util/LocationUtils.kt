@@ -1,9 +1,11 @@
 package com.toursafe.util
 
 import android.content.Context
+import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
+import android.net.Uri
 import android.os.Build
 import java.util.Locale
 import kotlin.math.roundToInt
@@ -48,6 +50,38 @@ object LocationUtils {
             }
         } catch (e: Exception) {
             onResult(defaultFormatted)
+        }
+    }
+
+    fun openMapsDirections(
+        context: Context,
+        destinationLat: Double,
+        destinationLng: Double,
+        destinationName: String = "Emergency Shelter"
+    ) {
+        val encodedName = Uri.encode(destinationName)
+        val gmmIntentUri = Uri.parse("google.navigation:q=$destinationLat,$destinationLng")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri).apply {
+            setPackage("com.google.android.apps.maps")
+        }
+
+        try {
+            if (mapIntent.resolveActivity(context.packageManager) != null) {
+                context.startActivity(mapIntent)
+            } else {
+                val webUri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=$destinationLat,$destinationLng")
+                val webIntent = Intent(Intent.ACTION_VIEW, webUri)
+                context.startActivity(webIntent)
+            }
+        } catch (e: Exception) {
+            val genericUri = Uri.parse("geo:$destinationLat,$destinationLng?q=$destinationLat,$destinationLng($encodedName)")
+            try {
+                context.startActivity(Intent(Intent.ACTION_VIEW, genericUri))
+            } catch (ex: Exception) {
+                // Fallback to web browser URL
+                val webUrl = "https://www.google.com/maps/search/?api=1&query=$destinationLat,$destinationLng"
+                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(webUrl)))
+            }
         }
     }
 }

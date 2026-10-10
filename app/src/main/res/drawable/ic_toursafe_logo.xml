@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Outer Location Pin Head -->
+    <path
+        android:fillColor="#06B6D4"
+        android:pathData="M100,20 C66.86,20 40,46.86 40,80 C40,118 88,168 100,180 C112,168 160,118 160,80 C160,46.86 133.14,20 100,20 Z" />
+
+    <!-- Inner Circle Cutout -->
+    <path
+        android:fillColor="#0F172A"
+        android:pathData="M100,45 C80.67,45 65,60.67 65,80 C65,99.33 80.67,115 100,115 C119.33,115 135,99.33 135,80 C135,60.67 119.33,45 100,45 Z" />
+
+    <!-- Stylized "S" Curve Wave inside Pin -->
+    <path
+        android:fillColor="#06B6D4"
+        android:pathData="M92,58 C85,58 80,63 80,70 C80,82 120,78 120,90 C120,97 115,102 108,102 C101,102 96,97 96,92 L82,92 C82,105 93,114 108,114 C123,114 134,103 134,90 C134,75 94,80 94,68 C94,63 98,60 105,60 C111,60 116,63 117,68 L131,68 C130,57 119,48 105,48 L92,58 Z" />
+
+</vector>

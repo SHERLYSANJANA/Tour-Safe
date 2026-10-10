@@ -2,12 +2,9 @@ package com.toursafe.ui.screens
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Shield
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,10 +13,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.toursafe.ui.theme.AccentCyan
+import com.toursafe.R
 import com.toursafe.ui.theme.BackgroundNavy
 import com.toursafe.ui.theme.TextPrimary
 import com.toursafe.ui.theme.TextSecondary
@@ -50,24 +48,16 @@ fun SplashScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.scale(scale.value)
         ) {
-            Box(
-                modifier = Modifier
-                    .size(100.dp)
-                    .background(AccentCyan.copy(alpha = 0.2f), shape = CircleShape),
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Shield,
-                    contentDescription = "TourSafe Logo",
-                    tint = AccentCyan,
-                    modifier = Modifier.size(60.dp)
-                )
-            }
+            Image(
+                painter = painterResource(id = R.drawable.ic_toursafe_logo),
+                contentDescription = "TourSafe Logo",
+                modifier = Modifier.size(120.dp)
+            )
 
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "TourSafe",
+                text = stringResource(R.string.app_name),
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold,
                 color = TextPrimary

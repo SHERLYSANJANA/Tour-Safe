@@ -19,8 +19,94 @@
     <string name="shelters_hotels_subtitle">避難所・安全ホテル</string>
     <string name="active_disaster_alerts">発生中の災害警報</string>
     <string name="view_all">すべて表示</string>
-    <string name="view_action_plan">行動計画を表示</string>
+    <string name="view_action_plan">行動計画を表示 &gt;</string>
     <string name="km_away">約 %1$.1f km</string>
+
+    <!-- Severity Badges -->
+    <string name="severity_critical">緊急</string>
+    <string name="severity_warning">警告</string>
+    <string name="severity_advisory">注意</string>
+    <string name="severity_info">情報</string>
+
+    <!-- Alert Details Screen -->
+    <string name="disaster_action_plan">災害行動計画</string>
+    <string name="alert_header">%1$s 警報</string>
+    <string name="affected_area_label">対象地域: %1$s</string>
+    <string name="distance_from_location">距離: 現在地から約 %1$.1f km</string>
+    <string name="official_instructions_title">公式緊急指示</string>
+    <string name="recommended_actions_title">旅行者推奨アクション</string>
+    <string name="find_safe_places_near_you">近くの避難場所を探す</string>
+
+    <!-- Interactive Map Screen -->
+    <string name="interactive_safety_map">インタラクティブ防災マップ</string>
+    <string name="legend_hazard_zone">危険区域</string>
+    <string name="legend_free_shelter">無料避難所</string>
+    <string name="legend_safe_hotel">安全ホテル</string>
+    <string name="legend_you">現在地</string>
+    <string name="view_safe_accommodations">避難可能な宿泊施設を表示</string>
+
+    <!-- Safe Accommodations & Details -->
+    <string name="safe_accommodations">避難可能な宿泊施設</string>
+    <string name="search_placeholder">安全なホテル、避難所、場所を検索...</string>
+    <string name="show_free_shelters_only">無料緊急避難所のみ表示</string>
+    <string name="accommodation_details">施設詳細</string>
+    <string name="available_capacity">受け入れ可能人数: %1$d / %2$d 人</string>
+    <string name="resilience_amenities_title">防災・災害対応設備</string>
+    <string name="emergency_phone_label">緊急連絡先電話番号: %1$s</string>
+    <string name="rate_label">料金: %1$s</string>
+    <string name="reviews_count">%1$.1f (%2$d 件のレビュー)</string>
+    <string name="directions">経路案内</string>
+
+    <!-- Reviews Screen -->
+    <string name="verified_reviews_title">認証済みレビュー</string>
+    <string name="verified_traveler">認証済み旅行者 • %1$s</string>
+    <string name="add_review_title">安全レビューを投稿</string>
+    <string name="your_name_label">お名前</string>
+    <string name="rating_label">評価:</string>
+    <string name="safety_comments_label">安全性の評価とコメント</string>
+    <string name="submit_review">レビューを送信</string>
+
+    <!-- Emergency Check-In Screen -->
+    <string name="check_in_screen_title">緊急安否確認</string>
+    <string name="check_in_screen_desc">安否状況を緊急連絡先および現地当局に即座に共有します。</string>
+    <string name="status_im_safe">無事・安全</string>
+    <string name="status_im_safe_desc">安全な場所にいます。救援は不要です。</string>
+    <string name="status_moving_to_safety">避難・移動中</string>
+    <string name="status_moving_to_safety_desc">現在高台や安全な避難所に移動しています。</string>
+    <string name="status_i_need_help">救援が必要</string>
+    <string name="status_i_need_help_desc">緊急救助または医療支援が必要です。</string>
+    <string name="status_critical_warning">危険警戒区域</string>
+    <string name="add_optional_note_label">メモを追加（例: ホテル302号室、2名）</string>
+    <string name="broadcast_status_now">安否状況を即時送信</string>
+
+    <!-- Onboarding Screen -->
+    <string name="welcome_title">TourSafeへようこそ</string>
+    <string name="welcome_desc">グローバルな旅行の安全と災害対策をサポートするスマートパートナー。</string>
+    <string name="feature_alerts_title">リアルタイム災害警報</string>
+    <string name="feature_alerts_desc">津波警報、集中豪雨、台風などの緊急通知を即座に受信。</string>
+    <string name="feature_places_title">認証済み避難場所</string>
+    <string name="feature_places_desc">近くの公認避難所や高台にある安全なホテルを素早く検索。</string>
+    <string name="feature_map_title">インタラクティブハザードマップ</string>
+    <string name="feature_map_desc">沿岸浸水区域、緊急避難所、避難経路を地図上で確認。</string>
+    <string name="get_started">今すぐ始める</string>
+
+    <!-- Profile Screen -->
+    <string name="traveler_profile_title">旅行者プロフィール</string>
+    <string name="passport_blood_type">パスポート: US • 血液型: O型</string>
+    <string name="current_trip">現在の旅行先: タイ (プーケット)</string>
+    <string name="settings_preferences">設定・環境設定</string>
+    <string name="configure">設定する</string>
+    <string name="emergency_contacts_title">緊急連絡先</string>
+    <string name="add_contact_btn">+ 連絡先を追加</string>
+    <string name="primary_tag">(優先)</string>
+    <string name="add_contact_dialog_title">緊急連絡先を追加</string>
+    <string name="full_name_label">氏名</string>
+    <string name="relationship_label">間柄（例: 配偶者、保護者）</string>
+    <string name="phone_number_label">電話番号</string>
+    <string name="delete">削除</string>
+
+    <!-- Notification History Screen -->
+    <string name="notification_history_title">通知履歴</string>
 
     <!-- Language Selector & Settings -->
     <string name="select_language">言語を選択</string>
@@ -51,7 +137,7 @@
     <string name="voice_sos_tab">音声 SOS</string>
     <string name="type_sos_tab">テキスト SOS</string>
     <string name="voice_sos_instruction">話して緊急メッセージを入力できます。TourSafeが自動で音声から文字に変換します。</string>
-    <string name="speech_language_spoken">発话言語</string>
+    <string name="speech_language_spoken">発話言語</string>
     <string name="start_voice_sos">音声 SOS 開始</string>
     <string name="stop_listening">録音停止</string>
     <string name="retry_voice">音声入力をやり直す</string>
@@ -73,13 +159,4 @@
     <string name="error_speech_not_available">この端末では音声認識サービスを利用できません。下のテキスト入力をご利用ください。</string>
     <string name="error_no_speech">音声が検出されませんでした。やり直してはっきりと話してください。</string>
     <string name="error_mic_missing">マイク権限が拒否されました。設定から許可するかテキスト入力をご利用ください。</string>
-
-    <!-- Safe Accommodations & Reviews -->
-    <string name="safe_accommodations">安全な宿泊施設</string>
-    <string name="search_placeholder">安全なホテル、避難所、場所を検索...</string>
-    <string name="show_free_shelters_only">無料緊急避難所のみ表示</string>
-    <string name="directions">経路案内</string>
-    <string name="reviews">レビュー</string>
-    <string name="write_review">安全レビューを書く</string>
-    <string name="submit_review">レビューを投稿</string>
 </resources>

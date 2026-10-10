@@ -16,7 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toursafe.R
 import com.toursafe.data.models.AlertSeverity
 import com.toursafe.data.models.DisasterAlert
 import com.toursafe.ui.components.TourSafeTopBar
@@ -31,7 +33,7 @@ fun AlertDetailsScreen(
     Scaffold(
         topBar = {
             TourSafeTopBar(
-                title = "Disaster Action Plan",
+                title = stringResource(R.string.disaster_action_plan),
                 showBackButton = true,
                 onBackClick = onBackClick
             )
@@ -52,10 +54,10 @@ fun AlertDetailsScreen(
                 )
             }
         } else {
-            val (badgeBg, badgeColor) = when (alert.severity) {
-                AlertSeverity.CRITICAL -> Pair(AlertRedBg, AlertRed)
-                AlertSeverity.WARNING -> Pair(WarningAmberBg, WarningAmber)
-                else -> Pair(SurfaceVariantNavy, AccentCyan)
+            val (badgeBg, badgeColor, severityLabel) = when (alert.severity) {
+                AlertSeverity.CRITICAL -> Triple(AlertRedBg, AlertRed, stringResource(R.string.severity_critical))
+                AlertSeverity.WARNING -> Triple(WarningAmberBg, WarningAmber, stringResource(R.string.severity_warning))
+                else -> Triple(SurfaceVariantNavy, AccentCyan, stringResource(R.string.severity_advisory))
             }
 
             Column(
@@ -85,7 +87,7 @@ fun AlertDetailsScreen(
                             )
                             Spacer(modifier = Modifier.width(10.dp))
                             Text(
-                                text = alert.severity.name + " ALERT",
+                                text = stringResource(R.string.alert_header, severityLabel),
                                 style = MaterialTheme.typography.titleMedium,
                                 color = badgeColor
                             )
@@ -114,13 +116,13 @@ fun AlertDetailsScreen(
                 ) {
                     Column {
                         Text(
-                            text = "Affected Area: ${alert.affectedArea}",
+                            text = stringResource(R.string.affected_area_label, alert.affectedArea),
                             style = MaterialTheme.typography.titleSmall,
                             color = TextPrimary
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "Distance: ${alert.distanceKm} km from current location",
+                            text = stringResource(R.string.distance_from_location, alert.distanceKm),
                             style = MaterialTheme.typography.bodyMedium,
                             color = TextSecondary
                         )
@@ -135,7 +137,7 @@ fun AlertDetailsScreen(
 
                 // Official Instructions Section
                 Text(
-                    text = "Official Emergency Instructions",
+                    text = stringResource(R.string.official_instructions_title),
                     style = MaterialTheme.typography.titleLarge,
                     color = TextPrimary
                 )
@@ -151,7 +153,7 @@ fun AlertDetailsScreen(
 
                 // Recommended Actions
                 Text(
-                    text = "Recommended Tourist Actions",
+                    text = stringResource(R.string.recommended_actions_title),
                     style = MaterialTheme.typography.titleLarge,
                     color = TextPrimary
                 )
@@ -174,7 +176,7 @@ fun AlertDetailsScreen(
                     shape = RoundedCornerShape(16.dp)
                 ) {
                     Text(
-                        text = "Find Safe Places Near You",
+                        text = stringResource(R.string.find_safe_places_near_you),
                         color = Color.Black,
                         style = MaterialTheme.typography.titleMedium
                     )

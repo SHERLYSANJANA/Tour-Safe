@@ -17,7 +17,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toursafe.R
 import com.toursafe.data.models.EmergencyContact
 import com.toursafe.navigation.Screen
 import com.toursafe.ui.components.TourSafeTopBar
@@ -35,7 +37,7 @@ fun ProfileScreen(
     Scaffold(
         topBar = {
             TourSafeTopBar(
-                title = "Traveler Profile"
+                title = stringResource(R.string.traveler_profile_title)
             )
         },
         containerColor = BackgroundNavy
@@ -77,13 +79,13 @@ fun ProfileScreen(
                             color = TextPrimary
                         )
                         Text(
-                            text = "Passport: US • Blood Type: O+",
+                            text = stringResource(R.string.passport_blood_type),
                             style = MaterialTheme.typography.bodySmall,
                             color = TextSecondary
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "Current Trip: Thailand (Phuket)",
+                            text = stringResource(R.string.current_trip),
                             style = MaterialTheme.typography.labelSmall,
                             color = AccentCyan
                         )
@@ -112,13 +114,13 @@ fun ProfileScreen(
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
-                            text = "Settings & Preferences",
+                            text = stringResource(R.string.settings_preferences),
                             style = MaterialTheme.typography.titleMedium,
                             color = TextPrimary
                         )
                     }
                     Text(
-                        text = "Configure",
+                        text = stringResource(R.string.configure),
                         style = MaterialTheme.typography.labelMedium,
                         color = AccentCyan
                     )
@@ -132,7 +134,7 @@ fun ProfileScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Emergency Contacts",
+                    text = stringResource(R.string.emergency_contacts_title),
                     style = MaterialTheme.typography.titleLarge,
                     color = TextPrimary
                 )
@@ -141,7 +143,7 @@ fun ProfileScreen(
                     colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
                     shape = RoundedCornerShape(10.dp)
                 ) {
-                    Text("+ Add Contact", color = Color.Black, style = MaterialTheme.typography.labelSmall)
+                    Text(stringResource(R.string.add_contact_btn), color = Color.Black, style = MaterialTheme.typography.labelSmall)
                 }
             }
 
@@ -186,7 +188,7 @@ private fun ContactRow(
         ) {
             Column {
                 Text(
-                    text = contact.name + if (contact.isPrimary) " (Primary)" else "",
+                    text = contact.name + if (contact.isPrimary) " " + stringResource(R.string.primary_tag) else "",
                     style = MaterialTheme.typography.titleMedium,
                     color = if (contact.isPrimary) SafetyGreen else TextPrimary
                 )
@@ -200,7 +202,7 @@ private fun ContactRow(
             IconButton(onClick = onDelete) {
                 Icon(
                     imageVector = Icons.Default.Delete,
-                    contentDescription = "Delete",
+                    contentDescription = stringResource(R.string.delete),
                     tint = AlertRed
                 )
             }
@@ -220,13 +222,13 @@ private fun AddContactDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         containerColor = SurfaceNavy,
-        title = { Text("Add Emergency Contact", color = TextPrimary) },
+        title = { Text(stringResource(R.string.add_contact_dialog_title), color = TextPrimary) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("Full Name", color = TextSecondary) },
+                    label = { Text(stringResource(R.string.full_name_label), color = TextSecondary) },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedTextColor = TextPrimary, unfocusedTextColor = TextPrimary
                     )
@@ -234,7 +236,7 @@ private fun AddContactDialog(
                 OutlinedTextField(
                     value = relation,
                     onValueChange = { relation = it },
-                    label = { Text("Relationship (e.g. Spouse, Parent)", color = TextSecondary) },
+                    label = { Text(stringResource(R.string.relationship_label), color = TextSecondary) },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedTextColor = TextPrimary, unfocusedTextColor = TextPrimary
                     )
@@ -242,7 +244,7 @@ private fun AddContactDialog(
                 OutlinedTextField(
                     value = phone,
                     onValueChange = { phone = it },
-                    label = { Text("Phone Number", color = TextSecondary) },
+                    label = { Text(stringResource(R.string.phone_number_label), color = TextSecondary) },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedTextColor = TextPrimary, unfocusedTextColor = TextPrimary
                     )
@@ -258,12 +260,12 @@ private fun AddContactDialog(
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = AccentCyan)
             ) {
-                Text("Add Contact", color = Color.Black)
+                Text(stringResource(R.string.add_contact_btn), color = Color.Black)
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancel", color = TextSecondary)
+                Text(stringResource(R.string.cancel), color = TextSecondary)
             }
         }
     )

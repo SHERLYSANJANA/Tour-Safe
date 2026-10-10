@@ -12,7 +12,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toursafe.R
 import com.toursafe.data.models.AlertSeverity
 import com.toursafe.navigation.Screen
 import com.toursafe.ui.components.AlertCard
@@ -31,7 +33,7 @@ fun DisasterAlertsScreen(
     Scaffold(
         topBar = {
             TourSafeTopBar(
-                title = "Disaster Alerts"
+                title = stringResource(R.string.active_disaster_alerts)
             )
         },
         containerColor = BackgroundNavy
@@ -51,7 +53,7 @@ fun DisasterAlertsScreen(
                     FilterChip(
                         selected = selectedFilter == null,
                         onClick = { viewModel.filterBySeverity(null) },
-                        label = { Text("All Alerts") },
+                        label = { Text(stringResource(R.string.view_all)) },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = AccentCyan,
                             selectedLabelColor = Color.Black
@@ -62,7 +64,7 @@ fun DisasterAlertsScreen(
                     FilterChip(
                         selected = selectedFilter == AlertSeverity.CRITICAL,
                         onClick = { viewModel.filterBySeverity(AlertSeverity.CRITICAL) },
-                        label = { Text("Critical") },
+                        label = { Text(stringResource(R.string.severity_critical)) },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = AlertRed,
                             selectedLabelColor = Color.White
@@ -73,7 +75,7 @@ fun DisasterAlertsScreen(
                     FilterChip(
                         selected = selectedFilter == AlertSeverity.WARNING,
                         onClick = { viewModel.filterBySeverity(AlertSeverity.WARNING) },
-                        label = { Text("Warning") },
+                        label = { Text(stringResource(R.string.severity_warning)) },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = WarningAmber,
                             selectedLabelColor = Color.Black
@@ -84,7 +86,7 @@ fun DisasterAlertsScreen(
                     FilterChip(
                         selected = selectedFilter == AlertSeverity.ADVISORY,
                         onClick = { viewModel.filterBySeverity(AlertSeverity.ADVISORY) },
-                        label = { Text("Advisory") },
+                        label = { Text(stringResource(R.string.severity_advisory)) },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = SurfaceVariantNavy,
                             selectedLabelColor = TextPrimary

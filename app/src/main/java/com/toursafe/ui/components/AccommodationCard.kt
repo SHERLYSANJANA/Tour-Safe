@@ -16,7 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toursafe.R
 import com.toursafe.data.models.SafeAccommodation
 import com.toursafe.ui.theme.*
 
@@ -56,7 +58,7 @@ fun AccommodationCard(
                 }
 
                 Text(
-                    text = "${accommodation.distanceKm} km away",
+                    text = stringResource(R.string.km_away, accommodation.distanceKm),
                     style = MaterialTheme.typography.bodySmall,
                     color = TextSecondary
                 )
@@ -87,7 +89,7 @@ fun AccommodationCard(
                     StarRatingBar(rating = accommodation.rating, starSize = 16.dp)
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "${accommodation.rating} (${accommodation.reviewCount})",
+                        text = stringResource(R.string.reviews_count, accommodation.rating, accommodation.reviewCount),
                         style = MaterialTheme.typography.bodySmall,
                         color = TextSecondary
                     )
@@ -103,7 +105,7 @@ fun AccommodationCard(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Available Capacity: ${accommodation.capacityAvailable} / ${accommodation.maxCapacity} spots",
+                text = stringResource(R.string.available_capacity, accommodation.capacityAvailable, accommodation.maxCapacity),
                 style = MaterialTheme.typography.labelSmall,
                 color = TextMuted
             )

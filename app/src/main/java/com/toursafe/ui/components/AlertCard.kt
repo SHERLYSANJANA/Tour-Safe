@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
@@ -22,7 +23,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toursafe.R
 import com.toursafe.data.models.AlertSeverity
 import com.toursafe.data.models.DisasterAlert
 import com.toursafe.ui.theme.AccentCyan
@@ -42,10 +45,10 @@ fun AlertCard(
     onClick: () -> Unit
 ) {
     val (badgeBg, badgeText, badgeColor) = when (alert.severity) {
-        AlertSeverity.CRITICAL -> Triple(AlertRedBg, "CRITICAL", AlertRed)
-        AlertSeverity.WARNING -> Triple(WarningAmberBg, "WARNING", WarningAmber)
-        AlertSeverity.ADVISORY -> Triple(SurfaceVariantNavy, "ADVISORY", AccentCyan)
-        AlertSeverity.INFO -> Triple(SurfaceVariantNavy, "INFO", TextSecondary)
+        AlertSeverity.CRITICAL -> Triple(AlertRedBg, stringResource(R.string.severity_critical), AlertRed)
+        AlertSeverity.WARNING -> Triple(WarningAmberBg, stringResource(R.string.severity_warning), WarningAmber)
+        AlertSeverity.ADVISORY -> Triple(SurfaceVariantNavy, stringResource(R.string.severity_advisory), AccentCyan)
+        AlertSeverity.INFO -> Triple(SurfaceVariantNavy, stringResource(R.string.severity_info), TextSecondary)
     }
 
     Box(
@@ -77,7 +80,7 @@ fun AlertCard(
                 }
 
                 Text(
-                    text = "${alert.distanceKm} km away",
+                    text = stringResource(R.string.km_away, alert.distanceKm),
                     style = MaterialTheme.typography.bodySmall,
                     color = TextSecondary
                 )
@@ -107,7 +110,7 @@ fun AlertCard(
                 color = WarningAmber
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -117,12 +120,15 @@ fun AlertCard(
                 Text(
                     text = alert.timestamp,
                     style = MaterialTheme.typography.bodySmall,
-                    color = TextMuted
+                    color = TextMuted,
+                    modifier = Modifier.weight(1f, fill = false)
                 )
+
+                Spacer(modifier = Modifier.width(8.dp))
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "View Action Plan",
+                        text = stringResource(R.string.view_action_plan),
                         style = MaterialTheme.typography.labelMedium,
                         color = AccentCyan
                     )

@@ -13,8 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.toursafe.R
 import com.toursafe.ui.theme.*
 
 @Composable
@@ -36,14 +38,14 @@ fun OnboardingScreen(
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    text = "Welcome to TourSafe",
+                    text = stringResource(R.string.welcome_title),
                     style = MaterialTheme.typography.headlineLarge,
                     color = TextPrimary,
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
-                    text = "Your intelligent companion for global travel safety and disaster response.",
+                    text = stringResource(R.string.welcome_desc),
                     style = MaterialTheme.typography.bodyLarge,
                     color = TextSecondary,
                     textAlign = TextAlign.Center
@@ -58,20 +60,20 @@ fun OnboardingScreen(
                 FeatureCard(
                     icon = Icons.Default.Warning,
                     iconTint = AlertRed,
-                    title = "Real-Time Disaster Alerts",
-                    description = "Get instant notifications on tsunami warnings, flash floods, and severe weather."
+                    title = stringResource(R.string.feature_alerts_title),
+                    description = stringResource(R.string.feature_alerts_desc)
                 )
                 FeatureCard(
                     icon = Icons.Default.Hotel,
                     iconTint = SafetyGreen,
-                    title = "Verified Safe Places",
-                    description = "Find disaster-certified shelters and high-elevation safe accommodations nearby."
+                    title = stringResource(R.string.feature_places_title),
+                    description = stringResource(R.string.feature_places_desc)
                 )
                 FeatureCard(
                     icon = Icons.Default.Map,
                     iconTint = AccentCyan,
-                    title = "Interactive Hazard Map",
-                    description = "View real-time coastal hazard zones, emergency shelters, and evacuation routes."
+                    title = stringResource(R.string.feature_map_title),
+                    description = stringResource(R.string.feature_map_desc)
                 )
             }
 
@@ -84,7 +86,7 @@ fun OnboardingScreen(
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Text(
-                    text = "Get Started",
+                    text = stringResource(R.string.get_started),
                     color = Color.Black,
                     style = MaterialTheme.typography.titleMedium
                 )

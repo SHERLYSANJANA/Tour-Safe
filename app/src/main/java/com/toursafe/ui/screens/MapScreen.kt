@@ -14,7 +14,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toursafe.R
 import com.toursafe.data.mock.MockData
 import com.toursafe.data.models.MapMarker
 import com.toursafe.data.models.MarkerType
@@ -33,7 +35,7 @@ fun MapScreen(
     Scaffold(
         topBar = {
             TourSafeTopBar(
-                title = "Interactive Safety Map"
+                title = stringResource(R.string.interactive_safety_map)
             )
         },
         containerColor = BackgroundNavy
@@ -62,10 +64,10 @@ fun MapScreen(
                 horizontalArrangement = Arrangement.SpaceAround,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                LegendDot(color = AlertRed, label = "Hazard Zone")
-                LegendDot(color = SafetyGreen, label = "Free Shelter")
-                LegendDot(color = AccentCyan, label = "Safe Hotel")
-                LegendDot(color = AccentBlue, label = "You")
+                LegendDot(color = AlertRed, label = stringResource(R.string.legend_hazard_zone))
+                LegendDot(color = SafetyGreen, label = stringResource(R.string.legend_free_shelter))
+                LegendDot(color = AccentCyan, label = stringResource(R.string.legend_safe_hotel))
+                LegendDot(color = AccentBlue, label = stringResource(R.string.legend_you))
             }
 
             // Selected Marker Information Panel
@@ -90,7 +92,7 @@ fun MapScreen(
                                 color = TextPrimary
                             )
                             Text(
-                                text = "${marker.distanceKm} km",
+                                text = stringResource(R.string.km_away, marker.distanceKm),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = AccentCyan
                             )
@@ -114,7 +116,7 @@ fun MapScreen(
                                 shape = RoundedCornerShape(12.dp)
                             ) {
                                 Text(
-                                    text = "View Safe Accommodations",
+                                    text = stringResource(R.string.view_safe_accommodations),
                                     color = androidx.compose.ui.graphics.Color.Black,
                                     style = MaterialTheme.typography.labelLarge
                                 )

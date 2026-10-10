@@ -17,7 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toursafe.R
 import com.toursafe.data.models.SafeAccommodation
 import com.toursafe.ui.components.StarRatingBar
 import com.toursafe.ui.components.TourSafeTopBar
@@ -32,7 +34,7 @@ fun AccommodationDetailsScreen(
     Scaffold(
         topBar = {
             TourSafeTopBar(
-                title = "Accommodation Details",
+                title = stringResource(R.string.accommodation_details),
                 showBackButton = true,
                 onBackClick = onBackClick
             )
@@ -82,7 +84,7 @@ fun AccommodationDetailsScreen(
                                 color = if (accommodation.isEmergencyShelter) SafetyGreen else AccentCyan
                             )
                             Text(
-                                text = "${accommodation.distanceKm} km away",
+                                text = stringResource(R.string.km_away, accommodation.distanceKm),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = TextSecondary
                             )
@@ -113,7 +115,7 @@ fun AccommodationDetailsScreen(
                                 StarRatingBar(rating = accommodation.rating)
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
-                                    text = "${accommodation.rating} (${accommodation.reviewCount} reviews)",
+                                    text = stringResource(R.string.reviews_count, accommodation.rating, accommodation.reviewCount),
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = TextSecondary
                                 )
@@ -123,7 +125,7 @@ fun AccommodationDetailsScreen(
                         Spacer(modifier = Modifier.height(12.dp))
 
                         Text(
-                            text = "Rate: ${accommodation.pricePerNight}",
+                            text = stringResource(R.string.rate_label, accommodation.pricePerNight),
                             style = MaterialTheme.typography.titleLarge,
                             color = SafetyGreen
                         )
@@ -132,7 +134,7 @@ fun AccommodationDetailsScreen(
 
                 // Emergency & Safety Amenities
                 Text(
-                    text = "Disaster Resilience Amenities",
+                    text = stringResource(R.string.resilience_amenities_title),
                     style = MaterialTheme.typography.titleLarge,
                     color = TextPrimary
                 )
@@ -171,13 +173,13 @@ fun AccommodationDetailsScreen(
                 ) {
                     Column {
                         Text(
-                            text = "Available Capacity: ${accommodation.capacityAvailable} / ${accommodation.maxCapacity} persons",
+                            text = stringResource(R.string.available_capacity, accommodation.capacityAvailable, accommodation.maxCapacity),
                             style = MaterialTheme.typography.titleMedium,
                             color = TextPrimary
                         )
                         Spacer(modifier = Modifier.height(6.dp))
                         Text(
-                            text = "Emergency Phone: ${accommodation.contactPhone}",
+                            text = stringResource(R.string.emergency_phone_label, accommodation.contactPhone),
                             style = MaterialTheme.typography.bodyMedium,
                             color = AccentCyan
                         )
@@ -198,7 +200,7 @@ fun AccommodationDetailsScreen(
                         shape = RoundedCornerShape(14.dp)
                     ) {
                         Text(
-                            text = "Reviews",
+                            text = stringResource(R.string.reviews),
                             color = TextPrimary,
                             style = MaterialTheme.typography.titleMedium
                         )
@@ -219,7 +221,7 @@ fun AccommodationDetailsScreen(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Directions",
+                            text = stringResource(R.string.directions),
                             color = Color.Black,
                             style = MaterialTheme.typography.titleMedium
                         )

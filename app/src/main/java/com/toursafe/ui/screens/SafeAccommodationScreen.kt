@@ -14,7 +14,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toursafe.R
 import com.toursafe.ui.components.AccommodationCard
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
@@ -32,7 +34,7 @@ fun SafeAccommodationScreen(
     Scaffold(
         topBar = {
             TourSafeTopBar(
-                title = "Safe Accommodations"
+                title = stringResource(R.string.safe_accommodations)
             )
         },
         containerColor = BackgroundNavy
@@ -49,7 +51,7 @@ fun SafeAccommodationScreen(
                 value = searchQuery,
                 onValueChange = { viewModel.updateSearchQuery(it) },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Search safe hotel, shelter, location...", color = TextMuted) },
+                placeholder = { Text(stringResource(R.string.search_placeholder), color = TextMuted) },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Search,
@@ -79,7 +81,7 @@ fun SafeAccommodationScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Show Emergency Free Shelters Only",
+                    text = stringResource(R.string.show_free_shelters_only),
                     style = MaterialTheme.typography.bodyMedium,
                     color = TextPrimary
                 )

@@ -14,7 +14,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toursafe.R
 import com.toursafe.data.models.SafetyLevel
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
@@ -34,7 +36,7 @@ fun EmergencyCheckInScreen(
     Scaffold(
         topBar = {
             TourSafeTopBar(
-                title = "Emergency Check-In",
+                title = stringResource(R.string.check_in_screen_title),
                 showBackButton = true,
                 onBackClick = onBackClick
             )
@@ -50,15 +52,15 @@ fun EmergencyCheckInScreen(
         ) {
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
                 Text(
-                    text = "Broadcast your safety status instantly to emergency contacts and local authorities.",
+                    text = stringResource(R.string.check_in_screen_desc),
                     style = MaterialTheme.typography.bodyMedium,
                     color = TextSecondary
                 )
 
                 // Option 1: I'm Safe
                 StatusOptionCard(
-                    title = "I'm Safe",
-                    subtitle = "I am in a safe location and do not need assistance.",
+                    title = stringResource(R.string.status_im_safe),
+                    subtitle = stringResource(R.string.status_im_safe_desc),
                     icon = Icons.Default.CheckCircle,
                     color = SafetyGreen,
                     bgColor = SafetyGreenBg,
@@ -68,8 +70,8 @@ fun EmergencyCheckInScreen(
 
                 // Option 2: Moving to Safety
                 StatusOptionCard(
-                    title = "Moving to Safety",
-                    subtitle = "I am currently evacuating or travelling to safe ground.",
+                    title = stringResource(R.string.status_moving_to_safety),
+                    subtitle = stringResource(R.string.status_moving_to_safety_desc),
                     icon = Icons.AutoMirrored.Filled.DirectionsRun,
                     color = WarningAmber,
                     bgColor = WarningAmberBg,
@@ -79,8 +81,8 @@ fun EmergencyCheckInScreen(
 
                 // Option 3: I Need Help
                 StatusOptionCard(
-                    title = "I Need Help",
-                    subtitle = "I require emergency rescue or immediate medical aid.",
+                    title = stringResource(R.string.status_i_need_help),
+                    subtitle = stringResource(R.string.status_i_need_help_desc),
                     icon = Icons.Default.Warning,
                     color = AlertRed,
                     bgColor = AlertRedBg,
@@ -94,7 +96,7 @@ fun EmergencyCheckInScreen(
                     value = customNote,
                     onValueChange = { checkInViewModel.updateCustomNote(it) },
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text("Add optional note (e.g. Hotel Room 302, 2 people)", color = TextMuted) },
+                    label = { Text(stringResource(R.string.add_optional_note_label), color = TextMuted) },
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedContainerColor = SurfaceNavy,
                         unfocusedContainerColor = SurfaceNavy,
@@ -137,7 +139,7 @@ fun EmergencyCheckInScreen(
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Text(
-                    text = "Broadcast Status Now",
+                    text = stringResource(R.string.broadcast_status_now),
                     color = Color.Black,
                     style = MaterialTheme.typography.titleMedium
                 )

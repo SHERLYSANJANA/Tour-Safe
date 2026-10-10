@@ -12,15 +12,101 @@
     <string name="dashboard_title">Panel TourSafe</string>
     <string name="safety_status_header">ESTADO DE SEGURIDAD</string>
     <string name="update">Actualizar</string>
-    <string name="quick_actions_header">Acciones Rápida de Seguridad</string>
+    <string name="quick_actions_header">Acciones Rápidas de Seguridad</string>
     <string name="emergency_sos">SOS de Emergencia</string>
     <string name="sos_subtitle">Señal Instantánea</string>
     <string name="safe_places">Lugares Seguros</string>
     <string name="shelters_hotels_subtitle">Refugios y Hoteles</string>
     <string name="active_disaster_alerts">Alertas de Desastre Activas</string>
     <string name="view_all">Ver Todo</string>
-    <string name="view_action_plan">Ver Plan de Acción</string>
+    <string name="view_action_plan">Ver Plan de Acción &gt;</string>
     <string name="km_away">a %1$.1f km</string>
+
+    <!-- Severity Badges -->
+    <string name="severity_critical">CRÍTICO</string>
+    <string name="severity_warning">ADVERTENCIA</string>
+    <string name="severity_advisory">AVISO</string>
+    <string name="severity_info">INFO</string>
+
+    <!-- Alert Details Screen -->
+    <string name="disaster_action_plan">Plan de Acción de Desastre</string>
+    <string name="alert_header">ALERTA %1$s</string>
+    <string name="affected_area_label">Zona Afectada: %1$s</string>
+    <string name="distance_from_location">Distancia: a %1$.1f km de la ubicación actual</string>
+    <string name="official_instructions_title">Instrucciones Oficiales de Emergencia</string>
+    <string name="recommended_actions_title">Acciones Recomendadas para Turistas</string>
+    <string name="find_safe_places_near_you">Buscar Lugares Seguros Cercanos</string>
+
+    <!-- Interactive Map Screen -->
+    <string name="interactive_safety_map">Mapa Interactivo de Seguridad</string>
+    <string name="legend_hazard_zone">Zona de Peligro</string>
+    <string name="legend_free_shelter">Refugio Gratuito</string>
+    <string name="legend_safe_hotel">Hotel Seguro</string>
+    <string name="legend_you">Tú</string>
+    <string name="view_safe_accommodations">Ver Alojamientos Seguros</string>
+
+    <!-- Safe Accommodations & Details -->
+    <string name="safe_accommodations">Alojamientos Seguros</string>
+    <string name="search_placeholder">Buscar hotel seguro, refugio, ubicación...</string>
+    <string name="show_free_shelters_only">Mostrar Solo Refugios Gratuitos de Emergencia</string>
+    <string name="accommodation_details">Detalles del Alojamiento</string>
+    <string name="available_capacity">Capacidad Disponible: %1$d / %2$d plazas</string>
+    <string name="resilience_amenities_title">Servicios de Resiliencia ante Desastres</string>
+    <string name="emergency_phone_label">Teléfono de Emergencia: %1$s</string>
+    <string name="rate_label">Tarifa: %1$s</string>
+    <string name="reviews_count">%1$.1f (%2$d reseñas)</string>
+    <string name="directions">Direcciones</string>
+
+    <!-- Reviews Screen -->
+    <string name="verified_reviews_title">Reseñas Verificadas</string>
+    <string name="verified_traveler">Viajero Verificado • %1$s</string>
+    <string name="add_review_title">Escribir Reseña de Seguridad</string>
+    <string name="your_name_label">Su Nombre</string>
+    <string name="rating_label">Calificación:</string>
+    <string name="safety_comments_label">Comentarios de Seguridad y Experiencia</string>
+    <string name="submit_review">Enviar Reseña</string>
+
+    <!-- Emergency Check-In Screen -->
+    <string name="check_in_screen_title">Control de Emergencia</string>
+    <string name="check_in_screen_desc">Transmita su estado de seguridad instantáneamente a sus contactos de emergencia y autoridades locales.</string>
+    <string name="status_im_safe">Estoy a Salvo</string>
+    <string name="status_im_safe_desc">Estoy en un lugar seguro y no necesito asistencia.</string>
+    <string name="status_moving_to_safety">Moviéndome a Lugar Seguro</string>
+    <string name="status_moving_to_safety_desc">Actualmente me encuentro evacuando a un lugar seguro.</string>
+    <string name="status_i_need_help">Necesito Ayuda</string>
+    <string name="status_i_need_help_desc">Requiero rescate de emergencia o asistencia médica inmediata.</string>
+    <string name="status_critical_warning">Zona de Peligro Crítico</string>
+    <string name="add_optional_note_label">Añadir nota opcional (ej. Habitación de Hotel 302, 2 personas)</string>
+    <string name="broadcast_status_now">Transmitir Estado Ahora</string>
+
+    <!-- Onboarding Screen -->
+    <string name="welcome_title">Bienvenido a TourSafe</string>
+    <string name="welcome_desc">Su compañero inteligente para la seguridad en viajes globales y respuesta ante desastres.</string>
+    <string name="feature_alerts_title">Alertas de Desastre en Tiempo Real</string>
+    <string name="feature_alerts_desc">Reciba notificaciones instantáneas sobre avisos de tsunami, inundaciones y clima extremo.</string>
+    <string name="feature_places_title">Lugares Seguros Verificados</string>
+    <string name="feature_places_desc">Encuentre refugios certificados y alojamientos seguros en zonas elevadas cercanas.</string>
+    <string name="feature_map_title">Mapa Interactivo de Peligros</string>
+    <string name="feature_map_desc">Consulte zonas de riesgo costero, refugios de emergencia y rutas de evacuación en tiempo real.</string>
+    <string name="get_started">Comenzar</string>
+
+    <!-- Profile Screen -->
+    <string name="traveler_profile_title">Perfil del Viajero</string>
+    <string name="passport_blood_type">Pasaporte: EE.UU. • Grupo Sanguíneo: O+</string>
+    <string name="current_trip">Viaje Actual: Tailandia (Phuket)</string>
+    <string name="settings_preferences">Ajustes y Preferencias</string>
+    <string name="configure">Configurar</string>
+    <string name="emergency_contacts_title">Contactos de Emergencia</string>
+    <string name="add_contact_btn">+ Añadir Contacto</string>
+    <string name="primary_tag">(Principal)</string>
+    <string name="add_contact_dialog_title">Añadir Contacto de Emergencia</string>
+    <string name="full_name_label">Nombre Completo</string>
+    <string name="relationship_label">Relación (ej. Cónyuge, Padre/Madre)</string>
+    <string name="phone_number_label">Número de Teléfono</string>
+    <string name="delete">Eliminar</string>
+
+    <!-- Notification History Screen -->
+    <string name="notification_history_title">Historial de Notificaciones</string>
 
     <!-- Language Selector & Settings -->
     <string name="select_language">Seleccionar Idioma</string>
@@ -73,13 +159,4 @@
     <string name="error_speech_not_available">El servicio de reconocimiento de voz no está disponible en este dispositivo. Por favor use el modo escrito a continuación.</string>
     <string name="error_no_speech">No se detectó voz. Toque Reintentar Entrada de Voz y hable claramente.</string>
     <string name="error_mic_missing">El permiso de micrófono fue denegado. Habilite el permiso en ajustes o use entrada escrita.</string>
-
-    <!-- Safe Accommodations & Reviews -->
-    <string name="safe_accommodations">Alojamientos Seguros</string>
-    <string name="search_placeholder">Buscar hotel seguro, refugio, ubicación...</string>
-    <string name="show_free_shelters_only">Mostrar Solo Refugios Gratuito de Emergencia</string>
-    <string name="directions">Direcciones</string>
-    <string name="reviews">Reseñas</string>
-    <string name="write_review">Escribir Reseña de Seguridad</string>
-    <string name="submit_review">Enviar Reseña</string>
 </resources>

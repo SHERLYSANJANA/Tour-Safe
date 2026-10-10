@@ -19,8 +19,94 @@
     <string name="shelters_hotels_subtitle">Shelters &amp; Hotels</string>
     <string name="active_disaster_alerts">Active Disaster Alerts</string>
     <string name="view_all">View All</string>
-    <string name="view_action_plan">View Action Plan</string>
+    <string name="view_action_plan">View Action Plan &gt;</string>
     <string name="km_away">%1$.1f km away</string>
+
+    <!-- Severity Badges -->
+    <string name="severity_critical">CRITICAL</string>
+    <string name="severity_warning">WARNING</string>
+    <string name="severity_advisory">ADVISORY</string>
+    <string name="severity_info">INFO</string>
+
+    <!-- Alert Details Screen -->
+    <string name="disaster_action_plan">Disaster Action Plan</string>
+    <string name="alert_header">%1$s ALERT</string>
+    <string name="affected_area_label">Affected Area: %1$s</string>
+    <string name="distance_from_location">Distance: %1$.1f km from current location</string>
+    <string name="official_instructions_title">Official Emergency Instructions</string>
+    <string name="recommended_actions_title">Recommended Tourist Actions</string>
+    <string name="find_safe_places_near_you">Find Safe Places Near You</string>
+
+    <!-- Interactive Map Screen -->
+    <string name="interactive_safety_map">Interactive Safety Map</string>
+    <string name="legend_hazard_zone">Hazard Zone</string>
+    <string name="legend_free_shelter">Free Shelter</string>
+    <string name="legend_safe_hotel">Safe Hotel</string>
+    <string name="legend_you">You</string>
+    <string name="view_safe_accommodations">View Safe Accommodations</string>
+
+    <!-- Safe Accommodations & Details -->
+    <string name="safe_accommodations">Safe Accommodations</string>
+    <string name="search_placeholder">Search safe hotel, shelter, location...</string>
+    <string name="show_free_shelters_only">Show Emergency Free Shelters Only</string>
+    <string name="accommodation_details">Accommodation Details</string>
+    <string name="available_capacity">Available Capacity: %1$d / %2$d spots</string>
+    <string name="resilience_amenities_title">Disaster Resilience Amenities</string>
+    <string name="emergency_phone_label">Emergency Phone: %1$s</string>
+    <string name="rate_label">Rate: %1$s</string>
+    <string name="reviews_count">%1$.1f (%2$d reviews)</string>
+    <string name="directions">Directions</string>
+
+    <!-- Reviews Screen -->
+    <string name="verified_reviews_title">Verified Reviews</string>
+    <string name="verified_traveler">Verified Traveler • %1$s</string>
+    <string name="add_review_title">Write Safety Review</string>
+    <string name="your_name_label">Your Name</string>
+    <string name="rating_label">Rating:</string>
+    <string name="safety_comments_label">Safety Comments &amp; Experience</string>
+    <string name="submit_review">Submit Review</string>
+
+    <!-- Emergency Check-In Screen -->
+    <string name="check_in_screen_title">Emergency Check-In</string>
+    <string name="check_in_screen_desc">Broadcast your safety status instantly to emergency contacts and local authorities.</string>
+    <string name="status_im_safe">I\'m Safe</string>
+    <string name="status_im_safe_desc">I am in a safe location and do not need assistance.</string>
+    <string name="status_moving_to_safety">Moving to Safety</string>
+    <string name="status_moving_to_safety_desc">I am currently evacuating or travelling to safe ground.</string>
+    <string name="status_i_need_help">I Need Help</string>
+    <string name="status_i_need_help_desc">I require emergency rescue or immediate medical aid.</string>
+    <string name="status_critical_warning">Critical Hazard Zone</string>
+    <string name="add_optional_note_label">Add optional note (e.g. Hotel Room 302, 2 people)</string>
+    <string name="broadcast_status_now">Broadcast Status Now</string>
+
+    <!-- Onboarding Screen -->
+    <string name="welcome_title">Welcome to TourSafe</string>
+    <string name="welcome_desc">Your intelligent companion for global travel safety and disaster response.</string>
+    <string name="feature_alerts_title">Real-Time Disaster Alerts</string>
+    <string name="feature_alerts_desc">Get instant notifications on tsunami warnings, flash floods, and severe weather.</string>
+    <string name="feature_places_title">Verified Safe Places</string>
+    <string name="feature_places_desc">Find disaster-certified shelters and high-elevation safe accommodations nearby.</string>
+    <string name="feature_map_title">Interactive Hazard Map</string>
+    <string name="feature_map_desc">View real-time coastal hazard zones, emergency shelters, and evacuation routes.</string>
+    <string name="get_started">Get Started</string>
+
+    <!-- Profile Screen -->
+    <string name="traveler_profile_title">Traveler Profile</string>
+    <string name="passport_blood_type">Passport: US • Blood Type: O+</string>
+    <string name="current_trip">Current Trip: Thailand (Phuket)</string>
+    <string name="settings_preferences">Settings &amp; Preferences</string>
+    <string name="configure">Configure</string>
+    <string name="emergency_contacts_title">Emergency Contacts</string>
+    <string name="add_contact_btn">+ Add Contact</string>
+    <string name="primary_tag">(Primary)</string>
+    <string name="add_contact_dialog_title">Add Emergency Contact</string>
+    <string name="full_name_label">Full Name</string>
+    <string name="relationship_label">Relationship (e.g. Spouse, Parent)</string>
+    <string name="phone_number_label">Phone Number</string>
+    <string name="delete">Delete</string>
+
+    <!-- Notification History Screen -->
+    <string name="notification_history_title">Notification History</string>
 
     <!-- Language Selector & Settings -->
     <string name="select_language">Select Language</string>
@@ -73,13 +159,4 @@
     <string name="error_speech_not_available">Speech recognition service is unavailable on this device. Please use typing mode below.</string>
     <string name="error_no_speech">No speech detected. Please tap Retry Voice Input and speak clearly.</string>
     <string name="error_mic_missing">Microphone permission was denied. Enable permission in settings or use typed input.</string>
-
-    <!-- Safe Accommodations & Reviews -->
-    <string name="safe_accommodations">Safe Accommodations</string>
-    <string name="search_placeholder">Search safe hotel, shelter, location...</string>
-    <string name="show_free_shelters_only">Show Emergency Free Shelters Only</string>
-    <string name="directions">Directions</string>
-    <string name="reviews">Reviews</string>
-    <string name="write_review">Write Safety Review</string>
-    <string name="submit_review">Submit Review</string>
 </resources>

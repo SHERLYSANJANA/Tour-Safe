@@ -160,4 +160,18 @@
     <string name="error_speech_not_available">この端末では音声認識サービスを利用できません。下のテキスト入力をご利用ください。</string>
     <string name="error_no_speech">音声が検出されませんでした。やり直してはっきりと話してください。</string>
     <string name="error_mic_missing">マイク権限が拒否されました。設定から許可するかテキスト入力をご利用ください。</string>
+    <!-- GPS Location Strings -->
+    <string name="location_permission_explanation_title">位置情報の権限が必要です</string>
+    <string name="location_permission_explanation_desc">TourSafeはハザードマップ上に現在地を表示し、緊急SOSメッセージに正確なGPS座標を添付するために位置情報の権限を使用します。</string>
+    <string name="use_my_location">現在地を使用</string>
+    <string name="refresh_location">位置情報を更新</string>
+    <string name="recenter_map">マップを再表示</string>
+    <string name="gps_acquiring">GPS座標を取得中...</string>
+    <string name="gps_disabled_title">GPS位置情報サービスが無効です</string>
+    <string name="gps_disabled_desc">リアルタイムのGPS座標を取得するには、端末の設定で位置情報サービスを有効にしてください。</string>
+    <string name="open_location_settings">位置情報設定を開く</string>
+    <string name="precise_gps_badge">高精度 GPS</string>
+    <string name="approximate_gps_badge">概算位置情報</string>
+    <string name="location_accuracy">精度: %1$dm</string>
+    <string name="google_maps_link_label">Google マップ リンク: %1$s</string>
 </resources>

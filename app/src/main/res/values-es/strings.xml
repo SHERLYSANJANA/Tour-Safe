@@ -160,4 +160,18 @@
     <string name="error_speech_not_available">El servicio de reconocimiento de voz no está disponible en este dispositivo. Por favor use el modo escrito a continuación.</string>
     <string name="error_no_speech">No se detectó voz. Toque Reintentar Entrada de Voz y hable claramente.</string>
     <string name="error_mic_missing">El permiso de micrófono fue denegado. Habilite el permiso en ajustes o use entrada escrita.</string>
+    <!-- GPS Location Strings -->
+    <string name="location_permission_explanation_title">Permiso de Ubicación Requerido</string>
+    <string name="location_permission_explanation_desc">TourSafe necesita permiso de ubicación para mostrar su posición en el mapa de peligros y adjuntar coordenadas GPS exactas a los mensajes de emergencia SOS.</string>
+    <string name="use_my_location">Usar Mi Ubicación</string>
+    <string name="refresh_location">Actualizar Ubicación</string>
+    <string name="recenter_map">Reorientar Mapa</string>
+    <string name="gps_acquiring">Obteniendo coordenadas GPS...</string>
+    <string name="gps_disabled_title">Servicios de Ubicación GPS Desactivados</string>
+    <string name="gps_disabled_desc">Por favor active los Servicios de Ubicación en los ajustes de su dispositivo para obtener coordenadas GPS en tiempo real.</string>
+    <string name="open_location_settings">Abrir Ajustes de Ubicación</string>
+    <string name="precise_gps_badge">GPS Preciso</string>
+    <string name="approximate_gps_badge">Ubicación Aproximada</string>
+    <string name="location_accuracy">Precisión: %1$dm</string>
+    <string name="google_maps_link_label">Enlace de Google Maps: %1$s</string>
 </resources>

@@ -82,4 +82,18 @@
     <string name="reviews">Bewertungen</string>
     <string name="write_review">Sicherheitsbewertung schreiben</string>
     <string name="submit_review">Bewertung absenden</string>
+    <!-- GPS Location Strings -->
+    <string name="location_permission_explanation_title">Standortberechtigung erforderlich</string>
+    <string name="location_permission_explanation_desc">TourSafe benötigt die Standortberechtigung, um Ihre Position auf der Gefahrenkarte anzugeben und exakte GPS-Koordinaten an Notfall-SOS-Nachrichten anzuhängen.</string>
+    <string name="use_my_location">Meinen Standort nutzen</string>
+    <string name="refresh_location">Standort aktualisieren</string>
+    <string name="recenter_map">Karte zentrieren</string>
+    <string name="gps_acquiring">Ermittle GPS-Koordinaten...</string>
+    <string name="gps_disabled_title">GPS-Standortdienste deaktiviert</string>
+    <string name="gps_disabled_desc">Bitte aktivieren Sie die Standortdienste in den Geräteeinstellungen, um Echtzeit-GPS-Koordinaten zu erhalten.</string>
+    <string name="open_location_settings">Standorteinstellungen öffnen</string>
+    <string name="precise_gps_badge">Präzises GPS</string>
+    <string name="approximate_gps_badge">Ungefährer Standort</string>
+    <string name="location_accuracy">Genauigkeit: %1$dm</string>
+    <string name="google_maps_link_label">Google Maps Link: %1$s</string>
 </resources>

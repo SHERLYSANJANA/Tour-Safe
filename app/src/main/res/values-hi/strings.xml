@@ -82,4 +82,18 @@
     <string name="reviews">समीक्षाएं</string>
     <string name="write_review">सुरक्षा समीक्षा लिखें</string>
     <string name="submit_review">समीक्षा सबमिट करें</string>
+    <!-- GPS Location Strings -->
+    <string name="location_permission_explanation_title">स्थान अनुमति आवश्यक है</string>
+    <string name="location_permission_explanation_desc">TourSafe को खतरे के नक्शे पर आपकी स्थिति प्रदर्शित करने और आपातकालीन SOS संदेशों में सटीक GPS निर्देशांक संलग्न करने के लिए स्थान अनुमति की आवश्यकता है।</string>
+    <string name="use_my_location">मेरा स्थान उपयोग करें</string>
+    <string name="refresh_location">स्थान रीफ्रेश करें</string>
+    <string name="recenter_map">मानचित्र रीसेट करें</string>
+    <string name="gps_acquiring">GPS निर्देशांक प्राप्त किए जा रहे हैं...</string>
+    <string name="gps_disabled_title">GPS स्थान सेवाएं अक्षम हैं</string>
+    <string name="gps_disabled_desc">वास्तविक समय के GPS निर्देशांक प्राप्त करने के लिए कृपया अपने डिवाइस की सेटिंग्स में स्थान सेवाएं सक्षम करें।</string>
+    <string name="open_location_settings">स्थान सेटिंग्स खोलें</string>
+    <string name="precise_gps_badge">सटीक GPS</string>
+    <string name="approximate_gps_badge">अनुमानित स्थान</string>
+    <string name="location_accuracy">सटीकता: %1$d मीटर</string>
+    <string name="google_maps_link_label">गूगल मैप्स लिंक: %1$s</string>
 </resources>

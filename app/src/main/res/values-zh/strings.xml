@@ -82,4 +82,18 @@
     <string name="reviews">评价</string>
     <string name="write_review">撰写安全评价</string>
     <string name="submit_review">提交评价</string>
+    <!-- GPS Location Strings -->
+    <string name="location_permission_explanation_title">需要定位权限</string>
+    <string name="location_permission_explanation_desc">TourSafe 需要定位权限以在危险地图上显示您的位置，并在紧急 SOS 求救信息中附带精确的 GPS 坐标。</string>
+    <string name="use_my_location">使用我的位置</string>
+    <string name="refresh_location">刷新位置</string>
+    <string name="recenter_map">重置地图视角</string>
+    <string name="gps_acquiring">正在获取 GPS 坐标...</string>
+    <string name="gps_disabled_title">GPS 定位服务已禁用</string>
+    <string name="gps_disabled_desc">请在设备设置中开启定位服务，以获取实时 GPS 坐标。</string>
+    <string name="open_location_settings">打开定位设置</string>
+    <string name="precise_gps_badge">精确定位 GPS</string>
+    <string name="approximate_gps_badge">大致位置</string>
+    <string name="location_accuracy">精度：%1$d 米</string>
+    <string name="google_maps_link_label">谷歌地图链接：%1$s</string>
 </resources>

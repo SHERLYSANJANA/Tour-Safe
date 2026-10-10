@@ -160,4 +160,18 @@
     <string name="error_speech_not_available">Speech recognition service is unavailable on this device. Please use typing mode below.</string>
     <string name="error_no_speech">No speech detected. Please tap Retry Voice Input and speak clearly.</string>
     <string name="error_mic_missing">Microphone permission was denied. Enable permission in settings or use typed input.</string>
+    <!-- GPS Location Strings -->
+    <string name="location_permission_explanation_title">Location Permission Required</string>
+    <string name="location_permission_explanation_desc">TourSafe needs location permission to display your position on the hazard map and attach exact GPS coordinates to emergency SOS messages.</string>
+    <string name="use_my_location">Use My Location</string>
+    <string name="refresh_location">Refresh Location</string>
+    <string name="recenter_map">Recenter Map</string>
+    <string name="gps_acquiring">Acquiring GPS coordinates...</string>
+    <string name="gps_disabled_title">GPS Location Services Disabled</string>
+    <string name="gps_disabled_desc">Please enable Location Services in your device settings to get real-time GPS coordinates.</string>
+    <string name="open_location_settings">Open Location Settings</string>
+    <string name="precise_gps_badge">Precise GPS</string>
+    <string name="approximate_gps_badge">Approximate Location</string>
+    <string name="location_accuracy">Accuracy: %1$dm</string>
+    <string name="google_maps_link_label">Google Maps Link: %1$s</string>
 </resources>

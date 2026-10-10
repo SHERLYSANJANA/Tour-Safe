@@ -82,4 +82,18 @@
     <string name="reviews">รีวิว</string>
     <string name="write_review">เขียนรีวิวความปลอดภัย</string>
     <string name="submit_review">ส่งรีวิว</string>
+    <!-- GPS Location Strings -->
+    <string name="location_permission_explanation_title">จำเป็นต้องใช้สิทธิ์เข้าถึงตำแหน่ง</string>
+    <string name="location_permission_explanation_desc">TourSafe จำเป็นต้องใช้สิทธิ์ตำแหน่งเพื่อแสดงตำแหน่งของคุณบนแผนที่พื้นที่เสี่ยง และแนบพิกัด GPS ที่แม่นยำไปกับข้อความฉุกเฉิน SOS</string>
+    <string name="use_my_location">ใช้ตำแหน่งของฉัน</string>
+    <string name="refresh_location">รีเฟรชตำแหน่ง</string>
+    <string name="recenter_map">ปรับมุมมองแผนที่</string>
+    <string name="gps_acquiring">กำลังดึงพิกัด GPS...</string>
+    <string name="gps_disabled_title">บริการตำแหน่ง GPS ถูกปิดใช้งาน</string>
+    <string name="gps_disabled_desc">โปรดเปิดใช้งานบริการตำแหน่งในการตั้งค่าอุปกรณ์ของคุณเพื่อรับพิกัด GPS แบบเรียลไทม์</string>
+    <string name="open_location_settings">เปิดการตั้งค่าตำแหน่ง</string>
+    <string name="precise_gps_badge">GPS แม่นยำสูง</string>
+    <string name="approximate_gps_badge">ตำแหน่งโดยประมาณ</string>
+    <string name="location_accuracy">ความแม่นยำ: %1$d เมตร</string>
+    <string name="google_maps_link_label">ลิงก์ Google Maps: %1$s</string>
 </resources>

@@ -14,11 +14,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.MicOff
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Send
-import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -29,6 +28,7 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -36,6 +36,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toursafe.R
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
+import com.toursafe.util.LocationState
 import com.toursafe.util.SpeechState
 import com.toursafe.viewmodels.VoiceSosViewModel
 
@@ -47,13 +48,14 @@ fun EmergencySosScreen(
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
-        voiceViewModel.initSpeechManager(context)
+        voiceViewModel.initManagers(context)
     }
 
     val speechState by voiceViewModel.speechState.collectAsState()
     val spokenText by voiceViewModel.spokenText.collectAsState()
     val selectedLang by voiceViewModel.selectedSpeechLanguage.collectAsState()
     val includeGps by voiceViewModel.includeGpsLocation.collectAsState()
+    val locationState by voiceViewModel.locationState.collectAsState()
 
     var activeTab by remember { mutableStateOf(0) } // 0: Voice SOS, 1: Tap SOS
     var hasMicPermission by remember {
@@ -68,6 +70,16 @@ fun EmergencySosScreen(
         hasMicPermission = isGranted
         if (isGranted) {
             voiceViewModel.startListening()
+        }
+    }
+
+    val locationPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val fine = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
+        val coarse = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+        if (fine || coarse) {
+            voiceViewModel.fetchRealGpsLocation()
         }
     }
 
@@ -357,19 +369,71 @@ fun EmergencySosScreen(
                             colors = SwitchDefaults.colors(checkedThumbColor = Color.Black, checkedTrackColor = SafetyGreen)
                         )
                     }
+
                     if (includeGps) {
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(
-                            text = "7.8804° N, 98.3923° E (Phuket Old Town)",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = AccentCyan
-                        )
+                        Spacer(modifier = Modifier.height(6.dp))
+                        when (locationState) {
+                            is LocationState.Success -> {
+                                val loc = (locationState as LocationState.Success).location
+                                Text(
+                                    text = "Lat: ${"%.4f".format(loc.latitude)}, Lng: ${"%.4f".format(loc.longitude)}",
+                                    style = MaterialTheme.typography.titleSmall,
+                                    color = AccentCyan
+                                )
+                                Text(
+                                    text = stringResource(R.string.location_accuracy, loc.accuracyMeters),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = TextSecondary
+                                )
+                                Spacer(modifier = Modifier.height(4.dp))
+                                Text(
+                                    text = stringResource(R.string.google_maps_link_label, loc.toGoogleMapsLink()),
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = SafetyGreen
+                                )
+                            }
+                            is LocationState.Loading -> {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    CircularProgressIndicator(modifier = Modifier.size(16.dp), color = AccentCyan, strokeWidth = 2.dp)
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Text(
+                                        text = stringResource(R.string.gps_acquiring),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = TextSecondary
+                                    )
+                                }
+                            }
+                            is LocationState.PermissionDenied -> {
+                                Button(
+                                    onClick = {
+                                        locationPermissionLauncher.launch(
+                                            arrayOf(
+                                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                                Manifest.permission.ACCESS_COARSE_LOCATION
+                                            )
+                                        )
+                                    },
+                                    colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                                    shape = RoundedCornerShape(8.dp)
+                                ) {
+                                    Text(stringResource(R.string.grant_mic_permission), color = Color.Black, style = MaterialTheme.typography.labelSmall)
+                                }
+                            }
+                            else -> {
+                                Text(
+                                    text = "GPS Location unavailable. Message will be sent without coordinates.",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = TextSecondary
+                                )
+                            }
+                        }
                     }
+
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
                         text = stringResource(R.string.location_permission_desc),
                         style = MaterialTheme.typography.bodySmall,
-                        color = TextSecondary
+                        color = TextMuted
                     )
                 }
             }
@@ -383,7 +447,7 @@ fun EmergencySosScreen(
                 colors = ButtonDefaults.buttonColors(containerColor = AlertRed),
                 shape = RoundedCornerShape(16.dp)
             ) {
-                Icon(imageVector = Icons.Default.Send, contentDescription = null, tint = Color.White)
+                Icon(imageVector = Icons.AutoMirrored.Filled.Send, contentDescription = null, tint = Color.White)
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
                     text = stringResource(R.string.send_emergency_message),
@@ -423,15 +487,28 @@ fun EmergencySosScreen(
         }
 
         if (showSendSuccessDialog) {
+            val locSuccess = locationState as? LocationState.Success
+            val mapsLink = locSuccess?.location?.toGoogleMapsLink()
+
             AlertDialog(
                 onDismissRequest = { showSendSuccessDialog = false },
                 containerColor = SurfaceNavy,
                 title = { Text(stringResource(R.string.signal_sent), color = SafetyGreen) },
                 text = {
-                    Text(
-                        text = if (spokenText.isNotBlank()) "Emergency Message Broadcasted:\n\"$spokenText\"" else "Emergency Beacon Signal Transmitted.",
-                        color = TextPrimary
-                    )
+                    Column {
+                        Text(
+                            text = if (spokenText.isNotBlank()) "Emergency Message:\n\"$spokenText\"" else "Emergency Beacon Signal Transmitted.",
+                            color = TextPrimary
+                        )
+                        if (includeGps && mapsLink != null) {
+                            Spacer(modifier = Modifier.height(10.dp))
+                            Text(
+                                text = "Attached GPS Location:\n$mapsLink",
+                                color = AccentCyan,
+                                style = MaterialTheme.typography.bodySmall
+                            )
+                        }
+                    }
                 },
                 confirmButton = {
                     Button(

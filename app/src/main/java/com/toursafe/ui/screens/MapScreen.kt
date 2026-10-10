@@ -31,11 +31,18 @@ import com.toursafe.data.mock.MockData
 import com.toursafe.data.models.HazardZone
 import com.toursafe.data.models.MapMarker
 import com.toursafe.data.models.MarkerType
+import com.toursafe.data.repository.LoadStatus
+import com.toursafe.data.repository.combineStatus
+import com.toursafe.ui.components.DataStatusPanel
 import com.toursafe.ui.components.InteractiveMapCanvas
+import com.toursafe.ui.components.SourceAttribution
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
 import com.toursafe.util.LocationState
+import com.toursafe.util.LiveMarkers
 import com.toursafe.util.LocationUtils
+import com.toursafe.viewmodels.AccommodationViewModel
+import com.toursafe.viewmodels.AlertsViewModel
 import com.toursafe.viewmodels.GpsLocationViewModel
 import com.toursafe.viewmodels.SettingsViewModel
 
@@ -43,6 +50,8 @@ import com.toursafe.viewmodels.SettingsViewModel
 fun MapScreen(
     locationViewModel: GpsLocationViewModel = viewModel(),
     settingsViewModel: SettingsViewModel = viewModel(),
+    alertsViewModel: AlertsViewModel = viewModel(),
+    accommodationViewModel: AccommodationViewModel = viewModel(),
     onNavigateToShelters: () -> Unit
 ) {
     val context = LocalContext.current
@@ -59,15 +68,39 @@ fun MapScreen(
     val demoModeEnabled by settingsViewModel.demoModeEnabled.collectAsState()
     var showPermissionExplanation by remember { mutableStateOf(false) }
 
-    val markers = remember(demoModeEnabled) {
-        if (demoModeEnabled) MockData.demoMapMarkers else emptyList()
+    val userLat = (locationState as? LocationState.Success)?.location?.latitude ?: 0.0
+    val userLng = (locationState as? LocationState.Success)?.location?.longitude ?: 0.0
+    var retryTick by remember { mutableStateOf(0) }
+
+    LaunchedEffect(locationState, demoModeEnabled, retryTick) {
+        alertsViewModel.refreshData(userLat, userLng, demoModeEnabled)
+        accommodationViewModel.refreshData(userLat, userLng, demoModeEnabled)
+    }
+
+    val livePlaces by accommodationViewModel.accommodations.collectAsState()
+    val liveAlerts by alertsViewModel.allAlerts.collectAsState()
+    val placesStatus by accommodationViewModel.status.collectAsState()
+    val alertsStatus by alertsViewModel.status.collectAsState()
+    val mapStatus = combineStatus(placesStatus, alertsStatus)
+    val youLabel = stringResource(R.string.legend_you)
+
+    val markers = remember(demoModeEnabled, livePlaces, liveAlerts, userLat, userLng, youLabel) {
+        if (demoModeEnabled) {
+            MockData.demoMapMarkers
+        } else if (userLat == 0.0 && userLng == 0.0) {
+            emptyList()
+        } else {
+            LiveMarkers.build(userLat, userLng, youLabel, livePlaces, liveAlerts)
+        }
     }
     val hazardZones = remember(demoModeEnabled) {
         if (demoModeEnabled) listOf(
             HazardZone("hz-1", "Coastal Hazard Zone (Demo)", "Demo Tsunami Risk Zone", 0.32f, 0.38f, 0.16f, latitude = 7.8920, longitude = 98.2980, isDemo = true)
         ) else emptyList()
     }
-    var selectedMarker by remember(markers) { mutableStateOf<MapMarker?>(markers.firstOrNull()) }
+    var selectedMarker by remember(markers) {
+        mutableStateOf<MapMarker?>(markers.firstOrNull { it.type != MarkerType.USER_LOCATION } ?: markers.firstOrNull())
+    }
 
     val locationPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions()
@@ -113,27 +146,12 @@ fun MapScreen(
             )
 
             if (markers.isEmpty()) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(SurfaceNavy, RoundedCornerShape(16.dp))
-                        .border(1.dp, SurfaceVariantNavy, RoundedCornerShape(16.dp))
-                        .padding(16.dp)
-                ) {
-                    Column {
-                        Text(
-                            text = stringResource(R.string.no_verified_source_title),
-                            style = MaterialTheme.typography.titleMedium,
-                            color = TextPrimary
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(
-                            text = stringResource(R.string.no_verified_source_desc),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = TextSecondary
-                        )
-                    }
-                }
+                DataStatusPanel(
+                    status = mapStatus,
+                    noneNearbyTitle = R.string.places_none_nearby_title,
+                    noneNearbyDesc = R.string.places_none_nearby_desc,
+                    onRetry = { retryTick++ }
+                )
             } else {
                 // Interactive Custom Canvas Map
                 InteractiveMapCanvas(
@@ -154,8 +172,13 @@ fun MapScreen(
                 ) {
                     LegendDot(color = AlertRed, label = stringResource(R.string.legend_hazard_zone))
                     LegendDot(color = SafetyGreen, label = stringResource(R.string.legend_free_shelter))
+                    LegendDot(color = ServiceViolet, label = stringResource(R.string.legend_emergency_service))
                     LegendDot(color = AccentCyan, label = stringResource(R.string.legend_safe_hotel))
                     LegendDot(color = AccentBlue, label = stringResource(R.string.legend_you))
+                }
+
+                if (!demoModeEnabled) {
+                    SourceAttribution(R.string.osm_attribution)
                 }
 
                 // Selected Marker Information Panel
@@ -200,7 +223,7 @@ fun MapScreen(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(10.dp)
                             ) {
-                                if (marker.type == MarkerType.SAFE_ACCOMMODATION || marker.type == MarkerType.EMERGENCY_SHELTER) {
+                                if (marker.type == MarkerType.SAFE_ACCOMMODATION || marker.type == MarkerType.EMERGENCY_SHELTER || marker.type == MarkerType.EMERGENCY_SERVICE) {
                                     Button(
                                         onClick = onNavigateToShelters,
                                         modifier = Modifier.weight(1f),

@@ -13,6 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,7 +24,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toursafe.R
+import com.toursafe.data.repository.LoadStatus
 import com.toursafe.ui.components.AccommodationCard
+import com.toursafe.ui.components.DataStatusPanel
+import com.toursafe.ui.components.PartialDataNote
+import com.toursafe.ui.components.SourceAttribution
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
 import com.toursafe.util.LocationState
@@ -49,7 +56,9 @@ fun SafeAccommodationScreen(
     val locationState by locationViewModel.locationState.collectAsState()
     val demoModeEnabled by settingsViewModel.demoModeEnabled.collectAsState()
 
-    LaunchedEffect(locationState, demoModeEnabled) {
+    var retryTick by remember { mutableStateOf(0) }
+
+    LaunchedEffect(locationState, demoModeEnabled, retryTick) {
         val userLat = (locationState as? LocationState.Success)?.location?.latitude ?: 0.0
         val userLng = (locationState as? LocationState.Success)?.location?.longitude ?: 0.0
         viewModel.refreshData(userLat, userLng, demoModeEnabled)
@@ -57,7 +66,8 @@ fun SafeAccommodationScreen(
 
     val searchQuery by viewModel.searchQuery.collectAsState()
     val onlyShelters by viewModel.onlyShelters.collectAsState()
-    val filteredList = viewModel.getFilteredAccommodations()
+    val filteredList by viewModel.filteredAccommodations.collectAsState()
+    val status by viewModel.status.collectAsState()
 
     Scaffold(
         topBar = {
@@ -124,29 +134,16 @@ fun SafeAccommodationScreen(
             }
 
             if (filteredList.isEmpty()) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(SurfaceNavy, RoundedCornerShape(16.dp))
-                        .border(1.dp, SurfaceVariantNavy, RoundedCornerShape(16.dp))
-                        .padding(16.dp)
-                ) {
-                    Column {
-                        Text(
-                            text = stringResource(R.string.no_verified_source_title),
-                            style = MaterialTheme.typography.titleMedium,
-                            color = TextPrimary
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(
-                            text = stringResource(R.string.no_verified_source_desc),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = TextSecondary
-                        )
-                    }
-                }
+                DataStatusPanel(
+                    status = status,
+                    noneNearbyTitle = R.string.places_none_nearby_title,
+                    noneNearbyDesc = R.string.places_none_nearby_desc,
+                    onRetry = { retryTick++ }
+                )
             } else {
+                if (status == LoadStatus.PARTIAL) PartialDataNote()
                 LazyColumn(
+                    modifier = Modifier.weight(1f),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(filteredList) { acc ->
@@ -156,6 +153,10 @@ fun SafeAccommodationScreen(
                         )
                     }
                 }
+            }
+
+            if (!demoModeEnabled && (status == LoadStatus.LOADED || status == LoadStatus.PARTIAL)) {
+                SourceAttribution(R.string.osm_attribution)
             }
         }
     }

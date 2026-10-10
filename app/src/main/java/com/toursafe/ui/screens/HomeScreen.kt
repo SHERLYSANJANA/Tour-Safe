@@ -26,6 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toursafe.R
 import com.toursafe.navigation.Screen
 import com.toursafe.ui.components.AlertCard
+import com.toursafe.ui.components.DataStatusPanel
 import com.toursafe.ui.components.StatusBanner
 import com.toursafe.ui.theme.*
 import com.toursafe.util.LocationState
@@ -61,6 +62,7 @@ fun HomeScreen(
 
     val status by viewModel.userStatus.collectAsState()
     val alerts by viewModel.alerts.collectAsState()
+    val alertsStatus by viewModel.alertsStatus.collectAsState()
 
     Scaffold(
         containerColor = BackgroundNavy
@@ -181,27 +183,11 @@ fun HomeScreen(
 
             if (alerts.isEmpty()) {
                 item {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(SurfaceNavy, RoundedCornerShape(16.dp))
-                            .border(1.dp, SurfaceVariantNavy, RoundedCornerShape(16.dp))
-                            .padding(16.dp)
-                    ) {
-                        Column {
-                            Text(
-                                text = stringResource(R.string.no_verified_source_title),
-                                style = MaterialTheme.typography.titleMedium,
-                                color = TextPrimary
-                            )
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text(
-                                text = stringResource(R.string.no_verified_source_desc),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = TextSecondary
-                            )
-                        }
-                    }
+                    DataStatusPanel(
+                        status = alertsStatus,
+                        noneNearbyTitle = R.string.alerts_none_nearby_title,
+                        noneNearbyDesc = R.string.alerts_none_nearby_desc
+                    )
                 }
             } else {
                 items(alerts) { alert ->

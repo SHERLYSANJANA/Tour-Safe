@@ -181,4 +181,20 @@
     <string name="sos_call_emergency">緊急番号に発信（112）</string>
     <string name="splash_tagline">旅行者の安全と災害への備え</string>
     <string name="location_updated">更新: %1$s</string>
+    <string name="data_loading_title">公的情報源を確認しています…</string>
+    <string name="data_loading_desc">現在地の最新データを取得しています。</string>
+    <string name="data_waiting_location_title">現在地を待機中</string>
+    <string name="data_waiting_location_desc">TourSafeが周辺の警報や安全な場所を確認できるよう位置情報へのアクセスを許可するか、設定で「デモモード」を有効にしてサンプルデータをご確認ください。</string>
+    <string name="alerts_none_nearby_title">周辺で報告されている有効な警報はありません</string>
+    <string name="alerts_none_nearby_desc">USGSとGDACSは現在、周辺の重大なイベントを掲載していません。これは安全を保証するものではありません。地元当局の指示とニュースに従ってください。</string>
+    <string name="places_none_nearby_title">周辺に緊急施設が見つかりません</string>
+    <string name="places_none_nearby_desc">OpenStreetMapには約6km圏内の病院、警察署、避難所が登録されていません。地域の救急サービスは利用できます。現地の緊急番号に電話してください。</string>
+    <string name="data_unavailable_title">ライブデータを読み込めませんでした</string>
+    <string name="data_unavailable_desc">TourSafeがデータソースに接続できませんでした。リストが空でも、その地域が安全とは限りません。接続を確認してもう一度お試しください。</string>
+    <string name="data_partial_note">一部の情報源に接続できなかったため、このリストは不完全な可能性があります。</string>
+    <string name="data_retry">再試行</string>
+    <string name="osm_attribution">地図データ © OpenStreetMap contributors。場所はコミュニティが管理しており、未検証です。</string>
+    <string name="alerts_sources_note">情報源：USGS地震災害プログラム、GDACS（国連／欧州委員会）。</string>
+    <string name="alerts_filter_no_match">このフィルターに一致する警報はありません。</string>
+    <string name="legend_emergency_service">緊急施設</string>
 </resources>

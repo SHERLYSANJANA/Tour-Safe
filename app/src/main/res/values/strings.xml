@@ -181,4 +181,20 @@
     <string name="sos_call_emergency">Call Emergency Number (112)</string>
     <string name="splash_tagline">Tourist Safety &amp; Disaster Preparedness</string>
     <string name="location_updated">Updated: %1$s</string>
+    <string name="data_loading_title">Checking official sources…</string>
+    <string name="data_loading_desc">Fetching the latest data for your location.</string>
+    <string name="data_waiting_location_title">Waiting for your location</string>
+    <string name="data_waiting_location_desc">Allow location access so TourSafe can check alerts and safe places near you, or turn on Demo Mode in Settings to preview sample data.</string>
+    <string name="alerts_none_nearby_title">No active alerts reported nearby</string>
+    <string name="alerts_none_nearby_desc">USGS and GDACS currently list no significant events near you. This is not a guarantee of safety. Follow local authorities and news.</string>
+    <string name="places_none_nearby_title">No emergency places found nearby</string>
+    <string name="places_none_nearby_desc">OpenStreetMap lists no hospitals, police stations or shelters within about 6 km. Local emergency services can still help: call your local emergency number.</string>
+    <string name="data_unavailable_title">Couldn\'t load live data</string>
+    <string name="data_unavailable_desc">TourSafe couldn\'t reach the data sources. An empty list here does not mean the area is safe. Check your connection and try again.</string>
+    <string name="data_partial_note">Some sources couldn\'t be reached, so this list may be incomplete.</string>
+    <string name="data_retry">Try again</string>
+    <string name="osm_attribution">Map data © OpenStreetMap contributors. Places are community-maintained and unverified.</string>
+    <string name="alerts_sources_note">Sources: USGS Earthquake Hazards Program and GDACS (UN / European Commission).</string>
+    <string name="alerts_filter_no_match">No alerts match this filter.</string>
+    <string name="legend_emergency_service">Emergency Service</string>
 </resources>

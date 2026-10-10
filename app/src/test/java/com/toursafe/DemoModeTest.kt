@@ -2,6 +2,7 @@ package com.toursafe
 
 import com.toursafe.data.repository.DataSourceState
 import com.toursafe.data.repository.MockSafetyRepository
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -11,7 +12,7 @@ class DemoModeTest {
     private val repository = MockSafetyRepository()
 
     @Test
-    fun repository_returnsNoVerifiedSource_whenDemoModeIsOff() {
+    fun repository_returnsNoVerifiedSource_whenDemoModeIsOff() = runBlocking {
         val alertState = repository.getAlerts(0.0, 0.0, demoMode = false)
         val accState = repository.getAccommodations(0.0, 0.0, demoMode = false)
 
@@ -20,7 +21,7 @@ class DemoModeTest {
     }
 
     @Test
-    fun repository_returnsDemoData_whenDemoModeIsOn() {
+    fun repository_returnsDemoData_whenDemoModeIsOn() = runBlocking {
         val alertState = repository.getAlerts(0.0, 0.0, demoMode = true)
         val accState = repository.getAccommodations(0.0, 0.0, demoMode = true)
 

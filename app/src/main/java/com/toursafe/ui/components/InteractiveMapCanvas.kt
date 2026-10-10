@@ -103,6 +103,7 @@ fun InteractiveMapCanvas(
                     MarkerType.HAZARD_ZONE -> AlertRed
                     MarkerType.EMERGENCY_SHELTER -> SafetyGreen
                     MarkerType.SAFE_ACCOMMODATION -> AccentCyan
+                    MarkerType.EMERGENCY_SERVICE -> ServiceViolet
                 }
 
                 // Halo circle for selected

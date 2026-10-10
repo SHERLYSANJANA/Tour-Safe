@@ -181,4 +181,20 @@
     <string name="sos_call_emergency">Llamar al número de emergencias (112)</string>
     <string name="splash_tagline">Seguridad turística y preparación ante desastres</string>
     <string name="location_updated">Actualizado: %1$s</string>
+    <string name="data_loading_title">Consultando fuentes oficiales…</string>
+    <string name="data_loading_desc">Obteniendo los datos más recientes para su ubicación.</string>
+    <string name="data_waiting_location_title">Esperando su ubicación</string>
+    <string name="data_waiting_location_desc">Permita el acceso a la ubicación para que TourSafe consulte alertas y lugares seguros cercanos, o active el Modo Demo en Ajustes para ver datos de ejemplo.</string>
+    <string name="alerts_none_nearby_title">No hay alertas activas cercanas</string>
+    <string name="alerts_none_nearby_desc">USGS y GDACS no indican eventos significativos cerca de usted. Esto no garantiza su seguridad. Siga las indicaciones de las autoridades y las noticias locales.</string>
+    <string name="places_none_nearby_title">No se encontraron lugares de emergencia cercanos</string>
+    <string name="places_none_nearby_desc">OpenStreetMap no lista hospitales, comisarías ni refugios en unos 6 km. Los servicios de emergencia locales pueden ayudarle: llame al número de emergencias local.</string>
+    <string name="data_unavailable_title">No se pudieron cargar los datos en vivo</string>
+    <string name="data_unavailable_desc">TourSafe no pudo conectar con las fuentes de datos. Una lista vacía no significa que la zona sea segura. Revise su conexión e inténtelo de nuevo.</string>
+    <string name="data_partial_note">Algunas fuentes no respondieron, por lo que esta lista puede estar incompleta.</string>
+    <string name="data_retry">Reintentar</string>
+    <string name="osm_attribution">Datos del mapa © colaboradores de OpenStreetMap. Los lugares los mantiene la comunidad y no están verificados.</string>
+    <string name="alerts_sources_note">Fuentes: USGS Earthquake Hazards Program y GDACS (ONU / Comisión Europea).</string>
+    <string name="alerts_filter_no_match">Ninguna alerta coincide con este filtro.</string>
+    <string name="legend_emergency_service">Servicio de emergencia</string>
 </resources>

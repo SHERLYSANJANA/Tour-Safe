@@ -165,4 +165,20 @@
     <string name="notification_history_title">Historique des notifications</string>
     <string name="splash_tagline">Sécurité des voyageurs et préparation aux catastrophes</string>
     <string name="location_updated">Mis à jour : %1$s</string>
+    <string name="data_loading_title">Consultation des sources officielles…</string>
+    <string name="data_loading_desc">Récupération des dernières données pour votre position.</string>
+    <string name="data_waiting_location_title">En attente de votre position</string>
+    <string name="data_waiting_location_desc">Autorisez l\'accès à la localisation pour que TourSafe vérifie les alertes et lieux sûrs à proximité, ou activez le Mode Démo dans les Paramètres pour voir des données d\'exemple.</string>
+    <string name="alerts_none_nearby_title">Aucune alerte active signalée à proximité</string>
+    <string name="alerts_none_nearby_desc">L\'USGS et GDACS ne signalent actuellement aucun événement majeur près de vous. Cela ne garantit pas votre sécurité. Suivez les consignes des autorités et les actualités locales.</string>
+    <string name="places_none_nearby_title">Aucun lieu d\'urgence trouvé à proximité</string>
+    <string name="places_none_nearby_desc">OpenStreetMap ne référence aucun hôpital, commissariat ou abri dans un rayon d\'environ 6 km. Les secours locaux peuvent toujours vous aider : appelez le numéro d\'urgence local.</string>
+    <string name="data_unavailable_title">Impossible de charger les données en direct</string>
+    <string name="data_unavailable_desc">TourSafe n\'a pas pu joindre les sources de données. Une liste vide ne signifie pas que la zone est sûre. Vérifiez votre connexion et réessayez.</string>
+    <string name="data_partial_note">Certaines sources n\'ont pas répondu : cette liste peut être incomplète.</string>
+    <string name="data_retry">Réessayer</string>
+    <string name="osm_attribution">Données cartographiques © contributeurs d\'OpenStreetMap. Les lieux sont maintenus par la communauté et non vérifiés.</string>
+    <string name="alerts_sources_note">Sources : USGS Earthquake Hazards Program et GDACS (ONU / Commission européenne).</string>
+    <string name="alerts_filter_no_match">Aucune alerte ne correspond à ce filtre.</string>
+    <string name="legend_emergency_service">Service d\'urgence</string>
 </resources>

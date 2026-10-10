@@ -16,6 +16,7 @@ val WarningAmber = Color(0xFFF59E0B)       // Amber for Warning / Advisory
 val AlertRed = Color(0xFFEF4444)           // Bright Red for Critical Alert
 val AccentCyan = Color(0xFF06B6D4)         // Cyan for primary actions/links
 val AccentBlue = Color(0xFF3B82F6)         // Vibrant Blue highlight
+val ServiceViolet = Color(0xFF8B5CF6)      // Hospitals, police, fire stations on the map
 
 // Color Variants
 val SafetyGreenBg = Color(0xFF064E3B)

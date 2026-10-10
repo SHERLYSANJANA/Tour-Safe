@@ -8,7 +8,7 @@ class LocaleParityTest {
 
     private fun extractKeysFromXml(file: File): Set<String> {
         if (!file.exists()) return emptySet()
-        val regex = Regex("""<string\s+name="([^"]+)">""")
+        val regex = Regex("""<string\s+[^>]*name="([^"]+)"[^>]*>""")
         return regex.findAll(file.readText()).map { it.groupValues[1] }.toSet()
     }
 

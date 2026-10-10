@@ -93,17 +93,6 @@ fun ProfileScreen(
                                 style = MaterialTheme.typography.titleLarge,
                                 color = if (profileName.isBlank()) TextMuted else TextPrimary
                             )
-                            Text(
-                                text = stringResource(R.string.passport_blood_type),
-                                style = MaterialTheme.typography.bodySmall,
-                                color = TextSecondary
-                            )
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text(
-                                text = stringResource(R.string.current_trip),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = AccentCyan
-                            )
                         }
                     }
 

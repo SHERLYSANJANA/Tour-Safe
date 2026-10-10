@@ -529,14 +529,13 @@ fun EmergencySosScreen(
                         ) {
                             Icon(imageVector = Icons.Default.Sms, contentDescription = null, tint = Color.Black)
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text("Open Messaging App (SMS)", color = Color.Black)
+                            Text(stringResource(R.string.sos_open_sms), color = Color.Black)
                         }
 
                         Button(
                             onClick = {
-                                val primaryPhone = emergencyContacts.firstOrNull()?.phoneNumber ?: "112"
                                 val dialIntent = Intent(Intent.ACTION_DIAL).apply {
-                                    data = Uri.parse("tel:${primaryPhone.replace(Regex("[^0-9+]"), "")}")
+                                    data = Uri.parse("tel:112")
                                 }
                                 try {
                                     context.startActivity(dialIntent)
@@ -549,7 +548,7 @@ fun EmergencySosScreen(
                         ) {
                             Icon(imageVector = Icons.Default.Call, contentDescription = null, tint = Color.White)
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text("Call Emergency Line", color = Color.White)
+                            Text(stringResource(R.string.sos_call_emergency), color = Color.White)
                         }
                     }
                 },

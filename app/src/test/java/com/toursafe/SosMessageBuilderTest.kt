@@ -24,7 +24,19 @@ class SosMessageBuilderTest {
 
         assertTrue(state is SosHandOffState.Prepared)
         val prepared = state as SosHandOffState.Prepared
-        assertEquals("15550192834,15552345678", prepared.smsNumbers)
+        assertEquals("+15550192834,+15552345678", prepared.smsNumbers)
         assertTrue(prepared.message.contains("Help needed at hotel room 302"))
+    }
+
+    @Test
+    fun prepareSosHandOff_withNoContacts_neverAddressesAFakeNumber() {
+        val viewModel = VoiceSosViewModel()
+        viewModel.updateSpokenText("Need help")
+
+        viewModel.prepareSosHandOff(emptyList())
+        val prepared = viewModel.handOffState.value as SosHandOffState.Prepared
+
+        // No saved contacts -> no recipient. The user chooses one in their SMS app.
+        assertEquals("", prepared.smsNumbers)
     }
 }

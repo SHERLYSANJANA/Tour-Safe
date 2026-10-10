@@ -28,18 +28,21 @@ import com.toursafe.util.LocationState
 import com.toursafe.util.LocationUtils
 import com.toursafe.viewmodels.AccommodationViewModel
 import com.toursafe.viewmodels.GpsLocationViewModel
+import com.toursafe.viewmodels.SettingsViewModel
 
 @Composable
 fun AccommodationDetailsScreen(
     accommodation: SafeAccommodation?,
     viewModel: AccommodationViewModel = viewModel(),
     locationViewModel: GpsLocationViewModel = viewModel(),
+    settingsViewModel: SettingsViewModel = viewModel(),
     onBackClick: () -> Unit,
     onViewReviewsClick: () -> Unit
 ) {
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
+        settingsViewModel.loadSettings(context)
         locationViewModel.initLocationManager(context)
         if (locationViewModel.hasPermission()) {
             locationViewModel.fetchLocation()
@@ -47,12 +50,12 @@ fun AccommodationDetailsScreen(
     }
 
     val locationState by locationViewModel.locationState.collectAsState()
+    val demoModeEnabled by settingsViewModel.demoModeEnabled.collectAsState()
 
-    LaunchedEffect(locationState) {
-        if (locationState is LocationState.Success) {
-            val loc = (locationState as LocationState.Success).location
-            viewModel.updateGpsLocation(loc.latitude, loc.longitude)
-        }
+    LaunchedEffect(locationState, demoModeEnabled) {
+        val userLat = (locationState as? LocationState.Success)?.location?.latitude ?: 0.0
+        val userLng = (locationState as? LocationState.Success)?.location?.longitude ?: 0.0
+        viewModel.refreshData(userLat, userLng, demoModeEnabled)
     }
 
     val currentAcc = accommodation?.let { viewModel.getAccommodationById(it.id) } ?: accommodation

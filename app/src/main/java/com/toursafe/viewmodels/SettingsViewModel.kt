@@ -69,11 +69,10 @@ class SettingsViewModel : ViewModel() {
                 }
                 _emergencyContacts.value = loaded
             } catch (e: Exception) {
-                _emergencyContacts.value = MockData.initialEmergencyContacts
+                _emergencyContacts.value = emptyList()
             }
         } else {
-            _emergencyContacts.value = MockData.initialEmergencyContacts
-            saveEmergencyContacts(context, MockData.initialEmergencyContacts)
+            _emergencyContacts.value = emptyList()
         }
     }
 

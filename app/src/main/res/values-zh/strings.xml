@@ -96,4 +96,8 @@
     <string name="approximate_gps_badge">大致位置</string>
     <string name="location_accuracy">精度：%1$d 米</string>
     <string name="google_maps_link_label">谷歌地图链接：%1$s</string>
+    <string name="accommodation_not_found">未找到避难场所详情。</string>
+    <string name="alert_not_found">未找到灾害警报详情。</string>
+    <string name="no_verified_source_title">当前位置无已验证记录</string>
+    <string name="no_verified_source_desc">您当前的 GPS 坐标点暂无官方验证的避难所或警报。请在设置中开启“演示模式”以查看模拟演示数据。</string>
 </resources>

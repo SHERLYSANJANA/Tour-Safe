@@ -1,5 +1,10 @@
 package com.toursafe.ui.screens
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.provider.Settings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -14,8 +19,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.toursafe.R
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
@@ -27,9 +34,22 @@ fun SettingsScreen(
     onBackClick: () -> Unit,
     onNavigateToLanguage: () -> Unit
 ) {
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.loadSettings(context)
+    }
+
     val pushEnabled by viewModel.pushNotificationsEnabled.collectAsState()
-    val disasterAlertsEnabled by viewModel.disasterAlertsEnabled.collectAsState()
-    val locationPermissionMock by viewModel.locationPermissionMock.collectAsState()
+    val priorityAlertsEnabled by viewModel.priorityAlertsEnabled.collectAsState()
+    val demoModeEnabled by viewModel.demoModeEnabled.collectAsState()
+
+    var hasLocationPermission by remember {
+        mutableStateOf(
+            ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        )
+    }
 
     Scaffold(
         topBar = {
@@ -89,6 +109,14 @@ fun SettingsScreen(
                 }
             }
 
+            // Demo Mode Toggle
+            SwitchSettingRow(
+                title = "Demo Data Mode",
+                subtitle = "Enable to view simulated shelters and disaster alerts for testing UI",
+                checked = demoModeEnabled,
+                onCheckedChange = { viewModel.toggleDemoMode(context, it) }
+            )
+
             Text(
                 text = stringResource(R.string.notifications_permissions),
                 style = MaterialTheme.typography.titleLarge,
@@ -100,24 +128,53 @@ fun SettingsScreen(
                 title = stringResource(R.string.push_notifications),
                 subtitle = stringResource(R.string.push_notifications_desc),
                 checked = pushEnabled,
-                onCheckedChange = { viewModel.togglePushNotifications(it) }
+                onCheckedChange = { viewModel.togglePushNotifications(context, it) }
             )
 
             // Toggle 2: High Priority Disaster Alerts
             SwitchSettingRow(
                 title = stringResource(R.string.priority_disaster_alerts),
                 subtitle = stringResource(R.string.priority_disaster_alerts_desc),
-                checked = disasterAlertsEnabled,
-                onCheckedChange = { viewModel.toggleDisasterAlerts(it) }
+                checked = priorityAlertsEnabled,
+                onCheckedChange = { viewModel.togglePriorityAlerts(context, it) }
             )
 
-            // Toggle 3: Location Access
-            SwitchSettingRow(
-                title = stringResource(R.string.gps_permission_simulated),
-                subtitle = stringResource(R.string.gps_permission_desc),
-                checked = locationPermissionMock,
-                onCheckedChange = { viewModel.toggleLocationPermissionMock(it) }
-            )
+            // Real GPS Location Runtime Permission Entry
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(SurfaceNavy, RoundedCornerShape(14.dp))
+                    .clickable {
+                        try {
+                            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                data = Uri.fromParts("package", context.packageName, null)
+                            }
+                            context.startActivity(intent)
+                        } catch (e: Exception) {}
+                    }
+                    .padding(16.dp)
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        Text(
+                            text = "GPS Location Permission",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = TextPrimary
+                        )
+                        Spacer(modifier = Modifier.height(2.dp))
+                        Text(
+                            text = if (hasLocationPermission) "Granted • Tap to manage system permissions" else "Denied • Tap to open system app settings",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = if (hasLocationPermission) SafetyGreen else WarningAmber
+                        )
+                    }
+                    Icon(imageVector = Icons.Default.ChevronRight, contentDescription = null, tint = TextSecondary)
+                }
+            }
         }
     }
 }

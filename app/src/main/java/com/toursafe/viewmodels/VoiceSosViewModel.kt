@@ -2,6 +2,7 @@ package com.toursafe.viewmodels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.toursafe.data.models.EmergencyContact
 import com.toursafe.util.LocationState
 import com.toursafe.util.RealLocationManager
 import com.toursafe.util.SpeechRecognitionManager
@@ -9,6 +10,16 @@ import com.toursafe.util.SpeechState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+
+sealed class SosHandOffState {
+    object NotPrepared : SosHandOffState()
+    data class Prepared(
+        val message: String,
+        val smsNumbers: String,
+        val mapsLink: String?
+    ) : SosHandOffState()
+    data class HandedOff(val intentType: String) : SosHandOffState()
+}
 
 class VoiceSosViewModel : ViewModel() {
 
@@ -30,8 +41,8 @@ class VoiceSosViewModel : ViewModel() {
     private val _locationState = MutableStateFlow<LocationState>(LocationState.Idle)
     val locationState: StateFlow<LocationState> = _locationState.asStateFlow()
 
-    private val _messageSentSuccess = MutableStateFlow(false)
-    val messageSentSuccess: StateFlow<Boolean> = _messageSentSuccess.asStateFlow()
+    private val _handOffState = MutableStateFlow<SosHandOffState>(SosHandOffState.NotPrepared)
+    val handOffState: StateFlow<SosHandOffState> = _handOffState.asStateFlow()
 
     fun initManagers(context: Context) {
         if (speechManager == null) {
@@ -83,9 +94,29 @@ class VoiceSosViewModel : ViewModel() {
         }
     }
 
-    fun sendEmergencyMessage(onComplete: () -> Unit) {
-        _messageSentSuccess.value = true
-        onComplete()
+    fun prepareSosHandOff(contacts: List<EmergencyContact>) {
+        val body = _spokenText.value.ifBlank { "EMERGENCY SOS: Assistance needed." }
+        val locSuccess = _locationState.value as? LocationState.Success
+        val mapsLink = if (_includeGpsLocation.value && locSuccess != null) {
+            locSuccess.location.toGoogleMapsLink()
+        } else null
+
+        val numbers = contacts.map { it.phoneNumber.replace(Regex("[^0-9+]"), "") }.filter { it.isNotBlank() }.joinToString(",")
+        val formattedMsg = if (mapsLink != null) "$body\n\nMap: $mapsLink" else body
+
+        _handOffState.value = SosHandOffState.Prepared(
+            message = formattedMsg,
+            smsNumbers = numbers.ifBlank { "112" },
+            mapsLink = mapsLink
+        )
+    }
+
+    fun markHandedOff(intentType: String) {
+        _handOffState.value = SosHandOffState.HandedOff(intentType)
+    }
+
+    fun resetHandOffState() {
+        _handOffState.value = SosHandOffState.NotPrepared
     }
 
     override fun onCleared() {

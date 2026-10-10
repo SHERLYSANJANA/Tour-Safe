@@ -62,6 +62,7 @@
     <string name="verified_reviews_title">認証済みレビュー</string>
     <string name="verified_traveler">認証済み旅行者 • %1$s</string>
     <string name="add_review_title">安全レビューを投稿</string>
+    <string name="write_review">安全レビューを書く</string>
     <string name="your_name_label">お名前</string>
     <string name="rating_label">評価:</string>
     <string name="safety_comments_label">安全性の評価とコメント</string>
@@ -174,4 +175,8 @@
     <string name="approximate_gps_badge">概算位置情報</string>
     <string name="location_accuracy">精度: %1$dm</string>
     <string name="google_maps_link_label">Google マップ リンク: %1$s</string>
+    <string name="accommodation_not_found">避難場所の詳細が見つかりません。</string>
+    <string name="alert_not_found">警報の詳細が見つかりません。</string>
+    <string name="no_verified_source_title">現在地に検証済みデータがありません</string>
+    <string name="no_verified_source_desc">現在のGPS座標には公式の検証済み避難所や警報データがありません。設定で「デモモード」を有効にすると模擬デモデータを閲覧できます。</string>
 </resources>

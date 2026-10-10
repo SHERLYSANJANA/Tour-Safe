@@ -3,7 +3,6 @@ package com.toursafe.data.models
 enum class AlertSeverity {
     CRITICAL,
     WARNING,
-    ADVISORY,
     INFO
 }
 
@@ -21,5 +20,8 @@ data class DisasterAlert(
     val recommendedActions: List<String>,
     val latitude: Double = 7.8920,
     val longitude: Double = 98.2980,
-    val isSimulated: Boolean = true
+    val isSimulated: Boolean = true,
+    val isVerified: Boolean = false,
+    val issuedAtEpochMs: Long? = null,
+    val expiresAtEpochMs: Long? = null
 )

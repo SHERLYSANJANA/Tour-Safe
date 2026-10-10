@@ -4,22 +4,30 @@ import androidx.lifecycle.ViewModel
 import com.toursafe.data.mock.MockData
 import com.toursafe.data.models.AlertSeverity
 import com.toursafe.data.models.DisasterAlert
+import com.toursafe.data.repository.DataSourceState
+import com.toursafe.data.repository.MockSafetyRepository
+import com.toursafe.data.repository.SafetyRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class AlertsViewModel : ViewModel() {
+class AlertsViewModel(
+    private val repository: SafetyRepository = MockSafetyRepository()
+) : ViewModel() {
 
-    private val _allAlerts = MutableStateFlow(MockData.getAnchoredAlerts())
+    private val _allAlerts = MutableStateFlow<List<DisasterAlert>>(emptyList())
     private val _selectedFilter = MutableStateFlow<AlertSeverity?>(null)
     val selectedFilter: StateFlow<AlertSeverity?> = _selectedFilter.asStateFlow()
 
-    private val _filteredAlerts = MutableStateFlow(MockData.getAnchoredAlerts())
+    private val _filteredAlerts = MutableStateFlow<List<DisasterAlert>>(emptyList())
     val filteredAlerts: StateFlow<List<DisasterAlert>> = _filteredAlerts.asStateFlow()
 
-    fun updateGpsLocation(userLat: Double, userLng: Double) {
-        if (userLat == 0.0 && userLng == 0.0) return
-        _allAlerts.value = MockData.getAnchoredAlerts(userLat, userLng)
+    fun refreshData(userLat: Double = 0.0, userLng: Double = 0.0, demoMode: Boolean = false) {
+        val state = repository.getAlerts(userLat, userLng, demoMode)
+        _allAlerts.value = when (state) {
+            is DataSourceState.Success -> state.data
+            is DataSourceState.NoVerifiedSource -> emptyList()
+        }
         filterBySeverity(_selectedFilter.value)
     }
 
@@ -33,6 +41,6 @@ class AlertsViewModel : ViewModel() {
     }
 
     fun getAlertById(id: String): DisasterAlert? {
-        return _allAlerts.value.find { it.id == id }
+        return _allAlerts.value.find { it.id == id } ?: MockData.demoAlerts.find { it.id == id }
     }
 }

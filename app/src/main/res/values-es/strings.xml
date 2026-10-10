@@ -36,6 +36,8 @@
     <string name="official_instructions_title">Instrucciones Oficiales de Emergencia</string>
     <string name="recommended_actions_title">Acciones Recomendadas para Turistas</string>
     <string name="find_safe_places_near_you">Buscar Lugares Seguros Cercanos</string>
+    <string name="accommodation_not_found">Detalles de alojamiento no encontrados.</string>
+    <string name="alert_not_found">Detalles de alerta no encontrados.</string>
 
     <!-- Interactive Map Screen -->
     <string name="interactive_safety_map">Mapa Interactivo de Seguridad</string>
@@ -62,6 +64,7 @@
     <string name="verified_reviews_title">Reseñas Verificadas</string>
     <string name="verified_traveler">Viajero Verificado • %1$s</string>
     <string name="add_review_title">Escribir Reseña de Seguridad</string>
+    <string name="write_review">Escribir Reseña de Seguridad</string>
     <string name="your_name_label">Su Nombre</string>
     <string name="rating_label">Calificación:</string>
     <string name="safety_comments_label">Comentarios de Seguridad y Experiencia</string>
@@ -127,12 +130,12 @@
     <!-- Emergency SOS & Voice SOS -->
     <string name="emergency_sos_title">SOS de Emergencia</string>
     <string name="disaster_sos_assistance">ASISTENCIA SOS DE DESASTRE</string>
-    <string name="sos_explanation">Mantenga presionado el botón a continuación para enviar sus coordenadas en tiempo real a los equipos de rescate y contactos primarios.</string>
-    <string name="tap_for_sos">TOCAR PARA SOS</string>
-    <string name="signal_sent">SEÑAL ENVIADA</string>
-    <string name="confirm_sos_title">¿Confirmar Señal SOS de Emergencia?</string>
-    <string name="confirm_sos_msg">Esto transmitirá inmediatamente su señal de emergencia y coordenadas a los equipos locales de rescate y contactos principales.</string>
-    <string name="confirm_sos_btn">CONFIRMAR SOS</string>
+    <string name="sos_explanation">Seleccione su mensaje de emergencia y enlace de ubicación para transferirlo a su aplicación de mensajes SMS o marcador telefónico.</string>
+    <string name="tap_for_sos">PREPARAR SOS</string>
+    <string name="signal_sent">Mensaje Preparado</string>
+    <string name="confirm_sos_title">¿Preparar Mensaje SOS de Emergencia?</string>
+    <string name="confirm_sos_msg">Esto preparará su mensaje de emergencia y enlace de ubicación para transferirlo a su aplicación de mensajes SMS o marcador telefónico.</string>
+    <string name="confirm_sos_btn">PREPARAR SOS</string>
     <string name="cancel">Cancelar</string>
 
     <string name="voice_sos_tab">SOS por Voz</string>
@@ -153,9 +156,9 @@
     <string name="location_permission_title">Compartir Ubicación GPS</string>
     <string name="location_permission_desc">Incluya coordenadas GPS exactas en su mensaje de emergencia para ayudar a los equipos de rescate a ubicarlo.</string>
     <string name="shared_gps_coords">📍 Sus Coordenadas GPS Compartidas:</string>
-    <string name="send_emergency_message">Enviar Mensaje de Emergencia</string>
-    <string name="confirm_send_msg_title">¿Enviar Mensaje de Emergencia Ahora?</string>
-    <string name="confirm_send_msg_desc">Revise su mensaje y ubicación antes de transmitir a los servicios de emergencia y contactos primarios. Los servicios de emergencia NO serán contactados automáticamente sin su acción explícita.</string>
+    <string name="send_emergency_message">Preparar Mensaje de Emergencia</string>
+    <string name="confirm_send_msg_title">¿Preparar Mensaje de Emergencia?</string>
+    <string name="confirm_send_msg_desc">Revise su mensaje antes de transferirlo a su aplicación de mensajes o marcador. Nada se enviará automáticamente sin su acción explícita en su aplicación de mensajes.</string>
 
     <string name="error_speech_not_available">El servicio de reconocimiento de voz no está disponible en este dispositivo. Por favor use el modo escrito a continuación.</string>
     <string name="error_no_speech">No se detectó voz. Toque Reintentar Entrada de Voz y hable claramente.</string>
@@ -174,4 +177,6 @@
     <string name="approximate_gps_badge">Ubicación Aproximada</string>
     <string name="location_accuracy">Precisión: %1$dm</string>
     <string name="google_maps_link_label">Enlace de Google Maps: %1$s</string>
+    <string name="no_verified_source_title">Sin Registros Verificados en Ubicación Actual</string>
+    <string name="no_verified_source_desc">No hay refugios ni alertas verificadas oficiales en sus coordenadas GPS actuales. Active el Modo Demo en Ajustes para ver datos simulados de demostración.</string>
 </resources>

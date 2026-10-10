@@ -1,6 +1,7 @@
 package com.toursafe.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -19,23 +20,25 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toursafe.R
 import com.toursafe.data.models.AlertSeverity
-import com.toursafe.navigation.Screen
 import com.toursafe.ui.components.AlertCard
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
 import com.toursafe.util.LocationState
 import com.toursafe.viewmodels.AlertsViewModel
 import com.toursafe.viewmodels.GpsLocationViewModel
+import com.toursafe.viewmodels.SettingsViewModel
 
 @Composable
 fun DisasterAlertsScreen(
     viewModel: AlertsViewModel,
     locationViewModel: GpsLocationViewModel = viewModel(),
+    settingsViewModel: SettingsViewModel = viewModel(),
     onAlertClick: (String) -> Unit
 ) {
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
+        settingsViewModel.loadSettings(context)
         locationViewModel.initLocationManager(context)
         if (locationViewModel.hasPermission()) {
             locationViewModel.fetchLocation()
@@ -43,12 +46,12 @@ fun DisasterAlertsScreen(
     }
 
     val locationState by locationViewModel.locationState.collectAsState()
+    val demoModeEnabled by settingsViewModel.demoModeEnabled.collectAsState()
 
-    LaunchedEffect(locationState) {
-        if (locationState is LocationState.Success) {
-            val loc = (locationState as LocationState.Success).location
-            viewModel.updateGpsLocation(loc.latitude, loc.longitude)
-        }
+    LaunchedEffect(locationState, demoModeEnabled) {
+        val userLat = (locationState as? LocationState.Success)?.location?.latitude ?: 0.0
+        val userLng = (locationState as? LocationState.Success)?.location?.longitude ?: 0.0
+        viewModel.refreshData(userLat, userLng, demoModeEnabled)
     }
 
     val filteredAlerts by viewModel.filteredAlerts.collectAsState()
@@ -108,9 +111,9 @@ fun DisasterAlertsScreen(
                 }
                 item {
                     FilterChip(
-                        selected = selectedFilter == AlertSeverity.ADVISORY,
-                        onClick = { viewModel.filterBySeverity(AlertSeverity.ADVISORY) },
-                        label = { Text(stringResource(R.string.severity_advisory)) },
+                        selected = selectedFilter == AlertSeverity.INFO,
+                        onClick = { viewModel.filterBySeverity(AlertSeverity.INFO) },
+                        label = { Text(stringResource(R.string.severity_info)) },
                         colors = FilterChipDefaults.filterChipColors(
                             selectedContainerColor = SurfaceVariantNavy,
                             selectedLabelColor = TextPrimary
@@ -119,14 +122,38 @@ fun DisasterAlertsScreen(
                 }
             }
 
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(filteredAlerts) { alert ->
-                    AlertCard(
-                        alert = alert,
-                        onClick = { onAlertClick(alert.id) }
-                    )
+            if (filteredAlerts.isEmpty()) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(SurfaceNavy, RoundedCornerShape(16.dp))
+                        .border(1.dp, SurfaceVariantNavy, RoundedCornerShape(16.dp))
+                        .padding(16.dp)
+                ) {
+                    Column {
+                        Text(
+                            text = stringResource(R.string.no_verified_source_title),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = TextPrimary
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = stringResource(R.string.no_verified_source_desc),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = TextSecondary
+                        )
+                    }
+                }
+            } else {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    items(filteredAlerts) { alert ->
+                        AlertCard(
+                            alert = alert,
+                            onClick = { onAlertClick(alert.id) }
+                        )
+                    }
                 }
             }
         }

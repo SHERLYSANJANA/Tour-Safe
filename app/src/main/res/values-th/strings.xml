@@ -96,4 +96,8 @@
     <string name="approximate_gps_badge">ตำแหน่งโดยประมาณ</string>
     <string name="location_accuracy">ความแม่นยำ: %1$d เมตร</string>
     <string name="google_maps_link_label">ลิงก์ Google Maps: %1$s</string>
+    <string name="accommodation_not_found">ไม่พบรายละเอียดที่พัก</string>
+    <string name="alert_not_found">ไม่พบรายละเอียดการแจ้งเตือน</string>
+    <string name="no_verified_source_title">ไม่มีข้อมูลที่ยืนยันแล้วในตำแหน่งปัจจุบัน</string>
+    <string name="no_verified_source_desc">ไม่มีศูนย์อพยพหรือการแจ้งเตือนที่ได้รับการยืนยันอย่างเป็นทางการที่พิกัด GPS ปัจจุบันของคุณ เปิดโหมดสาธิตในการตั้งค่าเพื่อดูข้อมูลจำลอง</string>
 </resources>

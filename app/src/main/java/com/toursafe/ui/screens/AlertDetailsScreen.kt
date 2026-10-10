@@ -8,7 +8,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -57,7 +56,7 @@ fun AlertDetailsScreen(
             val (badgeBg, badgeColor, severityLabel) = when (alert.severity) {
                 AlertSeverity.CRITICAL -> Triple(AlertRedBg, AlertRed, stringResource(R.string.severity_critical))
                 AlertSeverity.WARNING -> Triple(WarningAmberBg, WarningAmber, stringResource(R.string.severity_warning))
-                else -> Triple(SurfaceVariantNavy, AccentCyan, stringResource(R.string.severity_advisory))
+                AlertSeverity.INFO -> Triple(SurfaceVariantNavy, AccentCyan, stringResource(R.string.severity_info))
             }
 
             Column(

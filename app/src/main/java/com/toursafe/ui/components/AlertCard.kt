@@ -47,8 +47,7 @@ fun AlertCard(
     val (badgeBg, badgeText, badgeColor) = when (alert.severity) {
         AlertSeverity.CRITICAL -> Triple(AlertRedBg, stringResource(R.string.severity_critical), AlertRed)
         AlertSeverity.WARNING -> Triple(WarningAmberBg, stringResource(R.string.severity_warning), WarningAmber)
-        AlertSeverity.ADVISORY -> Triple(SurfaceVariantNavy, stringResource(R.string.severity_advisory), AccentCyan)
-        AlertSeverity.INFO -> Triple(SurfaceVariantNavy, stringResource(R.string.severity_info), TextSecondary)
+        AlertSeverity.INFO -> Triple(SurfaceVariantNavy, stringResource(R.string.severity_info), AccentCyan)
     }
 
     Box(

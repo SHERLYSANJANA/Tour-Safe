@@ -19,8 +19,8 @@ class CheckInViewModel : ViewModel() {
     private val _emergencyContacts = MutableStateFlow(MockData.initialEmergencyContacts)
     val emergencyContacts: StateFlow<List<EmergencyContact>> = _emergencyContacts.asStateFlow()
 
-    private val _lastBroadcastMessage = MutableStateFlow<String?>(null)
-    val lastBroadcastMessage: StateFlow<String?> = _lastBroadcastMessage.asStateFlow()
+    private val _lastUpdatedMessage = MutableStateFlow<String?>(null)
+    val lastBroadcastMessage: StateFlow<String?> = _lastUpdatedMessage.asStateFlow()
 
     fun selectStatus(level: SafetyLevel) {
         _selectedStatus.value = level
@@ -32,12 +32,12 @@ class CheckInViewModel : ViewModel() {
 
     fun submitCheckIn(onComplete: () -> Unit) {
         val msg = when (_selectedStatus.value) {
-            SafetyLevel.SAFE -> "Broadcasting 'I AM SAFE': ${_customNote.value.ifBlank { "All fine at my location." }}"
-            SafetyLevel.MOVING_TO_SAFETY -> "Broadcasting 'MOVING TO SAFETY': ${_customNote.value.ifBlank { "In transit to shelter." }}"
-            SafetyLevel.NEED_HELP -> "Broadcasting 'EMERGENCY HELP NEEDED': ${_customNote.value.ifBlank { "Please send assistance." }}"
-            SafetyLevel.CRITICAL_WARNING -> "Broadcasting 'ALERT ACKNOWLEDGED'."
+            SafetyLevel.SAFE -> "Status set to 'I AM SAFE': ${_customNote.value.ifBlank { "All fine at my location." }}"
+            SafetyLevel.MOVING_TO_SAFETY -> "Status set to 'MOVING TO SAFETY': ${_customNote.value.ifBlank { "In transit to shelter." }}"
+            SafetyLevel.NEED_HELP -> "Status set to 'EMERGENCY HELP NEEDED': ${_customNote.value.ifBlank { "Assistance requested." }}"
+            SafetyLevel.CRITICAL_WARNING -> "Status set to 'ALERT ACKNOWLEDGED'."
         }
-        _lastBroadcastMessage.value = msg
+        _lastUpdatedMessage.value = msg
         onComplete()
     }
 }

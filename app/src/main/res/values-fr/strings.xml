@@ -96,4 +96,8 @@
     <string name="approximate_gps_badge">Position Approximative</string>
     <string name="location_accuracy">Précision : %1$dm</string>
     <string name="google_maps_link_label">Lien Google Maps : %1$s</string>
+    <string name="accommodation_not_found">Détails de l\'hébergement introuvables.</string>
+    <string name="alert_not_found">Détails de l\'alerte introuvables.</string>
+    <string name="no_verified_source_title">Aucun Enregistrement Vérifié pour la Position</string>
+    <string name="no_verified_source_desc">Aucun abri ou alerte officiel vérifié n\'est disponible à vos coordonnées GPS actuales. Activez le Mode Démo dans los Paramètres pour afficher les données de démonstration.</string>
 </resources>

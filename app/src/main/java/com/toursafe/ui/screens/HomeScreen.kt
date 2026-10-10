@@ -95,22 +95,34 @@ fun HomeScreen(
                     color = TextPrimary
                 )
                 Spacer(modifier = Modifier.height(12.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        QuickActionButton(
+                            modifier = Modifier.weight(1f),
+                            title = stringResource(R.string.emergency_sos),
+                            subtitle = stringResource(R.string.sos_subtitle),
+                            icon = Icons.Default.Sos,
+                            bgColor = AlertRedBg,
+                            borderColor = AlertRed,
+                            iconTint = AlertRed,
+                            onClick = { onNavigate(Screen.EmergencySos.route) }
+                        )
+                        QuickActionButton(
+                            modifier = Modifier.weight(1f),
+                            title = stringResource(R.string.voice_sos_tab),
+                            subtitle = stringResource(R.string.start_voice_sos),
+                            icon = Icons.Default.Mic,
+                            bgColor = SurfaceNavy,
+                            borderColor = AccentCyan,
+                            iconTint = AccentCyan,
+                            onClick = { onNavigate(Screen.EmergencySos.route) }
+                        )
+                    }
                     QuickActionButton(
-                        modifier = Modifier.weight(1f),
-                        title = stringResource(R.string.emergency_sos),
-                        subtitle = stringResource(R.string.sos_subtitle),
-                        icon = Icons.Default.Sos,
-                        bgColor = AlertRedBg,
-                        borderColor = AlertRed,
-                        iconTint = AlertRed,
-                        onClick = { onNavigate(Screen.EmergencySos.route) }
-                    )
-                    QuickActionButton(
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.fillMaxWidth(),
                         title = stringResource(R.string.safe_places),
                         subtitle = stringResource(R.string.shelters_hotels_subtitle),
                         icon = Icons.Default.Hotel,

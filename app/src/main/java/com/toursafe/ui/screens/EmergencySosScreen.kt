@@ -1,7 +1,9 @@
 package com.toursafe.ui.screens
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.*
@@ -15,9 +17,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.MicOff
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Sms
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -28,7 +32,6 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -38,11 +41,14 @@ import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
 import com.toursafe.util.LocationState
 import com.toursafe.util.SpeechState
+import com.toursafe.viewmodels.SettingsViewModel
+import com.toursafe.viewmodels.SosHandOffState
 import com.toursafe.viewmodels.VoiceSosViewModel
 
 @Composable
 fun EmergencySosScreen(
     voiceViewModel: VoiceSosViewModel = viewModel(),
+    settingsViewModel: SettingsViewModel = viewModel(),
     onBackClick: () -> Unit
 ) {
     val context = LocalContext.current
@@ -56,8 +62,10 @@ fun EmergencySosScreen(
     val selectedLang by voiceViewModel.selectedSpeechLanguage.collectAsState()
     val includeGps by voiceViewModel.includeGpsLocation.collectAsState()
     val locationState by voiceViewModel.locationState.collectAsState()
+    val handOffState by voiceViewModel.handOffState.collectAsState()
+    val emergencyContacts by settingsViewModel.emergencyContacts.collectAsState()
 
-    var activeTab by remember { mutableStateOf(0) } // 0: Voice SOS, 1: Tap SOS
+    var activeTab by remember { mutableIntStateOf(0) } // 0: Voice SOS, 1: Tap SOS
     var hasMicPermission by remember {
         mutableStateOf(
             ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
@@ -84,7 +92,6 @@ fun EmergencySosScreen(
     }
 
     var showConfirmDialog by remember { mutableStateOf(false) }
-    var showSendSuccessDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -254,7 +261,7 @@ fun EmergencySosScreen(
                             textAlign = TextAlign.Center
                         )
 
-                        if (speechState is SpeechState.Error || speechState is SpeechState.Success) {
+                        if ((speechState is SpeechState.Error) || (speechState is SpeechState.Success)) {
                             IconButton(onClick = { voiceViewModel.startListening() }) {
                                 Icon(
                                     imageVector = Icons.Default.Refresh,
@@ -421,7 +428,7 @@ fun EmergencySosScreen(
                             }
                             else -> {
                                 Text(
-                                    text = "GPS Location unavailable. Message will be sent without coordinates.",
+                                    text = "GPS Location unavailable. Message will be prepared without coordinates.",
                                     style = MaterialTheme.typography.bodySmall,
                                     color = TextSecondary
                                 )
@@ -438,9 +445,12 @@ fun EmergencySosScreen(
                 }
             }
 
-            // Send Emergency Message Button
+            // Prepare & Hand-off Emergency Message Button
             Button(
-                onClick = { showConfirmDialog = true },
+                onClick = {
+                    voiceViewModel.prepareSosHandOff(emergencyContacts)
+                    showConfirmDialog = true
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(54.dp),
@@ -458,64 +468,99 @@ fun EmergencySosScreen(
         }
 
         if (showConfirmDialog) {
+            val preparedState = handOffState as? SosHandOffState.Prepared
+
             AlertDialog(
-                onDismissRequest = { showConfirmDialog = false },
+                onDismissRequest = {
+                    showConfirmDialog = false
+                    voiceViewModel.resetHandOffState()
+                },
                 containerColor = SurfaceNavy,
                 title = { Text(stringResource(R.string.confirm_send_msg_title), color = AlertRed) },
                 text = {
-                    Text(stringResource(R.string.confirm_send_msg_desc), color = TextPrimary)
-                },
-                confirmButton = {
-                    Button(
-                        onClick = {
-                            voiceViewModel.sendEmergencyMessage {
-                                showConfirmDialog = false
-                                showSendSuccessDialog = true
+                    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        Text(stringResource(R.string.confirm_send_msg_desc), color = TextPrimary)
+                        if (preparedState != null) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(SurfaceVariantNavy, RoundedCornerShape(10.dp))
+                                    .padding(12.dp)
+                            ) {
+                                Text(
+                                    text = preparedState.message,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = TextPrimary
+                                )
                             }
-                        },
-                        colors = ButtonDefaults.buttonColors(containerColor = AlertRed)
-                    ) {
-                        Text(stringResource(R.string.confirm_sos_btn), color = Color.White)
-                    }
-                },
-                dismissButton = {
-                    TextButton(onClick = { showConfirmDialog = false }) {
-                        Text(stringResource(R.string.cancel), color = TextSecondary)
-                    }
-                }
-            )
-        }
-
-        if (showSendSuccessDialog) {
-            val locSuccess = locationState as? LocationState.Success
-            val mapsLink = locSuccess?.location?.toGoogleMapsLink()
-
-            AlertDialog(
-                onDismissRequest = { showSendSuccessDialog = false },
-                containerColor = SurfaceNavy,
-                title = { Text(stringResource(R.string.signal_sent), color = SafetyGreen) },
-                text = {
-                    Column {
-                        Text(
-                            text = if (spokenText.isNotBlank()) "Emergency Message:\n\"$spokenText\"" else "Emergency Beacon Signal Transmitted.",
-                            color = TextPrimary
-                        )
-                        if (includeGps && mapsLink != null) {
-                            Spacer(modifier = Modifier.height(10.dp))
-                            Text(
-                                text = "Attached GPS Location:\n$mapsLink",
-                                color = AccentCyan,
-                                style = MaterialTheme.typography.bodySmall
-                            )
                         }
                     }
                 },
                 confirmButton = {
-                    Button(
-                        onClick = { showSendSuccessDialog = false },
-                        colors = ButtonDefaults.buttonColors(containerColor = SafetyGreen)
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        Text("OK", color = Color.Black)
+                        Button(
+                            onClick = {
+                                preparedState?.let { prep ->
+                                    val smsIntent = Intent(Intent.ACTION_SENDTO).apply {
+                                        data = Uri.parse("smsto:${prep.smsNumbers}")
+                                        putExtra("sms_body", prep.message)
+                                        putExtra(Intent.EXTRA_TEXT, prep.message)
+                                    }
+                                    try {
+                                        context.startActivity(smsIntent)
+                                        voiceViewModel.markHandedOff("SMS")
+                                    } catch (e: Exception) {
+                                        val genericIntent = Intent(Intent.ACTION_VIEW).apply {
+                                            data = Uri.parse("sms:${prep.smsNumbers}?body=${Uri.encode(prep.message)}")
+                                        }
+                                        try {
+                                            context.startActivity(genericIntent)
+                                            voiceViewModel.markHandedOff("SMS")
+                                        } catch (ex: Exception) {}
+                                    }
+                                }
+                                showConfirmDialog = false
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Icon(imageVector = Icons.Default.Sms, contentDescription = null, tint = Color.Black)
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text("Open Messaging App (SMS)", color = Color.Black)
+                        }
+
+                        Button(
+                            onClick = {
+                                val primaryPhone = emergencyContacts.firstOrNull()?.phoneNumber ?: "112"
+                                val dialIntent = Intent(Intent.ACTION_DIAL).apply {
+                                    data = Uri.parse("tel:${primaryPhone.replace(Regex("[^0-9+]"), "")}")
+                                }
+                                try {
+                                    context.startActivity(dialIntent)
+                                    voiceViewModel.markHandedOff("DIALER")
+                                } catch (e: Exception) {}
+                                showConfirmDialog = false
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = AlertRed),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Icon(imageVector = Icons.Default.Call, contentDescription = null, tint = Color.White)
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text("Call Emergency Line", color = Color.White)
+                        }
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = {
+                            showConfirmDialog = false
+                            voiceViewModel.resetHandOffState()
+                        }
+                    ) {
+                        Text(stringResource(R.string.cancel), color = TextSecondary)
                     }
                 }
             )
@@ -533,7 +578,7 @@ private fun LanguageDropdownSelector(
         "es" to "Español",
         "fr" to "Français",
         "de" to "Deutsch",
-        "zh" to "简体中文",
+        "zh" to "中文(简体)",
         "ja" to "日本語",
         "th" to "ไทย",
         "hi" to "हिन्दी"

@@ -69,7 +69,7 @@
 
     <!-- Emergency Check-In Screen -->
     <string name="check_in_screen_title">Emergency Check-In</string>
-    <string name="check_in_screen_desc">Broadcast your safety status instantly to emergency contacts and local authorities.</string>
+    <string name="check_in_screen_desc">Prepare your safety status message to share with emergency contacts.</string>
     <string name="status_im_safe">I\'m Safe</string>
     <string name="status_im_safe_desc">I am in a safe location and do not need assistance.</string>
     <string name="status_moving_to_safety">Moving to Safety</string>
@@ -78,7 +78,7 @@
     <string name="status_i_need_help_desc">I require emergency rescue or immediate medical aid.</string>
     <string name="status_critical_warning">Critical Hazard Zone</string>
     <string name="add_optional_note_label">Add optional note (e.g. Hotel Room 302, 2 people)</string>
-    <string name="broadcast_status_now">Broadcast Status Now</string>
+    <string name="broadcast_status_now">Update Safety Status</string>
 
     <!-- Onboarding Screen -->
     <string name="welcome_title">Welcome to TourSafe</string>
@@ -127,12 +127,12 @@
     <!-- Emergency SOS & Voice SOS -->
     <string name="emergency_sos_title">Emergency SOS</string>
     <string name="disaster_sos_assistance">DISASTER SOS ASSISTANCE</string>
-    <string name="sos_explanation">Press and hold the button below to dispatch your real-time coordinates to emergency responders and primary contacts.</string>
-    <string name="tap_for_sos">TAP FOR SOS</string>
-    <string name="signal_sent">SIGNAL SENT</string>
-    <string name="confirm_sos_title">Confirm Emergency SOS Signal?</string>
-    <string name="confirm_sos_msg">This will immediately transmit your emergency beacon and coordinates to local disaster response teams and emergency contacts.</string>
-    <string name="confirm_sos_btn">CONFIRM SOS</string>
+    <string name="sos_explanation">Select your emergency message and location link below to hand off to your SMS messaging app or phone dialer.</string>
+    <string name="tap_for_sos">PREPARE SOS</string>
+    <string name="signal_sent">Message Prepared</string>
+    <string name="confirm_sos_title">Prepare Emergency SOS Message?</string>
+    <string name="confirm_sos_msg">This will prepare your emergency message and location link for handing off to your SMS messaging app or phone dialer.</string>
+    <string name="confirm_sos_btn">PREPARE SOS HAND-OFF</string>
     <string name="cancel">Cancel</string>
 
     <string name="voice_sos_tab">Voice SOS</string>
@@ -154,8 +154,8 @@
     <string name="location_permission_desc">Include exact GPS coordinates with your emergency message to help rescue teams locate you.</string>
     <string name="shared_gps_coords">📍 Your Shared GPS Coordinates:</string>
     <string name="send_emergency_message">Send Emergency Message</string>
-    <string name="confirm_send_msg_title">Send Emergency Message Now?</string>
-    <string name="confirm_send_msg_desc">Review your message and location before broadcasting to emergency services and primary contacts. Emergency services will NOT be contacted automatically without your explicit action.</string>
+    <string name="confirm_send_msg_title">Prepare Emergency Message?</string>
+    <string name="confirm_send_msg_desc">Review your message before handing off to your messaging app or phone dialer. Nothing will be sent automatically without your explicit action in your messaging app.</string>
 
     <string name="error_speech_not_available">Speech recognition service is unavailable on this device. Please use typing mode below.</string>
     <string name="error_no_speech">No speech detected. Please tap Retry Voice Input and speak clearly.</string>

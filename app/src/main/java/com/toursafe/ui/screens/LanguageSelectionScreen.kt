@@ -75,8 +75,14 @@ fun LanguageSelectionScreen(
                             language = lang,
                             onSelect = {
                                 selectedLangCode = lang.code
-                                LocaleManager.setLocale(context, lang.code)
-                                (context as? Activity)?.recreate()
+                                // Same flow as before: pick a language -> save it -> continue.
+                                viewModel.selectLanguage(lang.code, context)
+                                onLanguageConfirmed()
+                                // Android 13+ re-applies the locale by itself; older versions
+                                // need the activity restarted so the new language shows.
+                                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.TIRAMISU) {
+                                    (context as? Activity)?.recreate()
+                                }
                             }
                         )
                     }

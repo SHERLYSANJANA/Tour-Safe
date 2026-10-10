@@ -76,6 +76,11 @@ class SettingsViewModel : ViewModel() {
         }
     }
 
+    fun selectLanguage(code: String, context: Context) {
+        _selectedLanguageCode.value = code
+        LocaleManager.setLocale(context, code)
+    }
+
     fun toggleDemoMode(context: Context, enabled: Boolean) {
         _demoModeEnabled.value = enabled
         context.getSharedPreferences("toursafe_settings", Context.MODE_PRIVATE)

@@ -36,6 +36,10 @@
     <string name="official_instructions_title">Official Emergency Instructions</string>
     <string name="recommended_actions_title">Recommended Tourist Actions</string>
     <string name="find_safe_places_near_you">Find Safe Places Near You</string>
+    <string name="accommodation_not_found">Accommodation details not found.</string>
+    <string name="alert_not_found">Disaster alert details not found.</string>
+    <string name="no_verified_source_title">No Verified Records in Current Location</string>
+    <string name="no_verified_source_desc">No official verified shelters or alerts are available at your current GPS coordinates. Enable Demo Mode in Settings to view simulated demo data.</string>
 
     <!-- Interactive Map Screen -->
     <string name="interactive_safety_map">Interactive Safety Map</string>
@@ -62,6 +66,7 @@
     <string name="verified_reviews_title">Verified Reviews</string>
     <string name="verified_traveler">Verified Traveler • %1$s</string>
     <string name="add_review_title">Write Safety Review</string>
+    <string name="write_review">Write Safety Review</string>
     <string name="your_name_label">Your Name</string>
     <string name="rating_label">Rating:</string>
     <string name="safety_comments_label">Safety Comments &amp; Experience</string>

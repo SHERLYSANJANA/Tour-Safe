@@ -8,6 +8,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.toursafe.data.models.DisasterAlert
 import com.toursafe.data.models.SafetyLevel
 import com.toursafe.data.models.UserSafetyStatus
+import com.toursafe.data.repository.DataSourceState
 import com.toursafe.data.repository.MockSafetyRepository
 import com.toursafe.data.repository.SafetyRepository
 import com.toursafe.util.LocationUtils
@@ -22,27 +23,32 @@ class HomeViewModel(
     private val _userStatus = MutableStateFlow(repository.getUserStatus())
     val userStatus: StateFlow<UserSafetyStatus> = _userStatus.asStateFlow()
 
-    private val _alerts = MutableStateFlow(repository.getAlerts())
+    private val _alerts = MutableStateFlow<List<DisasterAlert>>(emptyList())
     val alerts: StateFlow<List<DisasterAlert>> = _alerts.asStateFlow()
 
-    fun updateGpsLocation(userLat: Double, userLng: Double, context: Context? = null) {
-        if (userLat == 0.0 && userLng == 0.0) return
-        _alerts.value = repository.getAlerts(userLat, userLng)
+    fun refreshData(userLat: Double = 0.0, userLng: Double = 0.0, demoMode: Boolean = false, context: Context? = null) {
+        val state = repository.getAlerts(userLat, userLng, demoMode)
+        _alerts.value = when (state) {
+            is DataSourceState.Success -> state.data
+            is DataSourceState.NoVerifiedSource -> emptyList()
+        }
 
-        val formattedCoords = "${"%.4f".format(userLat)}° N, ${"%.4f".format(userLng)}° E"
-        val currentStatus = _userStatus.value
+        if (userLat != 0.0 || userLng != 0.0) {
+            val formattedCoords = "${"%.4f".format(userLat)}° N, ${"%.4f".format(userLng)}° E"
+            val currentStatus = _userStatus.value
 
-        if (context != null) {
-            LocationUtils.reverseGeocodeLocationName(context, userLat, userLng) { cityName ->
+            if (context != null) {
+                LocationUtils.reverseGeocodeLocationName(context, userLat, userLng) { cityName ->
+                    _userStatus.value = currentStatus.copy(
+                        locationName = cityName,
+                        coordinates = formattedCoords
+                    )
+                }
+            } else {
                 _userStatus.value = currentStatus.copy(
-                    locationName = cityName,
                     coordinates = formattedCoords
                 )
             }
-        } else {
-            _userStatus.value = currentStatus.copy(
-                coordinates = formattedCoords
-            )
         }
     }
 

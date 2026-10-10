@@ -96,4 +96,8 @@
     <string name="approximate_gps_badge">Ungefährer Standort</string>
     <string name="location_accuracy">Genauigkeit: %1$dm</string>
     <string name="google_maps_link_label">Google Maps Link: %1$s</string>
+    <string name="accommodation_not_found">Unterkunftsdetails nicht gefunden.</string>
+    <string name="alert_not_found">Warnungsdetails nicht gefunden.</string>
+    <string name="no_verified_source_title">Keine verifizierten Einträge am aktuellen Standort</string>
+    <string name="no_verified_source_desc">An Ihren aktuellen GPS-Koordinaten sind keine offiziell verifizierten Unterkünfte oder Warnungen verfügbar. Aktivieren Sie den Demomodus in den Einstellungen, um simulierte Demodaten anzuzeigen.</string>
 </resources>

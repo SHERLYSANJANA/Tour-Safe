@@ -17,7 +17,9 @@ data class MapMarker(
     val normY: Float, // Normalized offset Y on canvas (0.0 .. 1.0)
     val severityLevel: String = "Medium",
     val latitude: Double = 7.8804,
-    val longitude: Double = 98.3923
+    val longitude: Double = 98.3923,
+    val isDemo: Boolean = true,
+    val isVerified: Boolean = false
 )
 
 data class HazardZone(
@@ -28,5 +30,7 @@ data class HazardZone(
     val normCenterY: Float,
     val radiusNormalized: Float,
     val latitude: Double = 7.8950,
-    val longitude: Double = 98.2950
+    val longitude: Double = 98.2950,
+    val isDemo: Boolean = true,
+    val isVerified: Boolean = false
 )

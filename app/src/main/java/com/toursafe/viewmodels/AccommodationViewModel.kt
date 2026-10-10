@@ -4,13 +4,18 @@ import androidx.lifecycle.ViewModel
 import com.toursafe.data.mock.MockData
 import com.toursafe.data.models.PropertyReview
 import com.toursafe.data.models.SafeAccommodation
+import com.toursafe.data.repository.DataSourceState
+import com.toursafe.data.repository.MockSafetyRepository
+import com.toursafe.data.repository.SafetyRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class AccommodationViewModel : ViewModel() {
+class AccommodationViewModel(
+    private val repository: SafetyRepository = MockSafetyRepository()
+) : ViewModel() {
 
-    private val _accommodations = MutableStateFlow(MockData.getAnchoredAccommodations())
+    private val _accommodations = MutableStateFlow<List<SafeAccommodation>>(emptyList())
     val accommodations: StateFlow<List<SafeAccommodation>> = _accommodations.asStateFlow()
 
     private val _searchQuery = MutableStateFlow("")
@@ -22,9 +27,12 @@ class AccommodationViewModel : ViewModel() {
     private val _reviews = MutableStateFlow(MockData.propertyReviews)
     val reviews: StateFlow<List<PropertyReview>> = _reviews.asStateFlow()
 
-    fun updateGpsLocation(userLat: Double, userLng: Double) {
-        if (userLat == 0.0 && userLng == 0.0) return
-        _accommodations.value = MockData.getAnchoredAccommodations(userLat, userLng)
+    fun refreshData(userLat: Double = 0.0, userLng: Double = 0.0, demoMode: Boolean = false) {
+        val state = repository.getAccommodations(userLat, userLng, demoMode)
+        _accommodations.value = when (state) {
+            is DataSourceState.Success -> state.data
+            is DataSourceState.NoVerifiedSource -> emptyList()
+        }
     }
 
     fun updateSearchQuery(query: String) {
@@ -46,7 +54,7 @@ class AccommodationViewModel : ViewModel() {
     }
 
     fun getAccommodationById(id: String): SafeAccommodation? {
-        return _accommodations.value.find { it.id == id }
+        return _accommodations.value.find { it.id == id } ?: MockData.demoAccommodations.find { it.id == id }
     }
 
     fun addReview(accommodationId: String, userName: String, rating: Double, comment: String) {

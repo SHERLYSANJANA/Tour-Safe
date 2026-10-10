@@ -1,6 +1,7 @@
 package com.toursafe.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -26,16 +27,19 @@ import com.toursafe.ui.theme.*
 import com.toursafe.util.LocationState
 import com.toursafe.viewmodels.AccommodationViewModel
 import com.toursafe.viewmodels.GpsLocationViewModel
+import com.toursafe.viewmodels.SettingsViewModel
 
 @Composable
 fun SafeAccommodationScreen(
     viewModel: AccommodationViewModel,
     locationViewModel: GpsLocationViewModel = viewModel(),
+    settingsViewModel: SettingsViewModel = viewModel(),
     onAccommodationClick: (String) -> Unit
 ) {
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
+        settingsViewModel.loadSettings(context)
         locationViewModel.initLocationManager(context)
         if (locationViewModel.hasPermission()) {
             locationViewModel.fetchLocation()
@@ -43,12 +47,12 @@ fun SafeAccommodationScreen(
     }
 
     val locationState by locationViewModel.locationState.collectAsState()
+    val demoModeEnabled by settingsViewModel.demoModeEnabled.collectAsState()
 
-    LaunchedEffect(locationState) {
-        if (locationState is LocationState.Success) {
-            val loc = (locationState as LocationState.Success).location
-            viewModel.updateGpsLocation(loc.latitude, loc.longitude)
-        }
+    LaunchedEffect(locationState, demoModeEnabled) {
+        val userLat = (locationState as? LocationState.Success)?.location?.latitude ?: 0.0
+        val userLng = (locationState as? LocationState.Success)?.location?.longitude ?: 0.0
+        viewModel.refreshData(userLat, userLng, demoModeEnabled)
     }
 
     val searchQuery by viewModel.searchQuery.collectAsState()
@@ -119,15 +123,38 @@ fun SafeAccommodationScreen(
                 )
             }
 
-            // Accommodations List
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(filteredList) { acc ->
-                    AccommodationCard(
-                        accommodation = acc,
-                        onClick = { onAccommodationClick(acc.id) }
-                    )
+            if (filteredList.isEmpty()) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(SurfaceNavy, RoundedCornerShape(16.dp))
+                        .border(1.dp, SurfaceVariantNavy, RoundedCornerShape(16.dp))
+                        .padding(16.dp)
+                ) {
+                    Column {
+                        Text(
+                            text = stringResource(R.string.no_verified_source_title),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = TextPrimary
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = stringResource(R.string.no_verified_source_desc),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = TextSecondary
+                        )
+                    }
+                }
+            } else {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    items(filteredList) { acc ->
+                        AccommodationCard(
+                            accommodation = acc,
+                            onClick = { onAccommodationClick(acc.id) }
+                        )
+                    }
                 }
             }
         }

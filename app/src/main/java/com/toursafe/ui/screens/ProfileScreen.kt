@@ -1,7 +1,6 @@
 package com.toursafe.ui.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -10,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
@@ -17,11 +17,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.toursafe.R
 import com.toursafe.data.models.EmergencyContact
-import com.toursafe.navigation.Screen
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
 import com.toursafe.viewmodels.SettingsViewModel
@@ -31,8 +31,17 @@ fun ProfileScreen(
     viewModel: SettingsViewModel,
     onNavigateToSettings: () -> Unit
 ) {
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        viewModel.loadSettings(context)
+    }
+
     val contacts by viewModel.emergencyContacts.collectAsState()
+    val profileName by viewModel.profileName.collectAsState()
+
     var showAddContactDialog by remember { mutableStateOf(false) }
+    var showEditProfileDialog by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -55,40 +64,51 @@ fun ProfileScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(SurfaceNavy, RoundedCornerShape(16.dp))
+                    .clickable { showEditProfileDialog = true }
                     .padding(20.dp)
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Box(
-                        modifier = Modifier
-                            .size(60.dp)
-                            .background(AccentCyan.copy(alpha = 0.2f), CircleShape),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = null,
-                            tint = AccentCyan,
-                            modifier = Modifier.size(36.dp)
-                        )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Box(
+                            modifier = Modifier
+                                .size(60.dp)
+                                .background(AccentCyan.copy(alpha = 0.2f), CircleShape),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Person,
+                                contentDescription = null,
+                                tint = AccentCyan,
+                                modifier = Modifier.size(36.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Column {
+                            Text(
+                                text = profileName.ifBlank { "Tap to Set Profile Name" },
+                                style = MaterialTheme.typography.titleLarge,
+                                color = if (profileName.isBlank()) TextMuted else TextPrimary
+                            )
+                            Text(
+                                text = stringResource(R.string.passport_blood_type),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = TextSecondary
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                text = stringResource(R.string.current_trip),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = AccentCyan
+                            )
+                        }
                     }
-                    Spacer(modifier = Modifier.width(16.dp))
-                    Column {
-                        Text(
-                            text = "Alex Morgan",
-                            style = MaterialTheme.typography.titleLarge,
-                            color = TextPrimary
-                        )
-                        Text(
-                            text = stringResource(R.string.passport_blood_type),
-                            style = MaterialTheme.typography.bodySmall,
-                            color = TextSecondary
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(
-                            text = stringResource(R.string.current_trip),
-                            style = MaterialTheme.typography.labelSmall,
-                            color = AccentCyan
-                        )
+
+                    IconButton(onClick = { showEditProfileDialog = true }) {
+                        Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit Profile", tint = AccentCyan)
                     }
                 }
             }
@@ -149,20 +169,47 @@ fun ProfileScreen(
 
             // Contacts List
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                contacts.forEach { contact ->
-                    ContactRow(
-                        contact = contact,
-                        onDelete = { viewModel.removeContact(contact.id) }
-                    )
+                if (contacts.isEmpty()) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(SurfaceNavy, RoundedCornerShape(12.dp))
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "No emergency contacts added yet.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = TextSecondary
+                        )
+                    }
+                } else {
+                    contacts.forEach { contact ->
+                        ContactRow(
+                            contact = contact,
+                            onDelete = { viewModel.deleteEmergencyContact(context, contact.id) }
+                        )
+                    }
                 }
             }
+        }
+
+        if (showEditProfileDialog) {
+            EditProfileNameDialog(
+                currentName = profileName,
+                onDismiss = { showEditProfileDialog = false },
+                onSave = { newName ->
+                    viewModel.saveProfileName(context, newName)
+                    showEditProfileDialog = false
+                }
+            )
         }
 
         if (showAddContactDialog) {
             AddContactDialog(
                 onDismiss = { showAddContactDialog = false },
                 onAdd = { name, relation, phone ->
-                    viewModel.addContact(name, relation, phone)
+                    viewModel.addEmergencyContact(context, name, relation, phone)
                     showAddContactDialog = false
                 }
             )
@@ -208,6 +255,42 @@ private fun ContactRow(
             }
         }
     }
+}
+
+@Composable
+private fun EditProfileNameDialog(
+    currentName: String,
+    onDismiss: () -> Unit,
+    onSave: (String) -> Unit
+) {
+    var nameInput by remember { mutableStateOf(currentName) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        containerColor = SurfaceNavy,
+        title = { Text("Profile Name", color = TextPrimary) },
+        text = {
+            OutlinedTextField(
+                value = nameInput,
+                onValueChange = { nameInput = it },
+                label = { Text("Full Name", color = TextSecondary) },
+                colors = OutlinedTextFieldDefaults.colors(focusedTextColor = TextPrimary, unfocusedTextColor = TextPrimary)
+            )
+        },
+        confirmButton = {
+            Button(
+                onClick = { onSave(nameInput.trim()) },
+                colors = ButtonDefaults.buttonColors(containerColor = AccentCyan)
+            ) {
+                Text("Save", color = Color.Black)
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text(stringResource(R.string.cancel), color = TextSecondary)
+            }
+        }
+    )
 }
 
 @Composable

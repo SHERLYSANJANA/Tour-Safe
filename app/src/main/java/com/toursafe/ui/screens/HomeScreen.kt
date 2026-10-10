@@ -31,16 +31,19 @@ import com.toursafe.ui.theme.*
 import com.toursafe.util.LocationState
 import com.toursafe.viewmodels.GpsLocationViewModel
 import com.toursafe.viewmodels.HomeViewModel
+import com.toursafe.viewmodels.SettingsViewModel
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory),
     locationViewModel: GpsLocationViewModel = viewModel(),
+    settingsViewModel: SettingsViewModel = viewModel(),
     onNavigate: (String) -> Unit
 ) {
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
+        settingsViewModel.loadSettings(context)
         locationViewModel.initLocationManager(context)
         if (locationViewModel.hasPermission()) {
             locationViewModel.fetchLocation()
@@ -48,12 +51,12 @@ fun HomeScreen(
     }
 
     val locationState by locationViewModel.locationState.collectAsState()
+    val demoModeEnabled by settingsViewModel.demoModeEnabled.collectAsState()
 
-    LaunchedEffect(locationState) {
-        if (locationState is LocationState.Success) {
-            val loc = (locationState as LocationState.Success).location
-            viewModel.updateGpsLocation(loc.latitude, loc.longitude, context)
-        }
+    LaunchedEffect(locationState, demoModeEnabled) {
+        val userLat = (locationState as? LocationState.Success)?.location?.latitude ?: 0.0
+        val userLng = (locationState as? LocationState.Success)?.location?.longitude ?: 0.0
+        viewModel.refreshData(userLat, userLng, demoModeEnabled, context)
     }
 
     val status by viewModel.userStatus.collectAsState()
@@ -176,12 +179,37 @@ fun HomeScreen(
                 }
             }
 
-            // Alerts List
-            items(alerts) { alert ->
-                AlertCard(
-                    alert = alert,
-                    onClick = { onNavigate(Screen.AlertDetails.createRoute(alert.id)) }
-                )
+            if (alerts.isEmpty()) {
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(SurfaceNavy, RoundedCornerShape(16.dp))
+                            .border(1.dp, SurfaceVariantNavy, RoundedCornerShape(16.dp))
+                            .padding(16.dp)
+                    ) {
+                        Column {
+                            Text(
+                                text = stringResource(R.string.no_verified_source_title),
+                                style = MaterialTheme.typography.titleMedium,
+                                color = TextPrimary
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                text = stringResource(R.string.no_verified_source_desc),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = TextSecondary
+                            )
+                        }
+                    }
+                }
+            } else {
+                items(alerts) { alert ->
+                    AlertCard(
+                        alert = alert,
+                        onClick = { onNavigate(Screen.AlertDetails.createRoute(alert.id)) }
+                    )
+                }
             }
         }
     }

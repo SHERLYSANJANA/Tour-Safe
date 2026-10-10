@@ -9,7 +9,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Directions
-import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -76,7 +75,7 @@ fun AccommodationDetailsScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Accommodation not found.",
+                    text = stringResource(R.string.accommodation_not_found),
                     style = MaterialTheme.typography.bodyLarge,
                     color = TextSecondary
                 )
@@ -117,6 +116,22 @@ fun AccommodationDetailsScreen(
                             )
                         }
 
+                        if (currentAcc.isDemo) {
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(6.dp))
+                                    .background(WarningAmberBg)
+                                    .padding(horizontal = 8.dp, vertical = 2.dp)
+                            ) {
+                                Text(
+                                    text = "Unverified Demo Record",
+                                    color = WarningAmber,
+                                    style = MaterialTheme.typography.labelSmall
+                                )
+                            }
+                        }
+
                         Spacer(modifier = Modifier.height(8.dp))
 
                         Text(
@@ -131,13 +146,8 @@ fun AccommodationDetailsScreen(
                             color = TextSecondary
                         )
 
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
+                        if (currentAcc.rating != null) {
+                            Spacer(modifier = Modifier.height(12.dp))
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 StarRatingBar(rating = currentAcc.rating)
                                 Spacer(modifier = Modifier.width(8.dp))
@@ -149,44 +159,47 @@ fun AccommodationDetailsScreen(
                             }
                         }
 
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        Text(
-                            text = stringResource(R.string.rate_label, currentAcc.pricePerNight),
-                            style = MaterialTheme.typography.titleLarge,
-                            color = SafetyGreen
-                        )
+                        currentAcc.pricePerNight?.let { price ->
+                            Spacer(modifier = Modifier.height(12.dp))
+                            Text(
+                                text = stringResource(R.string.rate_label, price),
+                                style = MaterialTheme.typography.titleLarge,
+                                color = SafetyGreen
+                            )
+                        }
                     }
                 }
 
                 // Emergency & Safety Amenities
-                Text(
-                    text = stringResource(R.string.resilience_amenities_title),
-                    style = MaterialTheme.typography.titleLarge,
-                    color = TextPrimary
-                )
+                if (currentAcc.emergencyAmenities.isNotEmpty()) {
+                    Text(
+                        text = stringResource(R.string.resilience_amenities_title),
+                        style = MaterialTheme.typography.titleLarge,
+                        color = TextPrimary
+                    )
 
-                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                    currentAcc.emergencyAmenities.forEach { amenity ->
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(SurfaceNavy, RoundedCornerShape(12.dp))
-                                .padding(14.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.CheckCircle,
-                                contentDescription = null,
-                                tint = SafetyGreen,
-                                modifier = Modifier.size(20.dp)
-                            )
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Text(
-                                text = amenity,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = TextPrimary
-                            )
+                    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                        currentAcc.emergencyAmenities.forEach { amenity ->
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(SurfaceNavy, RoundedCornerShape(12.dp))
+                                    .padding(14.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.CheckCircle,
+                                    contentDescription = null,
+                                    tint = SafetyGreen,
+                                    modifier = Modifier.size(20.dp)
+                                )
+                                Spacer(modifier = Modifier.width(12.dp))
+                                Text(
+                                    text = amenity,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = TextPrimary
+                                )
+                            }
                         }
                     }
                 }
@@ -199,17 +212,28 @@ fun AccommodationDetailsScreen(
                         .padding(16.dp)
                 ) {
                     Column {
-                        Text(
-                            text = stringResource(R.string.available_capacity, currentAcc.capacityAvailable, currentAcc.maxCapacity),
-                            style = MaterialTheme.typography.titleMedium,
-                            color = TextPrimary
-                        )
-                        Spacer(modifier = Modifier.height(6.dp))
-                        Text(
-                            text = stringResource(R.string.emergency_phone_label, currentAcc.contactPhone),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = AccentCyan
-                        )
+                        if (currentAcc.capacityAvailable != null && currentAcc.maxCapacity != null) {
+                            Text(
+                                text = stringResource(R.string.available_capacity, currentAcc.capacityAvailable, currentAcc.maxCapacity),
+                                style = MaterialTheme.typography.titleMedium,
+                                color = TextPrimary
+                            )
+                        } else {
+                            Text(
+                                text = "Capacity Unlisted (Demo)",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = TextMuted
+                            )
+                        }
+
+                        if (currentAcc.contactPhone != null) {
+                            Spacer(modifier = Modifier.height(6.dp))
+                            Text(
+                                text = stringResource(R.string.emergency_phone_label, currentAcc.contactPhone),
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = AccentCyan
+                            )
+                        }
                     }
                 }
 
@@ -239,24 +263,25 @@ fun AccommodationDetailsScreen(
                                 context = context,
                                 destinationLat = currentAcc.latitude,
                                 destinationLng = currentAcc.longitude,
-                                destinationName = currentAcc.name
+                                destinationName = currentAcc.name,
+                                isDemoRecord = currentAcc.isDemo
                             )
                         },
                         modifier = Modifier
                             .weight(1f)
                             .height(52.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                        colors = ButtonDefaults.buttonColors(containerColor = if (currentAcc.isDemo) SurfaceVariantNavy else AccentCyan),
                         shape = RoundedCornerShape(14.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Directions,
                             contentDescription = null,
-                            tint = Color.Black
+                            tint = if (currentAcc.isDemo) TextMuted else Color.Black
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = stringResource(R.string.directions),
-                            color = Color.Black,
+                            color = if (currentAcc.isDemo) TextMuted else Color.Black,
                             style = MaterialTheme.typography.titleMedium
                         )
                     }

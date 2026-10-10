@@ -64,6 +64,22 @@ fun AccommodationCard(
                 )
             }
 
+            if (accommodation.isDemo) {
+                Spacer(modifier = Modifier.height(4.dp))
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(6.dp))
+                        .background(WarningAmberBg)
+                        .padding(horizontal = 8.dp, vertical = 2.dp)
+                ) {
+                    Text(
+                        text = "Unverified Demo Record",
+                        color = WarningAmber,
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                }
+            }
+
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
@@ -85,30 +101,41 @@ fun AccommodationCard(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    StarRatingBar(rating = accommodation.rating, starSize = 16.dp)
-                    Spacer(modifier = Modifier.width(6.dp))
+                if (accommodation.rating != null) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        StarRatingBar(rating = accommodation.rating, starSize = 16.dp)
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = stringResource(R.string.reviews_count, accommodation.rating, accommodation.reviewCount),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = TextSecondary
+                        )
+                    }
+                } else {
                     Text(
-                        text = stringResource(R.string.reviews_count, accommodation.rating, accommodation.reviewCount),
+                        text = "Rating Unlisted (Demo)",
                         style = MaterialTheme.typography.bodySmall,
-                        color = TextSecondary
+                        color = TextMuted
                     )
                 }
 
-                Text(
-                    text = accommodation.pricePerNight,
-                    style = MaterialTheme.typography.titleSmall,
-                    color = SafetyGreen
-                )
+                accommodation.pricePerNight?.let { price ->
+                    Text(
+                        text = price,
+                        style = MaterialTheme.typography.titleSmall,
+                        color = SafetyGreen
+                    )
+                }
             }
 
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = stringResource(R.string.available_capacity, accommodation.capacityAvailable, accommodation.maxCapacity),
-                style = MaterialTheme.typography.labelSmall,
-                color = TextMuted
-            )
+            if (accommodation.capacityAvailable != null && accommodation.maxCapacity != null) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = stringResource(R.string.available_capacity, accommodation.capacityAvailable, accommodation.maxCapacity),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = TextMuted
+                )
+            }
         }
     }
 }

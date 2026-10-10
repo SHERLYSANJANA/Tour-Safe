@@ -96,4 +96,8 @@
     <string name="approximate_gps_badge">अनुमानित स्थान</string>
     <string name="location_accuracy">सटीकता: %1$d मीटर</string>
     <string name="google_maps_link_label">गूगल मैप्स लिंक: %1$s</string>
+    <string name="accommodation_not_found">आवास विवरण नहीं मिला।</string>
+    <string name="alert_not_found">चेतावनी विवरण नहीं मिला।</string>
+    <string name="no_verified_source_title">वर्तमान स्थान में कोई सत्यापित रिकॉर्ड नहीं</string>
+    <string name="no_verified_source_desc">आपके वर्तमान GPS निर्देशांकों पर कोई आधिकारिक सत्यापित आश्रय या चेतावनी उपलब्ध नहीं है। सिमुलेटेड डेमो डेटा देखने के लिए सेटिंग्स में \'डेमो मोड\' सक्षम करें।</string>
 </resources>

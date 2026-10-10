@@ -1,5 +1,6 @@
 package com.toursafe
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,8 +9,14 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.toursafe.navigation.TourSafeNavGraph
 import com.toursafe.ui.theme.TourSafeTheme
+import com.toursafe.util.LocaleManager
 
 class MainActivity : ComponentActivity() {
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(LocaleManager.wrapContext(newBase))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT),

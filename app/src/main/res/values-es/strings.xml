@@ -36,6 +36,8 @@
     <string name="official_instructions_title">Instrucciones Oficiales de Emergencia</string>
     <string name="recommended_actions_title">Acciones Recomendadas para Turistas</string>
     <string name="find_safe_places_near_you">Buscar Lugares Seguros Cercanos</string>
+    <string name="accommodation_not_found">Detalles de alojamiento no encontrados.</string>
+    <string name="alert_not_found">Detalles de alerta no encontrados.</string>
 
     <!-- Interactive Map Screen -->
     <string name="interactive_safety_map">Mapa Interactivo de Seguridad</string>
@@ -62,6 +64,7 @@
     <string name="verified_reviews_title">Reseñas Verificadas</string>
     <string name="verified_traveler">Viajero Verificado • %1$s</string>
     <string name="add_review_title">Escribir Reseña de Seguridad</string>
+    <string name="write_review">Escribir Reseña de Seguridad</string>
     <string name="your_name_label">Su Nombre</string>
     <string name="rating_label">Calificación:</string>
     <string name="safety_comments_label">Comentarios de Seguridad y Experiencia</string>
@@ -174,4 +177,6 @@
     <string name="approximate_gps_badge">Ubicación Aproximada</string>
     <string name="location_accuracy">Precisión: %1$dm</string>
     <string name="google_maps_link_label">Enlace de Google Maps: %1$s</string>
+    <string name="no_verified_source_title">Sin Registros Verificados en Ubicación Actual</string>
+    <string name="no_verified_source_desc">No hay refugios ni alertas verificadas oficiales en sus coordenadas GPS actuales. Active el Modo Demo en Ajustes para ver datos simulados de demostración.</string>
 </resources>

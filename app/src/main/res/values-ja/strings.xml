@@ -55,6 +55,7 @@
     <string name="emergency_phone_label">緊急連絡先電話番号: %1$s</string>
     <string name="rate_label">料金: %1$s</string>
     <string name="reviews_count">%1$.1f (%2$d 件のレビュー)</string>
+    <string name="reviews">レビュー</string>
     <string name="directions">経路案内</string>
 
     <!-- Reviews Screen -->

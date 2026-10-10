@@ -55,6 +55,7 @@
     <string name="emergency_phone_label">Emergency Phone: %1$s</string>
     <string name="rate_label">Rate: %1$s</string>
     <string name="reviews_count">%1$.1f (%2$d reviews)</string>
+    <string name="reviews">Reviews</string>
     <string name="directions">Directions</string>
 
     <!-- Reviews Screen -->

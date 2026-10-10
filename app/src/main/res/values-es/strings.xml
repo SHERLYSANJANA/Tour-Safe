@@ -55,6 +55,7 @@
     <string name="emergency_phone_label">Teléfono de Emergencia: %1$s</string>
     <string name="rate_label">Tarifa: %1$s</string>
     <string name="reviews_count">%1$.1f (%2$d reseñas)</string>
+    <string name="reviews">Reseñas</string>
     <string name="directions">Direcciones</string>
 
     <!-- Reviews Screen -->

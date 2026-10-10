@@ -4,6 +4,7 @@ enum class MarkerType {
     HAZARD_ZONE,
     EMERGENCY_SHELTER,
     SAFE_ACCOMMODATION,
+    EMERGENCY_SERVICE,
     USER_LOCATION
 }
 

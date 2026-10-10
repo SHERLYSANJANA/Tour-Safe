@@ -15,7 +15,9 @@ data class UserGpsLocation(
     val latitude: Double,
     val longitude: Double,
     val accuracyMeters: Int,
-    val isApproximate: Boolean = false
+    val isApproximate: Boolean = false,
+    /** When the fix was taken (epoch millis), so the UI can show how fresh it is. */
+    val timestampMs: Long = System.currentTimeMillis()
 ) {
     fun toGoogleMapsLink(): String = "https://maps.google.com/?q=$latitude,$longitude"
 }
@@ -56,128 +58,120 @@ class RealLocationManager(private val context: Context) {
             onResult(LocationState.PermissionDenied)
             return
         }
-
         if (!isGpsEnabled()) {
             onResult(LocationState.GpsDisabled)
             return
         }
-
-        onResult(LocationState.Loading)
-
         val lm = locationManager
         if (lm == null) {
             onResult(LocationState.Error("Location service unavailable."))
             return
         }
 
+        onResult(LocationState.Loading)
+
         val isFine = isFineLocationGranted()
+        val bestLast = bestLastKnownLocation(lm)
 
-        // 1. Check last known location first for immediate response
-        val gpsLast = try { lm.getLastKnownLocation(LocationManager.GPS_PROVIDER) } catch (e: SecurityException) { null }
-        val netLast = try { lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER) } catch (e: SecurityException) { null }
-
-        val bestLast = when {
-            gpsLast != null && netLast != null -> if (gpsLast.time > netLast.time) gpsLast else netLast
-            gpsLast != null -> gpsLast
-            else -> netLast
-        }
-
-        if (bestLast != null && (System.currentTimeMillis() - bestLast.time) < 60000) {
-            LocationUtils.lastUserLat = bestLast.latitude
-            LocationUtils.lastUserLng = bestLast.longitude
-            val gpsLoc = UserGpsLocation(
-                latitude = bestLast.latitude,
-                longitude = bestLast.longitude,
-                accuracyMeters = bestLast.accuracy.toInt(),
-                isApproximate = !isFine
-            )
-            onResult(LocationState.Success(gpsLoc))
+        // 1. A very recent cached fix is good enough and instant.
+        if (bestLast != null && ageMs(bestLast) < FRESH_LAST_KNOWN_MS) {
+            onResult(LocationState.Success(toUserLocation(bestLast, isFine)))
             return
         }
 
-        // 2. Request single fresh update
-        val provider = when {
-            lm.isProviderEnabled(LocationManager.GPS_PROVIDER) -> LocationManager.GPS_PROVIDER
-            lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER) -> LocationManager.NETWORK_PROVIDER
-            else -> null
-        }
-
-        if (provider == null) {
+        // 2. Ask every enabled provider at once (GPS chip AND network/Wi-Fi/cell) and take the
+        //    first fix. Asking only the GPS chip fails indoors and during a cold start.
+        val providers = listOf(LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER)
+            .filter { name -> try { lm.isProviderEnabled(name) } catch (e: Exception) { false } }
+        if (providers.isEmpty()) {
             onResult(LocationState.GpsDisabled)
             return
         }
 
         val handler = Handler(Looper.getMainLooper())
-        var hasReceivedLocation = false
+        val listeners = mutableListOf<LocationListener>()
+        var finished = false
+        lateinit var timeout: Runnable
 
-        val listener = object : LocationListener {
-            override fun onLocationChanged(location: Location) {
-                if (!hasReceivedLocation) {
-                    hasReceivedLocation = true
-                    try { lm.removeUpdates(this) } catch (e: SecurityException) {}
-                    LocationUtils.lastUserLat = location.latitude
-                    LocationUtils.lastUserLng = location.longitude
-                    val gpsLoc = UserGpsLocation(
-                        latitude = location.latitude,
-                        longitude = location.longitude,
-                        accuracyMeters = location.accuracy.toInt(),
-                        isApproximate = !isFine
-                    )
-                    onResult(LocationState.Success(gpsLoc))
-                }
-            }
-
-            @Deprecated("Deprecated in Java")
-            override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
-            override fun onProviderEnabled(provider: String) {}
-            override fun onProviderDisabled(provider: String) {
-                if (!hasReceivedLocation) {
-                    hasReceivedLocation = true
-                    try { lm.removeUpdates(this) } catch (e: SecurityException) {}
-                    onResult(LocationState.GpsDisabled)
-                }
-            }
+        // Delivers exactly one result, then stops every listener and the timeout.
+        fun finish(state: LocationState) {
+            if (finished) return
+            finished = true
+            handler.removeCallbacks(timeout)
+            listeners.forEach { l -> try { lm.removeUpdates(l) } catch (e: Exception) { } }
+            listeners.clear()
+            onResult(state)
         }
 
-        // 8 second timeout fallback
-        handler.postDelayed({
-            if (!hasReceivedLocation) {
-                hasReceivedLocation = true
-                try { lm.removeUpdates(listener) } catch (e: SecurityException) {}
-                if (bestLast != null) {
-                    LocationUtils.lastUserLat = bestLast.latitude
-                    LocationUtils.lastUserLng = bestLast.longitude
-                    val gpsLoc = UserGpsLocation(
-                        latitude = bestLast.latitude,
-                        longitude = bestLast.longitude,
-                        accuracyMeters = bestLast.accuracy.toInt(),
-                        isApproximate = true
-                    )
-                    onResult(LocationState.Success(gpsLoc))
-                } else {
-                    onResult(LocationState.Error("GPS location request timed out. Please try again."))
-                }
-            }
-        }, 8000)
-
-        try {
-            lm.requestLocationUpdates(provider, 0L, 0f, listener, Looper.getMainLooper())
-        } catch (e: SecurityException) {
-            onResult(LocationState.PermissionDenied)
-        } catch (e: Exception) {
-            if (bestLast != null) {
-                LocationUtils.lastUserLat = bestLast.latitude
-                LocationUtils.lastUserLng = bestLast.longitude
-                val gpsLoc = UserGpsLocation(
-                    latitude = bestLast.latitude,
-                    longitude = bestLast.longitude,
-                    accuracyMeters = bestLast.accuracy.toInt(),
-                    isApproximate = true
-                )
-                onResult(LocationState.Success(gpsLoc))
+        timeout = Runnable {
+            val fallback = bestLast
+            if (fallback != null && ageMs(fallback) < MAX_FALLBACK_AGE_MS) {
+                // Only a recent cached position is ever reused; its age is carried in timestampMs.
+                finish(LocationState.Success(toUserLocation(fallback, isFine, forceApproximate = true)))
             } else {
-                onResult(LocationState.Error(e.localizedMessage ?: "Failed to acquire location."))
+                finish(LocationState.Error("Could not get a GPS fix. Move to an open area and try again."))
             }
         }
+        handler.postDelayed(timeout, REQUEST_TIMEOUT_MS)
+
+        var registered = 0
+        for (providerName in providers) {
+            val listener = object : LocationListener {
+                override fun onLocationChanged(location: Location) {
+                    finish(LocationState.Success(toUserLocation(location, isFine)))
+                }
+
+                @Deprecated("Deprecated in Java")
+                override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+                override fun onProviderEnabled(provider: String) {}
+                override fun onProviderDisabled(provider: String) {
+                    if (!isGpsEnabled()) finish(LocationState.GpsDisabled)
+                }
+            }
+            try {
+                lm.requestLocationUpdates(providerName, 0L, 0f, listener, Looper.getMainLooper())
+                listeners.add(listener)
+                registered++
+            } catch (e: SecurityException) {
+                finish(LocationState.PermissionDenied)
+                return
+            } catch (e: Exception) {
+                // This provider cannot be used; the other one may still work.
+            }
+        }
+        if (registered == 0) {
+            finish(LocationState.Error("Failed to start the location request."))
+        }
+    }
+
+    private fun bestLastKnownLocation(lm: LocationManager): Location? {
+        return listOf(LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER)
+            .mapNotNull { name -> try { lm.getLastKnownLocation(name) } catch (e: Exception) { null } }
+            .maxByOrNull { it.time }
+    }
+
+    private fun ageMs(location: Location): Long = System.currentTimeMillis() - location.time
+
+    private fun toUserLocation(
+        location: Location,
+        isFine: Boolean,
+        forceApproximate: Boolean = false
+    ): UserGpsLocation {
+        LocationUtils.lastUserLat = location.latitude
+        LocationUtils.lastUserLng = location.longitude
+        return UserGpsLocation(
+            latitude = location.latitude,
+            longitude = location.longitude,
+            accuracyMeters = location.accuracy.toInt(),
+            isApproximate = forceApproximate || !isFine || location.accuracy > APPROX_ACCURACY_METERS,
+            timestampMs = if (location.time > 0L) location.time else System.currentTimeMillis()
+        )
+    }
+
+    companion object {
+        private const val FRESH_LAST_KNOWN_MS = 30_000L
+        private const val MAX_FALLBACK_AGE_MS = 10 * 60_000L
+        private const val REQUEST_TIMEOUT_MS = 20_000L
+        private const val APPROX_ACCURACY_METERS = 200f
     }
 }

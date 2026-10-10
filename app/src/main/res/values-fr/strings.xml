@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">TourSafe</string>
+
+    <!-- Navigation Bar -->
+    <string name="nav_home">Accueil</string>
+    <string name="nav_map">Carte</string>
+    <string name="nav_alerts">Alertes</string>
+    <string name="nav_safe_places">Lieux Sûrs</string>
+    <string name="nav_profile">Profil</string>
+
+    <!-- General Actions & Headers -->
+    <string name="dashboard_title">Tableau de Bord TourSafe</string>
+    <string name="safety_status_header">STATUT DE SÉCURITÉ</string>
+    <string name="update">Mettre à jour</string>
+    <string name="quick_actions_header">Actions de Sécurité Rapides</string>
+    <string name="emergency_sos">SOS Urgence</string>
+    <string name="sos_subtitle">Signal Instantané</string>
+    <string name="safe_places">Lieux Sûrs</string>
+    <string name="shelters_hotels_subtitle">Refuges &amp; Hôtels</string>
+    <string name="active_disaster_alerts">Alertes de Catastrophe Actives</string>
+    <string name="view_all">Voir Tout</string>
+    <string name="view_action_plan">Voir le Plan d\'Action</string>
+    <string name="km_away">à %1$.1f km</string>
+
+    <!-- Language Selector & Settings -->
+    <string name="select_language">Choisir la Langue</string>
+    <string name="select_language_desc">Choisissez votre langue préférée pour les alertes officielles et les instructions d\'urgence.</string>
+    <string name="confirm_language">Confirmer la Langue</string>
+    <string name="app_settings">Paramètres de l\'Application</string>
+    <string name="preferences_regional">Préférences &amp; Région</string>
+    <string name="change_app_language">Changer la Langue de l\'App</string>
+    <string name="notifications_permissions">Notifications &amp; Permissions</string>
+    <string name="push_notifications">Notifications Push</string>
+    <string name="push_notifications_desc">Recevoir des conseils généraux sur la sécurité</string>
+    <string name="priority_disaster_alerts">Alertes de Catastrophe Prioritaires</string>
+    <string name="priority_disaster_alerts_desc">Outrepasser le mode silencieux pour les alertes tsunami ou météo critiques</string>
+    <string name="gps_permission_simulated">Permission de Localisation GPS (Simulée)</string>
+    <string name="gps_permission_desc">Autoriser TourSafe à fournir des avertissements de carte des risques</string>
+
+    <!-- Emergency SOS & Voice SOS -->
+    <string name="emergency_sos_title">SOS Urgence</string>
+    <string name="disaster_sos_assistance">ASSISTANCE SOS CATASTROPHE</string>
+    <string name="sos_explanation">Maintenez le bouton ci-dessous pour transmettre vos coordonnées en temps réel aux secours et contacts principaux.</string>
+    <string name="tap_for_sos">APPUYER POUR SOS</string>
+    <string name="signal_sent">SIGNAL ENVOYÉ</string>
+    <string name="confirm_sos_title">Confirmer le Signal SOS d\'Urgence ?</string>
+    <string name="confirm_sos_msg">Cela transmettra immédiatement votre signal d\'urgence et vos coordonnées aux équipes de secours locales.</string>
+    <string name="confirm_sos_btn">CONFIRMER SOS</string>
+    <string name="cancel">Annuler</string>
+
+    <string name="voice_sos_tab">SOS Vocal</string>
+    <string name="type_sos_tab">SOS Écrit</string>
+    <string name="voice_sos_instruction">Énoncez votre message d\'urgence dans votre langue. TourSafe convertit la voix en texte pour vérification.</string>
+    <string name="speech_language_spoken">Langue Parlée</string>
+    <string name="start_voice_sos">Démarrer SOS Vocal</string>
+    <string name="stop_listening">Arrêter l\'Écoute</string>
+    <string name="retry_voice">Réessayer l\'Entrée Vocale</string>
+    <string name="status_listening">Écoute de votre message...</string>
+    <string name="status_processing">Conversion de la voix en texte...</string>
+    <string name="status_idle">Appuyez sur Démarrer SOS Vocal pour dicter votre message d\'urgence.</string>
+    <string name="review_emergency_msg">Vérifier &amp; Modifier le Message d\'Urgence</string>
+    <string name="speech_processing_note">La reconnaissance vocale traite l\'audio sur l\'appareil si les packs hors ligne sont installés, ou utilise les services Android de manière sécurisée.</string>
+    <string name="mic_permission_title">Permission Micro Requise</string>
+    <string name="mic_permission_desc">TourSafe a besoin d\'accéder à votre microphone pour convertir votre message d\'urgence vocal en texte.</string>
+    <string name="grant_mic_permission">Accorder l\'Accès au Microphone</string>
+    <string name="location_permission_title">Partager la Position GPS</string>
+    <string name="location_permission_desc">Inclure des coordonnées GPS précises dans votre message d\'urgence pour aider les secours à vous localiser.</string>
+    <string name="shared_gps_coords">📍 Vos Coordonnées GPS Partagées :</string>
+    <string name="send_emergency_message">Envoyer le Message d\'Urgence</string>
+    <string name="confirm_send_msg_title">Envoyer le Message d\'Urgence Maintenant ?</string>
+    <string name="confirm_send_msg_desc">Vérifiez votre message et votre position avant d\'envoyer aux secours. Les services d\'urgence ne seront PAS contactés automatiquement sans votre action explicite.</string>
+
+    <string name="error_speech_not_available">Le service de reconnaissance vocale est indisponible sur cet appareil. Utilisez le mode texte ci-dessous.</string>
+    <string name="error_no_speech">Aucune voix détectée. Appuyez sur Réessayer et parlez clairement.</string>
+    <string name="error_mic_missing">La permission du microphone a été refusée. Activez-la dans les paramètres ou utilisez le clavier.</string>
+
+    <!-- Safe Accommodations & Reviews -->
+    <string name="safe_accommodations">Hébergements Sûrs</string>
+    <string name="search_placeholder">Rechercher un hôtel sûr, un refuge, un lieu...</string>
+    <string name="show_free_shelters_only">Afficher Uniquement les Refuges Gratuits d\'Urgence</string>
+    <string name="directions">Itinéraires</string>
+    <string name="reviews">Avis</string>
+    <string name="write_review">Écrire un Avis de Sécurité</string>
+    <string name="submit_review">Soumettre l\'Avis</string>
+</resources>

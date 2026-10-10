@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">TourSafe</string>
+
+    <!-- Navigation Bar -->
+    <string name="nav_home">首页</string>
+    <string name="nav_map">地图</string>
+    <string name="nav_alerts">预警</string>
+    <string name="nav_safe_places">安全住所</string>
+    <string name="nav_profile">个人</string>
+
+    <!-- General Actions & Headers -->
+    <string name="dashboard_title">TourSafe 仪表盘</string>
+    <string name="safety_status_header">安全状态</string>
+    <string name="update">更新状态</string>
+    <string name="quick_actions_header">快捷安全操作</string>
+    <string name="emergency_sos">紧急求救 SOS</string>
+    <string name="sos_subtitle">即时求救信号</string>
+    <string name="safe_places">安全住所</string>
+    <string name="shelters_hotels_subtitle">避难所与安全酒店</string>
+    <string name="active_disaster_alerts">实时灾害预警</string>
+    <string name="view_all">查看全部</string>
+    <string name="view_action_plan">查看应急方案</string>
+    <string name="km_away">距离 %1$.1f 公里</string>
+
+    <!-- Language Selector & Settings -->
+    <string name="select_language">选择语言</string>
+    <string name="select_language_desc">请选择您用于接收官方灾害预警和紧急指令的语言。</string>
+    <string name="confirm_language">确认语言</string>
+    <string name="app_settings">应用设置</string>
+    <string name="preferences_regional">偏好与语言</string>
+    <string name="change_app_language">更改应用语言</string>
+    <string name="notifications_permissions">通知与权限</string>
+    <string name="push_notifications">推送通知</string>
+    <string name="push_notifications_desc">接收一般安全建议与更新</string>
+    <string name="priority_disaster_alerts">高优先级灾害预警</string>
+    <string name="priority_disaster_alerts_desc">在海啸或极端天气预警时覆盖静音模式</string>
+    <string name="gps_permission_simulated">GPS 定位权限（模拟）</string>
+    <string name="gps_permission_desc">允许 TourSafe 提供本地危险地图预警</string>
+
+    <!-- Emergency SOS & Voice SOS -->
+    <string name="emergency_sos_title">紧急 SOS</string>
+    <string name="disaster_sos_assistance">灾害求救援助</string>
+    <string name="sos_explanation">长按下方按钮将您的实时坐标发送给救援人员和紧急联系人。</string>
+    <string name="tap_for_sos">点击发送 SOS</string>
+    <string name="signal_sent">信号已发送</string>
+    <string name="confirm_sos_title">确认发送紧急 SOS 信号？</string>
+    <string name="confirm_sos_msg">这将立即向当地救援队伍和紧急联系人发送您的求救信号及位置。</string>
+    <string name="confirm_sos_btn">确认求救</string>
+    <string name="cancel">取消</string>
+
+    <string name="voice_sos_tab">语音求救</string>
+    <string name="type_sos_tab">文本求救</string>
+    <string name="voice_sos_instruction">用您习惯的语言说出求救信息，TourSafe 将实时转换为文字以便核对。</string>
+    <string name="speech_language_spoken">说话语言</string>
+    <string name="start_voice_sos">开始语音求救</string>
+    <string name="stop_listening">停止录音</string>
+    <string name="retry_voice">重试语音输入</string>
+    <string name="status_listening">正在倾听您的求救信息...</string>
+    <string name="status_processing">正在将语音转换为文字...</string>
+    <string name="status_idle">点击“开始语音求救”说出您的紧急信息。</string>
+    <string name="review_emergency_msg">核对并编辑紧急信息</string>
+    <string name="speech_processing_note">当安装离线语言包时，语音识别将在设备本地处理，或通过 Android 语音服务安全处理。</string>
+    <string name="mic_permission_title">需要麦克风权限</string>
+    <string name="mic_permission_desc">TourSafe 需要麦克风权限以将您的语音紧急信息转换为文本。</string>
+    <string name="grant_mic_permission">授予麦克风权限</string>
+    <string name="location_permission_title">共享 GPS 定位</string>
+    <string name="location_permission_desc">在求救信息中附带精确的 GPS 坐标，帮助救援人员定位您的位置。</string>
+    <string name="shared_gps_coords">📍 您共享的 GPS 坐标：</string>
+    <string name="send_emergency_message">发送紧急信息</string>
+    <string name="confirm_send_msg_title">立即发送紧急信息？</string>
+    <string name="confirm_send_msg_desc">发送前请先核对您的信息与位置。未经过您的明确操作，系统绝不会自动联系紧急服务。</string>
+
+    <string name="error_speech_not_available">此设备不支持语音识别服务，请使用下方文本模式输入。</string>
+    <string name="error_no_speech">未检测到语音，请点击“重试语音输入”并清晰说话。</string>
+    <string name="error_mic_missing">麦克风权限已被拒绝，请在设置中开启或使用文本模式。</string>
+
+    <!-- Safe Accommodations & Reviews -->
+    <string name="safe_accommodations">安全住所</string>
+    <string name="search_placeholder">搜索安全酒店、避难所、地点...</string>
+    <string name="show_free_shelters_only">仅显示免费紧急避难所</string>
+    <string name="directions">路线导航</string>
+    <string name="reviews">评价</string>
+    <string name="write_review">撰写安全评价</string>
+    <string name="submit_review">提交评价</string>
+</resources>

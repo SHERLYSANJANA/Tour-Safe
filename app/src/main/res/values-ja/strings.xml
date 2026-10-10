@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">TourSafe</string>
+
+    <!-- Navigation Bar -->
+    <string name="nav_home">ホーム</string>
+    <string name="nav_map">マップ</string>
+    <string name="nav_alerts">警報</string>
+    <string name="nav_safe_places">避難場所</string>
+    <string name="nav_profile">プロフ</string>
+
+    <!-- General Actions & Headers -->
+    <string name="dashboard_title">TourSafe ダッシュボード</string>
+    <string name="safety_status_header">安全ステータス</string>
+    <string name="update">更新</string>
+    <string name="quick_actions_header">クイック安全アクション</string>
+    <string name="emergency_sos">緊急 SOS</string>
+    <string name="sos_subtitle">即時信号</string>
+    <string name="safe_places">避難場所</string>
+    <string name="shelters_hotels_subtitle">避難所・安全ホテル</string>
+    <string name="active_disaster_alerts">発生中の災害警報</string>
+    <string name="view_all">すべて表示</string>
+    <string name="view_action_plan">行動計画を表示</string>
+    <string name="km_away">約 %1$.1f km</string>
+
+    <!-- Language Selector & Settings -->
+    <string name="select_language">言語を選択</string>
+    <string name="select_language_desc">公式の災害警報や緊急指示を受信する言語を選択してください。</string>
+    <string name="confirm_language">言語を確定</string>
+    <string name="app_settings">アプリ設定</string>
+    <string name="preferences_regional">環境設定・言語</string>
+    <string name="change_app_language">アプリの言語を変更</string>
+    <string name="notifications_permissions">通知と権限</string>
+    <string name="push_notifications">プッシュ通知</string>
+    <string name="push_notifications_desc">一般的な安全情報と更新を受信</string>
+    <string name="priority_disaster_alerts">優先度の高い災害警報</string>
+    <string name="priority_disaster_alerts_desc">津波や気象警告の際マナーモードを解除</string>
+    <string name="gps_permission_simulated">GPS位置情報の権限（疑似）</string>
+    <string name="gps_permission_desc">TourSafeが地域のハザードマップ警告を表示することを許可</string>
+
+    <!-- Emergency SOS & Voice SOS -->
+    <string name="emergency_sos_title">緊急 SOS</string>
+    <string name="disaster_sos_assistance">災害 SOS 救援</string>
+    <string name="sos_explanation">下のボタンを長押しして救助隊や緊急連絡先に現在位置を送信します。</string>
+    <string name="tap_for_sos">タップして SOS</string>
+    <string name="signal_sent">信号送信完了</string>
+    <string name="confirm_sos_title">緊急 SOS 信号を送信しますか？</string>
+    <string name="confirm_sos_msg">救助隊および緊急連絡先に即時に現在地と救援信号を送信します。</string>
+    <string name="confirm_sos_btn">SOS 送信</string>
+    <string name="cancel">キャンセル</string>
+
+    <string name="voice_sos_tab">音声 SOS</string>
+    <string name="type_sos_tab">テキスト SOS</string>
+    <string name="voice_sos_instruction">話して緊急メッセージを入力できます。TourSafeが自動で音声から文字に変換します。</string>
+    <string name="speech_language_spoken">発话言語</string>
+    <string name="start_voice_sos">音声 SOS 開始</string>
+    <string name="stop_listening">録音停止</string>
+    <string name="retry_voice">音声入力をやり直す</string>
+    <string name="status_listening">音声を聞き取り中...</string>
+    <string name="status_processing">音声から文字へ変換中...</string>
+    <string name="status_idle">「音声 SOS 開始」をタップしてメッセージを話してください。</string>
+    <string name="review_emergency_msg">緊急メッセージを確認・編集</string>
+    <string name="speech_processing_note">オフライン言語パックがある場合は端末内で処理され、ない場合はAndroid音声サービスを利用します。</string>
+    <string name="mic_permission_title">マイクの権限が必要です</string>
+    <string name="mic_permission_desc">音声緊急メッセージをテキストに変換するためにマイクへのアクセスが必要です。</string>
+    <string name="grant_mic_permission">マイクのアクセスを許可</string>
+    <string name="location_permission_title">GPS位置情報を共有</string>
+    <string name="location_permission_desc">救助隊が迅速に発見できるよう緊急メッセージに位置情報を含めます。</string>
+    <string name="shared_gps_coords">📍 共有されるGPS座標:</string>
+    <string name="send_emergency_message">緊急メッセージを送信</string>
+    <string name="confirm_send_msg_title">今すぐ緊急メッセージを送信しますか？</string>
+    <string name="confirm_send_msg_desc">送信前に内容と位置情報を確認してください。明示的な操作なしで自動連絡されることはありません。</string>
+
+    <string name="error_speech_not_available">この端末では音声認識サービスを利用できません。下のテキスト入力をご利用ください。</string>
+    <string name="error_no_speech">音声が検出されませんでした。やり直してはっきりと話してください。</string>
+    <string name="error_mic_missing">マイク権限が拒否されました。設定から許可するかテキスト入力をご利用ください。</string>
+
+    <!-- Safe Accommodations & Reviews -->
+    <string name="safe_accommodations">安全な宿泊施設</string>
+    <string name="search_placeholder">安全なホテル、避難所、場所を検索...</string>
+    <string name="show_free_shelters_only">無料緊急避難所のみ表示</string>
+    <string name="directions">経路案内</string>
+    <string name="reviews">レビュー</string>
+    <string name="write_review">安全レビューを書く</string>
+    <string name="submit_review">レビューを投稿</string>
+</resources>

@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">TourSafe</string>
+
+    <!-- Navigation Bar -->
+    <string name="nav_home">Start</string>
+    <string name="nav_map">Karte</string>
+    <string name="nav_alerts">Warnungen</string>
+    <string name="nav_safe_places">Sichere Orte</string>
+    <string name="nav_profile">Profil</string>
+
+    <!-- General Actions & Headers -->
+    <string name="dashboard_title">TourSafe Dashboard</string>
+    <string name="safety_status_header">SICHERHEITSSTATUS</string>
+    <string name="update">Aktualisieren</string>
+    <string name="quick_actions_header">Schnelle Sicherheitsaktionen</string>
+    <string name="emergency_sos">Notfall-SOS</string>
+    <string name="sos_subtitle">Sofortiges Signal</string>
+    <string name="safe_places">Sichere Orte</string>
+    <string name="shelters_hotels_subtitle">Notunterkünfte &amp; Hotels</string>
+    <string name="active_disaster_alerts">Aktive Katastrophenwarnungen</string>
+    <string name="view_all">Alle anzeigen</string>
+    <string name="view_action_plan">Aktionsplan anzeigen</string>
+    <string name="km_away">%1$.1f km entfernt</string>
+
+    <!-- Language Selector & Settings -->
+    <string name="select_language">Sprache wählen</string>
+    <string name="select_language_desc">Wählen Sie Ihre bevorzugte Sprache für offizielle Katastrophenwarnungen und Notfallanweisungen.</string>
+    <string name="confirm_language">Sprache bestätigen</string>
+    <string name="app_settings">App-Einstellungen</string>
+    <string name="preferences_regional">Einstellungen &amp; Region</string>
+    <string name="change_app_language">App-Sprache ändern</string>
+    <string name="notifications_permissions">Benachrichtigungen &amp; Berechtigungen</string>
+    <string name="push_notifications">Push-Benachrichtigungen</string>
+    <string name="push_notifications_desc">Hinweise zur allgemeinen App-Sicherheit erhalten</string>
+    <string name="priority_disaster_alerts">Prioritäts-Katastrophenwarnungen</string>
+    <string name="priority_disaster_alerts_desc">Stummmodus für kritische Tsunami- oder Wetterwarnungen umgehen</string>
+    <string name="gps_permission_simulated">GPS-Standortberechtigung (Simuliert)</string>
+    <string name="gps_permission_desc">TourSafe erlauben, lokale Gefahrenkartenwarnungen bereitzustellen</string>
+
+    <!-- Emergency SOS & Voice SOS -->
+    <string name="emergency_sos_title">Notfall-SOS</string>
+    <string name="disaster_sos_assistance">KATASTROPHEN-SOS-HILFE</string>
+    <string name="sos_explanation">Halten Sie die Taste unten gedrückt, um Ihre Echtzeit-Koordinaten an Rettungsdienste und Kontakte zu senden.</string>
+    <string name="tap_for_sos">TIPPEN FÜR SOS</string>
+    <string name="signal_sent">SIGNAL GESENDET</string>
+    <string name="confirm_sos_title">Notfall-SOS-Signal bestätigen?</string>
+    <string name="confirm_sos_msg">Dies überträgt Ihr Notfallsignal und Ihre Koordinaten sofort an lokale Rettungsteams.</string>
+    <string name="confirm_sos_btn">SOS BESTÄTIGEN</string>
+    <string name="cancel">Abbrechen</string>
+
+    <string name="voice_sos_tab">Sprach-SOS</string>
+    <string name="type_sos_tab">Text-SOS</string>
+    <string name="voice_sos_instruction">Sprechen Sie Ihre Notfallnachricht in Ihrer bevorzugten Sprache. TourSafe wandelt Sprache in Text um.</string>
+    <string name="speech_language_spoken">Gesprochene Sprache</string>
+    <string name="start_voice_sos">Sprach-SOS starten</string>
+    <string name="stop_listening">Zuhören stoppen</string>
+    <string name="retry_voice">Spracheingabe wiederholen</string>
+    <string name="status_listening">Höre auf Ihre Nachricht...</string>
+    <string name="status_processing">Verarbeite Sprache zu Text...</string>
+    <string name="status_idle">Tippen Sie auf Sprach-SOS starten, um Ihre Notfallnachricht zu sprechen.</string>
+    <string name="review_emergency_msg">Notfallnachricht überprüfen &amp; bearbeiten</string>
+    <string name="speech_processing_note">Spracherkennung verarbeitet Audio auf dem Gerät, wenn Offline-Sprachpakete installiert sind, oder nutzt Android-Sprachdienste sicher.</string>
+    <string name="mic_permission_title">Mikrofonberechtigung erforderlich</string>
+    <string name="mic_permission_desc">TourSafe benötigt Zugriff auf Ihr Mikrofon, um Ihre gesprochene Notfallnachricht in Text umzuwandeln.</string>
+    <string name="grant_mic_permission">Mikrofonzugriff gewähren</string>
+    <string name="location_permission_title">GPS-Standort teilen</string>
+    <string name="location_permission_desc">Fügen Sie exakte GPS-Koordinaten zu Ihrer Notfallnachricht hinzu, damit Rettungsteams Sie finden.</string>
+    <string name="shared_gps_coords">📍 Ihre geteilten GPS-Koordinaten:</string>
+    <string name="send_emergency_message">Notfallnachricht senden</string>
+    <string name="confirm_send_msg_title">Notfallnachricht jetzt senden?</string>
+    <string name="confirm_send_msg_desc">Überprüfen Sie Ihre Nachricht und Ihren Standort vor dem Senden. Rettungsdienste werden NICHT automatisch ohne Ihre ausdrückliche Aktion kontaktiert.</string>
+
+    <string name="error_speech_not_available">Spracherkennungsdienst ist auf diesem Gerät nicht verfügbar. Bitte nutzen Sie den Textmodus unten.</string>
+    <string name="error_no_speech">Keine Sprache erkannt. Tippen Sie auf Spracheingabe wiederholen und sprechen Sie deutlich.</string>
+    <string name="error_mic_missing">Mikrofonberechtigung wurde verweigert. Aktivieren Sie die Berechtigung in den Einstellungen oder nutzen Sie Text.</string>
+
+    <!-- Safe Accommodations & Reviews -->
+    <string name="safe_accommodations">Sichere Unterkünfte</string>
+    <string name="search_placeholder">Sicheres Hotel, Unterkunft, Ort suchen...</string>
+    <string name="show_free_shelters_only">Nur kostenlose Notunterkünfte anzeigen</string>
+    <string name="directions">Route</string>
+    <string name="reviews">Bewertungen</string>
+    <string name="write_review">Sicherheitsbewertung schreiben</string>
+    <string name="submit_review">Bewertung absenden</string>
+</resources>

@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">TourSafe</string>
+
+    <!-- Navigation Bar -->
+    <string name="nav_home">หน้าแรก</string>
+    <string name="nav_map">แผนที่</string>
+    <string name="nav_alerts">การแจ้งเตือน</string>
+    <string name="nav_safe_places">สถานที่ปลอดภัย</string>
+    <string name="nav_profile">โปรไฟล์</string>
+
+    <!-- General Actions & Headers -->
+    <string name="dashboard_title">แผงควบคุม TourSafe</string>
+    <string name="safety_status_header">สถานะความปลอดภัย</string>
+    <string name="update">อัปเดต</string>
+    <string name="quick_actions_header">การดำเนินการความปลอดภัยด่วน</string>
+    <string name="emergency_sos">ขอความช่วยเหลือ SOS</string>
+    <string name="sos_subtitle">สัญญาณด่วน</string>
+    <string name="safe_places">สถานที่ปลอดภัย</string>
+    <string name="shelters_hotels_subtitle">ศูนย์อพยพ &amp; โรงแรมปลอดภัย</string>
+    <string name="active_disaster_alerts">การเตือนภัยพิบัติที่เกิดขึ้น</string>
+    <string name="view_all">ดูทั้งหมด</string>
+    <string name="view_action_plan">ดูแผนรับมือ</string>
+    <string name="km_away">ห่างออกไป %1$.1f กม.</string>
+
+    <!-- Language Selector & Settings -->
+    <string name="select_language">เลือกภาษา</string>
+    <string name="select_language_desc">เลือกภาษาที่คุณต้องการสำหรับการเตือนภัยพิบัติอย่างเป็นทางการและคำแนะนำฉุกเฉิน</string>
+    <string name="confirm_language">ยืนยันภาษา</string>
+    <string name="app_settings">ตั้งค่าแอปพลิเคชัน</string>
+    <string name="preferences_regional">ตัวเลือก &amp; ภูมิภาค</string>
+    <string name="change_app_language">เปลี่ยนภาษาของแอป</string>
+    <string name="notifications_permissions">การแจ้งเตือน &amp; สิทธิ์การใช้งาน</string>
+    <string name="push_notifications">การแจ้งเตือนป๊อปอัป</string>
+    <string name="push_notifications_desc">รับข้อมูลอัปเดตคำแนะนำความปลอดภัยทั่วไป</string>
+    <string name="priority_disaster_alerts">การเตือนภัยพิบัติความสำคัญสูง</string>
+    <string name="priority_disaster_alerts_desc">ยกเว้นโหมดเงียบเมื่อมีการเตือนภัยสึนามิหรือสภาพอากาศรุนแรง</string>
+    <string name="gps_permission_simulated">สิทธิ์ตำแหน่ง GPS (จำลอง)</string>
+    <string name="gps_permission_desc">อนุญาตให้ TourSafe แสดงคำเตือนบนแผนที่พื้นที่เสี่ยง</string>
+
+    <!-- Emergency SOS & Voice SOS -->
+    <string name="emergency_sos_title">ฉุกเฉิน SOS</string>
+    <string name="disaster_sos_assistance">การความช่วยเหลือภัยพิบัติ SOS</string>
+    <string name="sos_explanation">กดปุ่มด้านล่างค้างไว้เพื่อส่งพิกัดตำแหน่งจริงไปยังทีมช่วยเหลือและผู้ติดต่อฉุกเฉิน</string>
+    <string name="tap_for_sos">แตะเพื่อส่ง SOS</string>
+    <string name="signal_sent">ส่งสัญญาณแล้ว</string>
+    <string name="confirm_sos_title">ยืนยันการส่งสัญญาณฉุกเฉิน SOS?</string>
+    <string name="confirm_sos_msg">การดำเนินการนี้จะส่งสัญญาณและพิกัดตำแหน่งไปยังทีมกู้ภัยและผู้ติดต่อฉุกเฉินทันที</string>
+    <string name="confirm_sos_btn">ยืนยันส่ง SOS</string>
+    <string name="cancel">ยกเลิก</string>
+
+    <string name="voice_sos_tab">SOS ด้วยเสียง</string>
+    <string name="type_sos_tab">SOS ด้วยข้อความ</string>
+    <string name="voice_sos_instruction">พูดข้อความฉุกเฉินของคุณในภาษาที่ต้องการ TourSafe จะแปลงเสียงเป็นข้อความเพื่อให้คุณตรวจสอบ</string>
+    <string name="speech_language_spoken">ภาษาที่พูด</string>
+    <string name="start_voice_sos">เริ่ม SOS ด้วยเสียง</string>
+    <string name="stop_listening">หยุดฟัง</string>
+    <string name="retry_voice">ลองพูดอีกครั้ง</string>
+    <string name="status_listening">กำลังฟังข้อความของคุณ...</string>
+    <string name="status_processing">กำลังแปลงเสียงเป็นข้อความ...</string>
+    <string name="status_idle">แตะ เริ่ม SOS ด้วยเสียง เพื่อพูดข้อความฉุกเฉินของคุณ</string>
+    <string name="review_emergency_msg">ตรวจสอบ &amp; แก้ไขข้อความฉุกเฉิน</string>
+    <string name="speech_processing_note">ระบบการจดจำเสียงจะประมวลผลบนเครื่องหากมีชุดภาษาออฟไลน์ หรือใช้บริการ Android Speech อย่างปลอดภัย</string>
+    <string name="mic_permission_title">ต้องการสิทธิ์เข้าถึงไมโครโฟน</string>
+    <string name="mic_permission_desc">TourSafe จำเป็นต้องใช้ไมโครโฟนเพื่อแปลงเสียงฉุกเฉินเป็นข้อความ</string>
+    <string name="grant_mic_permission">อนุญาตเข้าถึงไมโครโฟน</string>
+    <string name="location_permission_title">แชร์ตำแหน่ง GPS</string>
+    <string name="location_permission_desc">แนบพิกัด GPS ที่แม่นยำเพื่อช่วยให้ทีมกู้ภัยค้นหาตำแหน่งของคุณได้รวดเร็ว</string>
+    <string name="shared_gps_coords">📍 พิกัด GPS ที่แชร์:</string>
+    <string name="send_emergency_message">ส่งข้อความฉุกเฉิน</string>
+    <string name="confirm_send_msg_title">ส่งข้อความฉุกเฉินทันที?</string>
+    <string name="confirm_send_msg_desc">โปรดตรวจสอบข้อความและตำแหน่งก่อนส่ง ระบบจะไม่ติดต่อบริการฉุกเฉินโดยอัตโนมัติหากคุณไม่ได้กดส่งด้วยตัวเอง</string>
+
+    <string name="error_speech_not_available">ไม่พบบริการจดจำเสียงในอุปกรณ์นี้ กรุณาใช้โหมดพิมพ์ข้อความด้านล่าง</string>
+    <string name="error_no_speech">ไม่พบเสียงพูด กรุณาแตะ ลองพูดอีกครั้ง และพูดให้ชัดเจน</string>
+    <string name="error_mic_missing">สิทธิ์ไมโครโฟนถูกปฏิเสธ กรุณาอนุญาตในการตั้งค่าหรือใช้การพิมพ์</string>
+
+    <!-- Safe Accommodations & Reviews -->
+    <string name="safe_accommodations">ที่พักปลอดภัย</string>
+    <string name="search_placeholder">ค้นหาโรงแรมปลอดภัย ศูนย์อพยพ สถานที่...</string>
+    <string name="show_free_shelters_only">แสดงเฉพาะศูนย์อพยพฟรีฉุกเฉิน</string>
+    <string name="directions">นำทาง</string>
+    <string name="reviews">รีวิว</string>
+    <string name="write_review">เขียนรีวิวความปลอดภัย</string>
+    <string name="submit_review">ส่งรีวิว</string>
+</resources>

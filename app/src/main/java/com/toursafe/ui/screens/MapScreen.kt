@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toursafe.R
 import com.toursafe.data.mock.MockData
+import com.toursafe.data.models.HazardZone
 import com.toursafe.data.models.MapMarker
 import com.toursafe.data.models.MarkerType
 import com.toursafe.ui.components.InteractiveMapCanvas
@@ -36,15 +37,18 @@ import com.toursafe.ui.theme.*
 import com.toursafe.util.LocationState
 import com.toursafe.util.LocationUtils
 import com.toursafe.viewmodels.GpsLocationViewModel
+import com.toursafe.viewmodels.SettingsViewModel
 
 @Composable
 fun MapScreen(
     locationViewModel: GpsLocationViewModel = viewModel(),
+    settingsViewModel: SettingsViewModel = viewModel(),
     onNavigateToShelters: () -> Unit
 ) {
     val context = LocalContext.current
 
     LaunchedEffect(Unit) {
+        settingsViewModel.loadSettings(context)
         locationViewModel.initLocationManager(context)
         if (locationViewModel.hasPermission()) {
             locationViewModel.fetchLocation()
@@ -52,13 +56,17 @@ fun MapScreen(
     }
 
     val locationState by locationViewModel.locationState.collectAsState()
+    val demoModeEnabled by settingsViewModel.demoModeEnabled.collectAsState()
     var showPermissionExplanation by remember { mutableStateOf(false) }
 
-    val userLat = (locationState as? LocationState.Success)?.location?.latitude ?: 0.0
-    val userLng = (locationState as? LocationState.Success)?.location?.longitude ?: 0.0
-
-    val markers = remember(userLat, userLng) { MockData.getAnchoredMapMarkers(userLat, userLng) }
-    val hazardZones = remember(userLat, userLng) { MockData.getAnchoredHazardZones(userLat, userLng) }
+    val markers = remember(demoModeEnabled) {
+        if (demoModeEnabled) MockData.demoMapMarkers else emptyList()
+    }
+    val hazardZones = remember(demoModeEnabled) {
+        if (demoModeEnabled) listOf(
+            HazardZone("hz-1", "Coastal Hazard Zone (Demo)", "Demo Tsunami Risk Zone", 0.32f, 0.38f, 0.16f, latitude = 7.8920, longitude = 98.2980, isDemo = true)
+        ) else emptyList()
+    }
     var selectedMarker by remember(markers) { mutableStateOf<MapMarker?>(markers.firstOrNull()) }
 
     val locationPermissionLauncher = rememberLauncherForActivityResult(
@@ -104,105 +112,130 @@ fun MapScreen(
                 }
             )
 
-            // Interactive Custom Canvas Map
-            InteractiveMapCanvas(
-                markers = markers,
-                hazardZones = hazardZones,
-                selectedMarker = selectedMarker,
-                onMarkerSelect = { selectedMarker = it }
-            )
-
-            // Map Legend Row
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(SurfaceNavy, RoundedCornerShape(12.dp))
-                    .padding(12.dp),
-                horizontalArrangement = Arrangement.SpaceAround,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                LegendDot(color = AlertRed, label = stringResource(R.string.legend_hazard_zone))
-                LegendDot(color = SafetyGreen, label = stringResource(R.string.legend_free_shelter))
-                LegendDot(color = AccentCyan, label = stringResource(R.string.legend_safe_hotel))
-                LegendDot(color = AccentBlue, label = stringResource(R.string.legend_you))
-            }
-
-            // Selected Marker Information Panel
-            selectedMarker?.let { marker ->
+            if (markers.isEmpty()) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(16.dp))
-                        .background(SurfaceNavy)
+                        .background(SurfaceNavy, RoundedCornerShape(16.dp))
                         .border(1.dp, SurfaceVariantNavy, RoundedCornerShape(16.dp))
                         .padding(16.dp)
                 ) {
                     Column {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(
-                                text = marker.title,
-                                style = MaterialTheme.typography.titleMedium,
-                                color = TextPrimary
-                            )
-                            Text(
-                                text = stringResource(R.string.km_away, marker.distanceKm),
-                                style = MaterialTheme.typography.labelSmall,
-                                color = AccentCyan
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.height(6.dp))
-
                         Text(
-                            text = marker.description,
-                            style = MaterialTheme.typography.bodyMedium,
+                            text = stringResource(R.string.no_verified_source_title),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = TextPrimary
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(
+                            text = stringResource(R.string.no_verified_source_desc),
+                            style = MaterialTheme.typography.bodySmall,
                             color = TextSecondary
                         )
+                    }
+                }
+            } else {
+                // Interactive Custom Canvas Map
+                InteractiveMapCanvas(
+                    markers = markers,
+                    hazardZones = hazardZones,
+                    selectedMarker = selectedMarker,
+                    onMarkerSelect = { selectedMarker = it }
+                )
 
-                        Spacer(modifier = Modifier.height(12.dp))
+                // Map Legend Row
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(SurfaceNavy, RoundedCornerShape(12.dp))
+                        .padding(12.dp),
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    LegendDot(color = AlertRed, label = stringResource(R.string.legend_hazard_zone))
+                    LegendDot(color = SafetyGreen, label = stringResource(R.string.legend_free_shelter))
+                    LegendDot(color = AccentCyan, label = stringResource(R.string.legend_safe_hotel))
+                    LegendDot(color = AccentBlue, label = stringResource(R.string.legend_you))
+                }
 
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(10.dp)
-                        ) {
-                            if (marker.type == MarkerType.SAFE_ACCOMMODATION || marker.type == MarkerType.EMERGENCY_SHELTER) {
+                // Selected Marker Information Panel
+                selectedMarker?.let { marker ->
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(SurfaceNavy)
+                            .border(1.dp, SurfaceVariantNavy, RoundedCornerShape(16.dp))
+                            .padding(16.dp)
+                    ) {
+                        Column {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                Text(
+                                    text = marker.title,
+                                    style = MaterialTheme.typography.titleMedium,
+                                    color = TextPrimary
+                                )
+                                Text(
+                                    text = stringResource(R.string.km_away, marker.distanceKm),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = AccentCyan
+                                )
+                            }
+
+                            Spacer(modifier = Modifier.height(6.dp))
+
+                            Text(
+                                text = marker.description,
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = TextSecondary
+                            )
+
+                            Spacer(modifier = Modifier.height(12.dp))
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                if (marker.type == MarkerType.SAFE_ACCOMMODATION || marker.type == MarkerType.EMERGENCY_SHELTER) {
+                                    Button(
+                                        onClick = onNavigateToShelters,
+                                        modifier = Modifier.weight(1f),
+                                        colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                                        shape = RoundedCornerShape(12.dp)
+                                    ) {
+                                        Text(
+                                            text = stringResource(R.string.view_safe_accommodations),
+                                            color = Color.Black,
+                                            style = MaterialTheme.typography.labelLarge
+                                        )
+                                    }
+                                }
+
                                 Button(
-                                    onClick = onNavigateToShelters,
-                                    modifier = Modifier.weight(1f),
-                                    colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                                    onClick = {
+                                        LocationUtils.openMapsDirections(
+                                            context = context,
+                                            destinationLat = marker.latitude,
+                                            destinationLng = marker.longitude,
+                                            destinationName = marker.title,
+                                            isDemoRecord = marker.isDemo
+                                        )
+                                    },
+                                    colors = ButtonDefaults.buttonColors(containerColor = SurfaceVariantNavy),
                                     shape = RoundedCornerShape(12.dp)
                                 ) {
+                                    Icon(imageVector = Icons.Default.Directions, contentDescription = null, tint = TextPrimary)
+                                    Spacer(modifier = Modifier.width(6.dp))
                                     Text(
-                                        text = stringResource(R.string.view_safe_accommodations),
-                                        color = Color.Black,
+                                        text = stringResource(R.string.directions),
+                                        color = TextPrimary,
                                         style = MaterialTheme.typography.labelLarge
                                     )
                                 }
-                            }
-
-                            Button(
-                                onClick = {
-                                    LocationUtils.openMapsDirections(
-                                        context = context,
-                                        destinationLat = marker.latitude,
-                                        destinationLng = marker.longitude,
-                                        destinationName = marker.title
-                                    )
-                                },
-                                colors = ButtonDefaults.buttonColors(containerColor = SurfaceVariantNavy),
-                                shape = RoundedCornerShape(12.dp)
-                            ) {
-                                Icon(imageVector = Icons.Default.Directions, contentDescription = null, tint = TextPrimary)
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(
-                                    text = stringResource(R.string.directions),
-                                    color = TextPrimary,
-                                    style = MaterialTheme.typography.labelLarge
-                                )
                             }
                         }
                     }

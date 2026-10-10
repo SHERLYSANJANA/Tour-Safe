@@ -63,5 +63,7 @@ dependencies {
     implementation(libs.play.services.location)
 
     testImplementation("junit:junit:4.13.2")
+    // Real org.json for JVM unit tests: the android.jar version is an empty stub that throws "not mocked".
+    testImplementation("org.json:json:20231013")
     debugImplementation(libs.androidx.ui.tooling)
 }

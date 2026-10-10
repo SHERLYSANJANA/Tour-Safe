@@ -47,7 +47,7 @@ fun LanguageSelectionScreen(
                 title = stringResource(R.string.select_language)
             )
         },
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -62,7 +62,7 @@ fun LanguageSelectionScreen(
                 Text(
                     text = stringResource(R.string.select_language_desc),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -95,12 +95,12 @@ fun LanguageSelectionScreen(
                     .fillMaxWidth()
                     .padding(top = 12.dp)
                     .height(54.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Text(
                     text = stringResource(R.string.confirm_language),
-                    color = Color.Black,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     style = MaterialTheme.typography.titleMedium
                 )
             }
@@ -117,10 +117,10 @@ private fun LanguageItemCard(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(SurfaceNavy, RoundedCornerShape(14.dp))
+            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(14.dp))
             .border(
                 width = if (isSelected) 2.dp else 1.dp,
-                color = if (isSelected) AccentCyan else SurfaceVariantNavy,
+                color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant,
                 shape = RoundedCornerShape(14.dp)
             )
             .clickable { onSelect() }
@@ -138,12 +138,12 @@ private fun LanguageItemCard(
                 Text(
                     text = language.name,
                     style = MaterialTheme.typography.titleMedium,
-                    color = TextPrimary
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     text = language.nativeName,
                     style = MaterialTheme.typography.bodySmall,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -152,7 +152,7 @@ private fun LanguageItemCard(
             Icon(
                 imageVector = Icons.Default.Check,
                 contentDescription = null,
-                tint = AccentCyan,
+                tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(24.dp)
             )
         }

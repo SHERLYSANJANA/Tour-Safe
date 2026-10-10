@@ -26,7 +26,7 @@ fun OnboardingScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackgroundNavy)
+            .background(MaterialTheme.colorScheme.background)
             .padding(24.dp)
     ) {
         Column(
@@ -40,14 +40,14 @@ fun OnboardingScreen(
                 Text(
                     text = stringResource(R.string.welcome_title),
                     style = MaterialTheme.typography.headlineLarge,
-                    color = TextPrimary,
+                    color = MaterialTheme.colorScheme.onSurface,
                     textAlign = TextAlign.Center
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 Text(
                     text = stringResource(R.string.welcome_desc),
                     style = MaterialTheme.typography.bodyLarge,
-                    color = TextSecondary,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
                 )
             }
@@ -59,19 +59,19 @@ fun OnboardingScreen(
             ) {
                 FeatureCard(
                     icon = Icons.Default.Warning,
-                    iconTint = AlertRed,
+                    iconTint = MaterialTheme.colorScheme.error,
                     title = stringResource(R.string.feature_alerts_title),
                     description = stringResource(R.string.feature_alerts_desc)
                 )
                 FeatureCard(
                     icon = Icons.Default.Hotel,
-                    iconTint = SafetyGreen,
+                    iconTint = MaterialTheme.tourSafe.safe,
                     title = stringResource(R.string.feature_places_title),
                     description = stringResource(R.string.feature_places_desc)
                 )
                 FeatureCard(
                     icon = Icons.Default.Map,
-                    iconTint = AccentCyan,
+                    iconTint = MaterialTheme.colorScheme.primary,
                     title = stringResource(R.string.feature_map_title),
                     description = stringResource(R.string.feature_map_desc)
                 )
@@ -82,12 +82,12 @@ fun OnboardingScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Text(
                     text = stringResource(R.string.get_started),
-                    color = Color.Black,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     style = MaterialTheme.typography.titleMedium
                 )
             }
@@ -105,7 +105,7 @@ private fun FeatureCard(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(SurfaceNavy, RoundedCornerShape(16.dp))
+            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(16.dp))
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -127,13 +127,13 @@ private fun FeatureCard(
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
             Spacer(modifier = Modifier.height(2.dp))
             Text(
                 text = description,
                 style = MaterialTheme.typography.bodyMedium,
-                color = TextSecondary
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }

@@ -1,5 +1,8 @@
 package com.toursafe.ui.components
 
+import androidx.compose.material3.MaterialTheme
+import com.toursafe.ui.theme.tourSafe
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
@@ -11,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.toursafe.ui.theme.WarningAmber
 
 @Composable
 fun StarRatingBar(
@@ -26,7 +28,7 @@ fun StarRatingBar(
             Icon(
                 imageVector = if (isFilled) Icons.Default.Star else Icons.Default.StarBorder,
                 contentDescription = null,
-                tint = WarningAmber,
+                tint = MaterialTheme.tourSafe.warning,
                 modifier = Modifier
                     .size(starSize)
                     .then(

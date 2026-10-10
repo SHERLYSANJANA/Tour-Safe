@@ -41,7 +41,7 @@ fun EmergencyCheckInScreen(
                 onBackClick = onBackClick
             )
         },
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -54,7 +54,7 @@ fun EmergencyCheckInScreen(
                 Text(
                     text = stringResource(R.string.check_in_screen_desc),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
                 // Option 1: I'm Safe
@@ -62,8 +62,8 @@ fun EmergencyCheckInScreen(
                     title = stringResource(R.string.status_im_safe),
                     subtitle = stringResource(R.string.status_im_safe_desc),
                     icon = Icons.Default.CheckCircle,
-                    color = SafetyGreen,
-                    bgColor = SafetyGreenBg,
+                    color = MaterialTheme.tourSafe.safe,
+                    bgColor = MaterialTheme.tourSafe.safeContainer,
                     isSelected = selectedStatus == SafetyLevel.SAFE,
                     onClick = { checkInViewModel.selectStatus(SafetyLevel.SAFE) }
                 )
@@ -73,8 +73,8 @@ fun EmergencyCheckInScreen(
                     title = stringResource(R.string.status_moving_to_safety),
                     subtitle = stringResource(R.string.status_moving_to_safety_desc),
                     icon = Icons.AutoMirrored.Filled.DirectionsRun,
-                    color = WarningAmber,
-                    bgColor = WarningAmberBg,
+                    color = MaterialTheme.tourSafe.warning,
+                    bgColor = MaterialTheme.tourSafe.warningContainer,
                     isSelected = selectedStatus == SafetyLevel.MOVING_TO_SAFETY,
                     onClick = { checkInViewModel.selectStatus(SafetyLevel.MOVING_TO_SAFETY) }
                 )
@@ -84,8 +84,8 @@ fun EmergencyCheckInScreen(
                     title = stringResource(R.string.status_i_need_help),
                     subtitle = stringResource(R.string.status_i_need_help_desc),
                     icon = Icons.Default.Warning,
-                    color = AlertRed,
-                    bgColor = AlertRedBg,
+                    color = MaterialTheme.colorScheme.error,
+                    bgColor = MaterialTheme.colorScheme.errorContainer,
                     isSelected = selectedStatus == SafetyLevel.NEED_HELP,
                     onClick = { checkInViewModel.selectStatus(SafetyLevel.NEED_HELP) }
                 )
@@ -96,14 +96,14 @@ fun EmergencyCheckInScreen(
                     value = customNote,
                     onValueChange = { checkInViewModel.updateCustomNote(it) },
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text(stringResource(R.string.add_optional_note_label), color = TextMuted) },
+                    label = { Text(stringResource(R.string.add_optional_note_label), color = MaterialTheme.colorScheme.onSurfaceVariant) },
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedContainerColor = SurfaceNavy,
-                        unfocusedContainerColor = SurfaceNavy,
-                        focusedBorderColor = AccentCyan,
-                        unfocusedBorderColor = SurfaceVariantNavy,
-                        focusedTextColor = TextPrimary,
-                        unfocusedTextColor = TextPrimary
+                        focusedContainerColor = MaterialTheme.colorScheme.surface,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                        focusedBorderColor = MaterialTheme.colorScheme.primary,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.surfaceVariant,
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                        unfocusedTextColor = MaterialTheme.colorScheme.onSurface
                     ),
                     shape = RoundedCornerShape(14.dp),
                     maxLines = 3
@@ -113,13 +113,13 @@ fun EmergencyCheckInScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(SurfaceVariantNavy, RoundedCornerShape(12.dp))
+                            .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp))
                             .padding(12.dp)
                     ) {
                         Text(
                             text = msg,
                             style = MaterialTheme.typography.bodySmall,
-                            color = SafetyGreen
+                            color = MaterialTheme.tourSafe.safe
                         )
                     }
                 }
@@ -135,12 +135,12 @@ fun EmergencyCheckInScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(54.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Text(
                     text = stringResource(R.string.broadcast_status_now),
-                    color = Color.Black,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     style = MaterialTheme.typography.titleMedium
                 )
             }
@@ -161,10 +161,10 @@ private fun StatusOptionCard(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(if (isSelected) bgColor else SurfaceNavy, RoundedCornerShape(16.dp))
+            .background(if (isSelected) bgColor else MaterialTheme.colorScheme.surface, RoundedCornerShape(16.dp))
             .border(
                 width = if (isSelected) 2.dp else 1.dp,
-                color = if (isSelected) color else SurfaceVariantNavy,
+                color = if (isSelected) color else MaterialTheme.colorScheme.surfaceVariant,
                 shape = RoundedCornerShape(16.dp)
             )
             .clickable { onClick() }
@@ -182,13 +182,13 @@ private fun StatusOptionCard(
                 Text(
                     text = title,
                     style = MaterialTheme.typography.titleMedium,
-                    color = TextPrimary
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(
                     text = subtitle,
                     style = MaterialTheme.typography.bodySmall,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }

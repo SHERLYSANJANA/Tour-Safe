@@ -6,8 +6,6 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.toursafe.ui.theme.BackgroundNavy
-import com.toursafe.ui.theme.TextPrimary
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -23,7 +21,7 @@ fun TourSafeTopBar(
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleLarge,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
         },
         navigationIcon = {
@@ -32,7 +30,7 @@ fun TourSafeTopBar(
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Back",
-                        tint = TextPrimary
+                        tint = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
@@ -43,13 +41,13 @@ fun TourSafeTopBar(
                     Icon(
                         imageVector = Icons.Default.Notifications,
                         contentDescription = "Notifications",
-                        tint = TextPrimary
+                        tint = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = BackgroundNavy
+            containerColor = MaterialTheme.colorScheme.background
         )
     )
 }

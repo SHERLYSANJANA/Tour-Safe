@@ -8,10 +8,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.toursafe.R
 import com.toursafe.navigation.Screen
-import com.toursafe.ui.theme.AccentCyan
-import com.toursafe.ui.theme.SurfaceNavy
-import com.toursafe.ui.theme.TextMuted
-import com.toursafe.ui.theme.TextPrimary
 
 sealed class BottomNavItem(val route: String, val titleRes: Int, val icon: ImageVector) {
     object Home : BottomNavItem(Screen.Home.route, R.string.nav_home, Icons.Default.Home)
@@ -35,8 +31,8 @@ fun TourSafeBottomBar(
     )
 
     NavigationBar(
-        containerColor = SurfaceNavy,
-        contentColor = TextPrimary
+        containerColor = MaterialTheme.colorScheme.surface,
+        contentColor = MaterialTheme.colorScheme.onSurface
     ) {
         items.forEach { item ->
             val isSelected = currentRoute == item.route
@@ -48,18 +44,18 @@ fun TourSafeBottomBar(
                     Icon(
                         imageVector = item.icon,
                         contentDescription = titleText,
-                        tint = if (isSelected) AccentCyan else TextMuted
+                        tint = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 },
                 label = {
                     Text(
                         text = titleText,
-                        color = if (isSelected) AccentCyan else TextMuted,
+                        color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.labelSmall
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = SurfaceNavy
+                    indicatorColor = MaterialTheme.colorScheme.surface
                 )
             )
         }

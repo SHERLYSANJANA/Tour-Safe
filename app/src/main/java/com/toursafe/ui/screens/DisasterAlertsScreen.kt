@@ -74,7 +74,7 @@ fun DisasterAlertsScreen(
                 title = stringResource(R.string.active_disaster_alerts)
             )
         },
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -93,8 +93,8 @@ fun DisasterAlertsScreen(
                         onClick = { viewModel.filterBySeverity(null) },
                         label = { Text(stringResource(R.string.view_all)) },
                         colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = AccentCyan,
-                            selectedLabelColor = Color.Black
+                            selectedContainerColor = MaterialTheme.colorScheme.primary,
+                            selectedLabelColor = MaterialTheme.colorScheme.onPrimary
                         )
                     )
                 }
@@ -104,8 +104,8 @@ fun DisasterAlertsScreen(
                         onClick = { viewModel.filterBySeverity(AlertSeverity.CRITICAL) },
                         label = { Text(stringResource(R.string.severity_critical)) },
                         colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = AlertRed,
-                            selectedLabelColor = Color.White
+                            selectedContainerColor = MaterialTheme.colorScheme.error,
+                            selectedLabelColor = MaterialTheme.colorScheme.onError
                         )
                     )
                 }
@@ -115,8 +115,8 @@ fun DisasterAlertsScreen(
                         onClick = { viewModel.filterBySeverity(AlertSeverity.WARNING) },
                         label = { Text(stringResource(R.string.severity_warning)) },
                         colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = WarningAmber,
-                            selectedLabelColor = Color.Black
+                            selectedContainerColor = MaterialTheme.tourSafe.warning,
+                            selectedLabelColor = MaterialTheme.colorScheme.onPrimary
                         )
                     )
                 }
@@ -126,8 +126,8 @@ fun DisasterAlertsScreen(
                         onClick = { viewModel.filterBySeverity(AlertSeverity.INFO) },
                         label = { Text(stringResource(R.string.severity_info)) },
                         colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = SurfaceVariantNavy,
-                            selectedLabelColor = TextPrimary
+                            selectedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
+                            selectedLabelColor = MaterialTheme.colorScheme.onSurface
                         )
                     )
                 }
@@ -139,7 +139,7 @@ fun DisasterAlertsScreen(
                     Text(
                         text = stringResource(R.string.alerts_filter_no_match),
                         style = MaterialTheme.typography.bodyMedium,
-                        color = TextSecondary
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 } else {
                     DataStatusPanel(

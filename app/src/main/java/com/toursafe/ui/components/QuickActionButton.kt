@@ -18,8 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import com.toursafe.ui.theme.SurfaceNavy
-import com.toursafe.ui.theme.TextPrimary
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,7 +32,7 @@ fun QuickActionButton(
         onClick = onClick,
         modifier = modifier,
         shape = RoundedCornerShape(20.dp),
-        color = SurfaceNavy,
+        color = MaterialTheme.colorScheme.surface,
         border = BorderStroke(1.dp, tint.copy(alpha = 0.45f))
     ) {
         Column(
@@ -43,7 +41,7 @@ fun QuickActionButton(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Icon(imageVector = icon, contentDescription = null, tint = tint, modifier = Modifier.size(28.dp))
-            Text(text = label, style = MaterialTheme.typography.labelLarge, color = TextPrimary)
+            Text(text = label, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurface)
         }
     }
 }

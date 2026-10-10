@@ -65,7 +65,7 @@ fun HomeScreen(
     val alertsStatus by viewModel.alertsStatus.collectAsState()
 
     Scaffold(
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         LazyColumn(
             modifier = Modifier
@@ -85,23 +85,23 @@ fun HomeScreen(
                         Text(
                             text = stringResource(R.string.dashboard_title),
                             style = MaterialTheme.typography.headlineMedium,
-                            color = TextPrimary
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                         Text(
                             text = status.locationName,
                             style = MaterialTheme.typography.bodyMedium,
-                            color = TextSecondary
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
 
                     IconButton(
                         onClick = { onNavigate(Screen.NotificationHistory.route) },
-                        modifier = Modifier.background(SurfaceNavy, RoundedCornerShape(12.dp))
+                        modifier = Modifier.background(MaterialTheme.colorScheme.surface, RoundedCornerShape(12.dp))
                     ) {
                         Icon(
                             imageVector = Icons.Default.Notifications,
                             contentDescription = "Notifications",
-                            tint = AccentCyan
+                            tint = MaterialTheme.colorScheme.primary
                         )
                     }
                 }
@@ -120,7 +120,7 @@ fun HomeScreen(
                 Text(
                     text = stringResource(R.string.quick_actions_header),
                     style = MaterialTheme.typography.titleLarge,
-                    color = TextPrimary
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -133,9 +133,9 @@ fun HomeScreen(
                             title = stringResource(R.string.emergency_sos),
                             subtitle = stringResource(R.string.sos_subtitle),
                             icon = Icons.Default.Sos,
-                            bgColor = AlertRedBg,
-                            borderColor = AlertRed,
-                            iconTint = AlertRed,
+                            bgColor = MaterialTheme.colorScheme.errorContainer,
+                            borderColor = MaterialTheme.colorScheme.error,
+                            iconTint = MaterialTheme.colorScheme.error,
                             onClick = { onNavigate(Screen.EmergencySos.route) }
                         )
                         QuickActionButton(
@@ -143,9 +143,9 @@ fun HomeScreen(
                             title = stringResource(R.string.voice_sos_tab),
                             subtitle = stringResource(R.string.start_voice_sos),
                             icon = Icons.Default.Mic,
-                            bgColor = SurfaceNavy,
-                            borderColor = AccentCyan,
-                            iconTint = AccentCyan,
+                            bgColor = MaterialTheme.colorScheme.surface,
+                            borderColor = MaterialTheme.colorScheme.primary,
+                            iconTint = MaterialTheme.colorScheme.primary,
                             onClick = { onNavigate(Screen.EmergencySos.route) }
                         )
                     }
@@ -154,9 +154,9 @@ fun HomeScreen(
                         title = stringResource(R.string.safe_places),
                         subtitle = stringResource(R.string.shelters_hotels_subtitle),
                         icon = Icons.Default.Hotel,
-                        bgColor = SurfaceNavy,
-                        borderColor = AccentCyan,
-                        iconTint = AccentCyan,
+                        bgColor = MaterialTheme.colorScheme.surface,
+                        borderColor = MaterialTheme.colorScheme.primary,
+                        iconTint = MaterialTheme.colorScheme.primary,
                         onClick = { onNavigate(Screen.SafeAccommodation.route) }
                     )
                 }
@@ -172,7 +172,7 @@ fun HomeScreen(
                     Text(
                         text = stringResource(R.string.active_disaster_alerts),
                         style = MaterialTheme.typography.titleLarge,
-                        color = TextPrimary
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     TextTextButton(
                         text = "${stringResource(R.string.view_all)} (${alerts.size})",
@@ -231,12 +231,12 @@ private fun QuickActionButton(
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
             Text(
                 text = subtitle,
                 style = MaterialTheme.typography.bodySmall,
-                color = TextSecondary
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }
@@ -250,7 +250,7 @@ private fun TextTextButton(
     Text(
         text = text,
         style = MaterialTheme.typography.labelMedium,
-        color = AccentCyan,
+        color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.clickable { onClick() }
     )
 }

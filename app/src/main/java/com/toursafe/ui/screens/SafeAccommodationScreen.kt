@@ -75,7 +75,7 @@ fun SafeAccommodationScreen(
                 title = stringResource(R.string.safe_accommodations)
             )
         },
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -89,21 +89,21 @@ fun SafeAccommodationScreen(
                 value = searchQuery,
                 onValueChange = { viewModel.updateSearchQuery(it) },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text(stringResource(R.string.search_placeholder), color = TextMuted) },
+                placeholder = { Text(stringResource(R.string.search_placeholder), color = MaterialTheme.colorScheme.onSurfaceVariant) },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Search,
                         contentDescription = null,
-                        tint = AccentCyan
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 },
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = SurfaceNavy,
-                    unfocusedContainerColor = SurfaceNavy,
-                    focusedBorderColor = AccentCyan,
-                    unfocusedBorderColor = SurfaceVariantNavy,
-                    focusedTextColor = TextPrimary,
-                    unfocusedTextColor = TextPrimary
+                    focusedContainerColor = MaterialTheme.colorScheme.surface,
+                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.surfaceVariant,
+                    focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                    unfocusedTextColor = MaterialTheme.colorScheme.onSurface
                 ),
                 shape = RoundedCornerShape(14.dp),
                 singleLine = true
@@ -113,7 +113,7 @@ fun SafeAccommodationScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(SurfaceNavy, RoundedCornerShape(12.dp))
+                    .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(12.dp))
                     .padding(horizontal = 16.dp, vertical = 8.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -121,14 +121,14 @@ fun SafeAccommodationScreen(
                 Text(
                     text = stringResource(R.string.show_free_shelters_only),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = TextPrimary
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Switch(
                     checked = onlyShelters,
                     onCheckedChange = { viewModel.toggleShelterFilter(it) },
                     colors = SwitchDefaults.colors(
-                        checkedThumbColor = Color.Black,
-                        checkedTrackColor = SafetyGreen
+                        checkedThumbColor = MaterialTheme.colorScheme.onPrimary,
+                        checkedTrackColor = MaterialTheme.tourSafe.safe
                     )
                 )
             }

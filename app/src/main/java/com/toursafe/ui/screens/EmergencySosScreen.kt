@@ -101,7 +101,7 @@ fun EmergencySosScreen(
                 onBackClick = onBackClick
             )
         },
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -115,8 +115,8 @@ fun EmergencySosScreen(
             // Mode Tab Row (Voice SOS vs Tap SOS)
             TabRow(
                 selectedTabIndex = activeTab,
-                containerColor = SurfaceNavy,
-                contentColor = AccentCyan,
+                containerColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(12.dp))
@@ -128,7 +128,7 @@ fun EmergencySosScreen(
                         Text(
                             text = stringResource(R.string.voice_sos_tab),
                             style = MaterialTheme.typography.titleMedium,
-                            color = if (activeTab == 0) AccentCyan else TextSecondary
+                            color = if (activeTab == 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 )
@@ -139,7 +139,7 @@ fun EmergencySosScreen(
                         Text(
                             text = stringResource(R.string.type_sos_tab),
                             style = MaterialTheme.typography.titleMedium,
-                            color = if (activeTab == 1) AccentCyan else TextSecondary
+                            color = if (activeTab == 1) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 )
@@ -150,7 +150,7 @@ fun EmergencySosScreen(
                 Text(
                     text = stringResource(R.string.voice_sos_instruction),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = TextSecondary,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
                 )
 
@@ -165,32 +165,32 @@ fun EmergencySosScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(SurfaceNavy, RoundedCornerShape(16.dp))
-                            .border(1.dp, WarningAmber, RoundedCornerShape(16.dp))
+                            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(16.dp))
+                            .border(1.dp, MaterialTheme.tourSafe.warning, RoundedCornerShape(16.dp))
                             .padding(16.dp)
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
                                 text = stringResource(R.string.mic_permission_title),
                                 style = MaterialTheme.typography.titleMedium,
-                                color = WarningAmber
+                                color = MaterialTheme.tourSafe.warning
                             )
                             Spacer(modifier = Modifier.height(6.dp))
                             Text(
                                 text = stringResource(R.string.mic_permission_desc),
                                 style = MaterialTheme.typography.bodySmall,
-                                color = TextSecondary,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 textAlign = TextAlign.Center
                             )
                             Spacer(modifier = Modifier.height(12.dp))
                             Button(
                                 onClick = { micPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO) },
-                                colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                                 shape = RoundedCornerShape(10.dp)
                             ) {
                                 Text(
                                     text = stringResource(R.string.grant_mic_permission),
-                                    color = Color.Black,
+                                    color = MaterialTheme.colorScheme.onPrimary,
                                     style = MaterialTheme.typography.labelLarge
                                 )
                             }
@@ -215,8 +215,8 @@ fun EmergencySosScreen(
                             .size(140.dp)
                             .scale(pulseScale)
                             .clip(CircleShape)
-                            .background(if (isListening) AlertRedBg else SurfaceNavy)
-                            .border(3.dp, if (isListening) AlertRed else AccentCyan, CircleShape)
+                            .background(if (isListening) MaterialTheme.colorScheme.errorContainer else MaterialTheme.colorScheme.surface)
+                            .border(3.dp, if (isListening) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary, CircleShape)
                             .clickable {
                                 if (isListening) {
                                     voiceViewModel.stopListening()
@@ -230,14 +230,14 @@ fun EmergencySosScreen(
                             Icon(
                                 imageVector = if (isListening) Icons.Default.Mic else Icons.Default.MicOff,
                                 contentDescription = null,
-                                tint = if (isListening) AlertRed else AccentCyan,
+                                tint = if (isListening) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(48.dp)
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
                                 text = if (isListening) stringResource(R.string.stop_listening) else stringResource(R.string.start_voice_sos),
                                 style = MaterialTheme.typography.labelSmall,
-                                color = TextPrimary,
+                                color = MaterialTheme.colorScheme.onSurface,
                                 textAlign = TextAlign.Center
                             )
                         }
@@ -257,7 +257,7 @@ fun EmergencySosScreen(
                                 else -> stringResource(R.string.status_idle)
                             },
                             style = MaterialTheme.typography.bodySmall,
-                            color = if (speechState is SpeechState.Error) AlertRed else TextSecondary,
+                            color = if (speechState is SpeechState.Error) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant,
                             textAlign = TextAlign.Center
                         )
 
@@ -266,7 +266,7 @@ fun EmergencySosScreen(
                                 Icon(
                                     imageVector = Icons.Default.Refresh,
                                     contentDescription = "Retry",
-                                    tint = AccentCyan
+                                    tint = MaterialTheme.colorScheme.primary
                                 )
                             }
                         }
@@ -277,7 +277,7 @@ fun EmergencySosScreen(
                 Text(
                     text = stringResource(R.string.speech_processing_note),
                     style = MaterialTheme.typography.bodySmall,
-                    color = TextMuted,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
                 )
 
@@ -286,21 +286,21 @@ fun EmergencySosScreen(
                     Text(
                         text = stringResource(R.string.review_emergency_msg),
                         style = MaterialTheme.typography.titleSmall,
-                        color = TextPrimary
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     OutlinedTextField(
                         value = spokenText,
                         onValueChange = { voiceViewModel.updateSpokenText(it) },
                         modifier = Modifier.fillMaxWidth(),
-                        placeholder = { Text(stringResource(R.string.status_idle), color = TextMuted) },
+                        placeholder = { Text(stringResource(R.string.status_idle), color = MaterialTheme.colorScheme.onSurfaceVariant) },
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedContainerColor = SurfaceNavy,
-                            unfocusedContainerColor = SurfaceNavy,
-                            focusedBorderColor = AccentCyan,
-                            unfocusedBorderColor = SurfaceVariantNavy,
-                            focusedTextColor = TextPrimary,
-                            unfocusedTextColor = TextPrimary
+                            focusedContainerColor = MaterialTheme.colorScheme.surface,
+                            unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                            focusedBorderColor = MaterialTheme.colorScheme.primary,
+                            unfocusedBorderColor = MaterialTheme.colorScheme.surfaceVariant,
+                            focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                            unfocusedTextColor = MaterialTheme.colorScheme.onSurface
                         ),
                         shape = RoundedCornerShape(14.dp),
                         maxLines = 4
@@ -316,12 +316,12 @@ fun EmergencySosScreen(
                     Text(
                         text = stringResource(R.string.disaster_sos_assistance),
                         style = MaterialTheme.typography.labelSmall,
-                        color = AlertRed
+                        color = MaterialTheme.colorScheme.error
                     )
                     Text(
                         text = stringResource(R.string.sos_explanation),
                         style = MaterialTheme.typography.bodyMedium,
-                        color = TextSecondary,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                         textAlign = TextAlign.Center
                     )
 
@@ -329,8 +329,8 @@ fun EmergencySosScreen(
                         modifier = Modifier
                             .size(160.dp)
                             .clip(CircleShape)
-                            .background(AlertRedBg)
-                            .border(4.dp, AlertRed, CircleShape)
+                            .background(MaterialTheme.colorScheme.errorContainer)
+                            .border(4.dp, MaterialTheme.colorScheme.error, CircleShape)
                             .clickable { showConfirmDialog = true },
                         contentAlignment = Alignment.Center
                     ) {
@@ -338,14 +338,14 @@ fun EmergencySosScreen(
                             Icon(
                                 imageVector = Icons.Default.Warning,
                                 contentDescription = "SOS",
-                                tint = AlertRed,
+                                tint = MaterialTheme.colorScheme.error,
                                 modifier = Modifier.size(54.dp)
                             )
                             Spacer(modifier = Modifier.height(6.dp))
                             Text(
                                 text = stringResource(R.string.tap_for_sos),
                                 style = MaterialTheme.typography.headlineMedium,
-                                color = TextPrimary
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                         }
                     }
@@ -356,7 +356,7 @@ fun EmergencySosScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(SurfaceNavy, RoundedCornerShape(16.dp))
+                    .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(16.dp))
                     .padding(16.dp)
             ) {
                 Column {
@@ -368,12 +368,12 @@ fun EmergencySosScreen(
                         Text(
                             text = stringResource(R.string.shared_gps_coords),
                             style = MaterialTheme.typography.titleSmall,
-                            color = TextPrimary
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                         Switch(
                             checked = includeGps,
                             onCheckedChange = { voiceViewModel.toggleIncludeGpsLocation(it) },
-                            colors = SwitchDefaults.colors(checkedThumbColor = Color.Black, checkedTrackColor = SafetyGreen)
+                            colors = SwitchDefaults.colors(checkedThumbColor = MaterialTheme.colorScheme.onPrimary, checkedTrackColor = MaterialTheme.tourSafe.safe)
                         )
                     }
 
@@ -385,28 +385,28 @@ fun EmergencySosScreen(
                                 Text(
                                     text = "Lat: ${"%.4f".format(loc.latitude)}, Lng: ${"%.4f".format(loc.longitude)}",
                                     style = MaterialTheme.typography.titleSmall,
-                                    color = AccentCyan
+                                    color = MaterialTheme.colorScheme.primary
                                 )
                                 Text(
                                     text = stringResource(R.string.location_accuracy, loc.accuracyMeters),
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = TextSecondary
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                                 Spacer(modifier = Modifier.height(4.dp))
                                 Text(
                                     text = stringResource(R.string.google_maps_link_label, loc.toGoogleMapsLink()),
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = SafetyGreen
+                                    color = MaterialTheme.tourSafe.safe
                                 )
                             }
                             is LocationState.Loading -> {
                                 Row(verticalAlignment = Alignment.CenterVertically) {
-                                    CircularProgressIndicator(modifier = Modifier.size(16.dp), color = AccentCyan, strokeWidth = 2.dp)
+                                    CircularProgressIndicator(modifier = Modifier.size(16.dp), color = MaterialTheme.colorScheme.primary, strokeWidth = 2.dp)
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Text(
                                         text = stringResource(R.string.gps_acquiring),
                                         style = MaterialTheme.typography.bodySmall,
-                                        color = TextSecondary
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                 }
                             }
@@ -420,17 +420,17 @@ fun EmergencySosScreen(
                                             )
                                         )
                                     },
-                                    colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                                     shape = RoundedCornerShape(8.dp)
                                 ) {
-                                    Text(stringResource(R.string.grant_mic_permission), color = Color.Black, style = MaterialTheme.typography.labelSmall)
+                                    Text(stringResource(R.string.grant_mic_permission), color = MaterialTheme.colorScheme.onPrimary, style = MaterialTheme.typography.labelSmall)
                                 }
                             }
                             else -> {
                                 Text(
                                     text = "GPS Location unavailable. Message will be prepared without coordinates.",
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = TextSecondary
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
                         }
@@ -440,7 +440,7 @@ fun EmergencySosScreen(
                     Text(
                         text = stringResource(R.string.location_permission_desc),
                         style = MaterialTheme.typography.bodySmall,
-                        color = TextMuted
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
@@ -454,14 +454,14 @@ fun EmergencySosScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(54.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = AlertRed),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
                 shape = RoundedCornerShape(16.dp)
             ) {
-                Icon(imageVector = Icons.AutoMirrored.Filled.Send, contentDescription = null, tint = Color.White)
+                Icon(imageVector = Icons.AutoMirrored.Filled.Send, contentDescription = null, tint = MaterialTheme.colorScheme.onError)
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
                     text = stringResource(R.string.send_emergency_message),
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onError,
                     style = MaterialTheme.typography.titleMedium
                 )
             }
@@ -475,22 +475,22 @@ fun EmergencySosScreen(
                     showConfirmDialog = false
                     voiceViewModel.resetHandOffState()
                 },
-                containerColor = SurfaceNavy,
-                title = { Text(stringResource(R.string.confirm_send_msg_title), color = AlertRed) },
+                containerColor = MaterialTheme.colorScheme.surface,
+                title = { Text(stringResource(R.string.confirm_send_msg_title), color = MaterialTheme.colorScheme.error) },
                 text = {
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                        Text(stringResource(R.string.confirm_send_msg_desc), color = TextPrimary)
+                        Text(stringResource(R.string.confirm_send_msg_desc), color = MaterialTheme.colorScheme.onSurface)
                         if (preparedState != null) {
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .background(SurfaceVariantNavy, RoundedCornerShape(10.dp))
+                                    .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(10.dp))
                                     .padding(12.dp)
                             ) {
                                 Text(
                                     text = preparedState.message,
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = TextPrimary
+                                    color = MaterialTheme.colorScheme.onSurface
                                 )
                             }
                         }
@@ -524,12 +524,12 @@ fun EmergencySosScreen(
                                 }
                                 showConfirmDialog = false
                             },
-                            colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Icon(imageVector = Icons.Default.Sms, contentDescription = null, tint = Color.Black)
+                            Icon(imageVector = Icons.Default.Sms, contentDescription = null, tint = MaterialTheme.colorScheme.onPrimary)
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text(stringResource(R.string.sos_open_sms), color = Color.Black)
+                            Text(stringResource(R.string.sos_open_sms), color = MaterialTheme.colorScheme.onPrimary)
                         }
 
                         Button(
@@ -543,12 +543,12 @@ fun EmergencySosScreen(
                                 } catch (e: Exception) {}
                                 showConfirmDialog = false
                             },
-                            colors = ButtonDefaults.buttonColors(containerColor = AlertRed),
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Icon(imageVector = Icons.Default.Call, contentDescription = null, tint = Color.White)
+                            Icon(imageVector = Icons.Default.Call, contentDescription = null, tint = MaterialTheme.colorScheme.onError)
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text(stringResource(R.string.sos_call_emergency), color = Color.White)
+                            Text(stringResource(R.string.sos_call_emergency), color = MaterialTheme.colorScheme.onError)
                         }
                     }
                 },
@@ -559,7 +559,7 @@ fun EmergencySosScreen(
                             voiceViewModel.resetHandOffState()
                         }
                     ) {
-                        Text(stringResource(R.string.cancel), color = TextSecondary)
+                        Text(stringResource(R.string.cancel), color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 }
             )
@@ -590,8 +590,8 @@ private fun LanguageDropdownSelector(
             onClick = { expanded = true },
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.outlinedButtonColors(contentColor = TextPrimary),
-            border = androidx.compose.foundation.BorderStroke(1.dp, SurfaceVariantNavy)
+            colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.onSurface),
+            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.surfaceVariant)
         ) {
             Text("${stringResource(R.string.speech_language_spoken)}: $currentLabel")
         }
@@ -599,11 +599,11 @@ private fun LanguageDropdownSelector(
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier = Modifier.background(SurfaceNavy)
+            modifier = Modifier.background(MaterialTheme.colorScheme.surface)
         ) {
             languages.forEach { (code, label) ->
                 DropdownMenuItem(
-                    text = { Text(label, color = TextPrimary) },
+                    text = { Text(label, color = MaterialTheme.colorScheme.onSurface) },
                     onClick = {
                         onSelectLanguage(code)
                         expanded = false

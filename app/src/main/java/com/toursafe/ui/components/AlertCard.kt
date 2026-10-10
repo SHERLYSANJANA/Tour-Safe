@@ -1,5 +1,7 @@
 package com.toursafe.ui.components
 
+import com.toursafe.ui.theme.tourSafe
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -28,16 +30,6 @@ import androidx.compose.ui.unit.dp
 import com.toursafe.R
 import com.toursafe.data.models.AlertSeverity
 import com.toursafe.data.models.DisasterAlert
-import com.toursafe.ui.theme.AccentCyan
-import com.toursafe.ui.theme.AlertRed
-import com.toursafe.ui.theme.AlertRedBg
-import com.toursafe.ui.theme.SurfaceNavy
-import com.toursafe.ui.theme.SurfaceVariantNavy
-import com.toursafe.ui.theme.TextMuted
-import com.toursafe.ui.theme.TextPrimary
-import com.toursafe.ui.theme.TextSecondary
-import com.toursafe.ui.theme.WarningAmber
-import com.toursafe.ui.theme.WarningAmberBg
 
 @Composable
 fun AlertCard(
@@ -45,16 +37,16 @@ fun AlertCard(
     onClick: () -> Unit
 ) {
     val (badgeBg, badgeText, badgeColor) = when (alert.severity) {
-        AlertSeverity.CRITICAL -> Triple(AlertRedBg, stringResource(R.string.severity_critical), AlertRed)
-        AlertSeverity.WARNING -> Triple(WarningAmberBg, stringResource(R.string.severity_warning), WarningAmber)
-        AlertSeverity.INFO -> Triple(SurfaceVariantNavy, stringResource(R.string.severity_info), AccentCyan)
+        AlertSeverity.CRITICAL -> Triple(MaterialTheme.colorScheme.errorContainer, stringResource(R.string.severity_critical), MaterialTheme.colorScheme.error)
+        AlertSeverity.WARNING -> Triple(MaterialTheme.tourSafe.warningContainer, stringResource(R.string.severity_warning), MaterialTheme.tourSafe.warning)
+        AlertSeverity.INFO -> Triple(MaterialTheme.colorScheme.surfaceVariant, stringResource(R.string.severity_info), MaterialTheme.colorScheme.primary)
     }
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(SurfaceNavy)
+            .background(MaterialTheme.colorScheme.surface)
             .border(1.dp, badgeColor.copy(alpha = 0.5f), RoundedCornerShape(16.dp))
             .clickable { onClick() }
             .padding(16.dp)
@@ -81,7 +73,7 @@ fun AlertCard(
                 Text(
                     text = stringResource(R.string.km_away, alert.distanceKm),
                     style = MaterialTheme.typography.bodySmall,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -90,7 +82,7 @@ fun AlertCard(
             Text(
                 text = alert.title,
                 style = MaterialTheme.typography.titleMedium,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             Spacer(modifier = Modifier.height(4.dp))
@@ -98,7 +90,7 @@ fun AlertCard(
             Text(
                 text = alert.affectedArea,
                 style = MaterialTheme.typography.bodySmall,
-                color = TextSecondary
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -106,7 +98,7 @@ fun AlertCard(
             Text(
                 text = alert.sourceLabel,
                 style = MaterialTheme.typography.labelSmall,
-                color = WarningAmber
+                color = MaterialTheme.tourSafe.warning
             )
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -119,7 +111,7 @@ fun AlertCard(
                 Text(
                     text = alert.timestamp,
                     style = MaterialTheme.typography.bodySmall,
-                    color = TextMuted,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.weight(1f, fill = false)
                 )
 
@@ -129,12 +121,12 @@ fun AlertCard(
                     Text(
                         text = stringResource(R.string.view_action_plan),
                         style = MaterialTheme.typography.labelMedium,
-                        color = AccentCyan
+                        color = MaterialTheme.colorScheme.primary
                     )
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                         contentDescription = null,
-                        tint = AccentCyan,
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(18.dp)
                     )
                 }

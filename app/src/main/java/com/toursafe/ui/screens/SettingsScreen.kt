@@ -59,7 +59,7 @@ fun SettingsScreen(
                 onBackClick = onBackClick
             )
         },
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -72,14 +72,14 @@ fun SettingsScreen(
             Text(
                 text = stringResource(R.string.preferences_regional),
                 style = MaterialTheme.typography.titleLarge,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             // Language Selection Item
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(SurfaceNavy, RoundedCornerShape(14.dp))
+                    .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(14.dp))
                     .clickable { onNavigateToLanguage() }
                     .padding(16.dp)
             ) {
@@ -92,19 +92,19 @@ fun SettingsScreen(
                         Icon(
                             imageVector = Icons.Default.Language,
                             contentDescription = null,
-                            tint = AccentCyan
+                            tint = MaterialTheme.colorScheme.primary
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
                             text = stringResource(R.string.change_app_language),
                             style = MaterialTheme.typography.titleMedium,
-                            color = TextPrimary
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                     Icon(
                         imageVector = Icons.Default.ChevronRight,
                         contentDescription = null,
-                        tint = TextSecondary
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
@@ -120,7 +120,7 @@ fun SettingsScreen(
             Text(
                 text = stringResource(R.string.notifications_permissions),
                 style = MaterialTheme.typography.titleLarge,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             // Toggle 1: Push Notifications
@@ -143,7 +143,7 @@ fun SettingsScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(SurfaceNavy, RoundedCornerShape(14.dp))
+                    .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(14.dp))
                     .clickable {
                         try {
                             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
@@ -163,16 +163,16 @@ fun SettingsScreen(
                         Text(
                             text = "GPS Location Permission",
                             style = MaterialTheme.typography.titleMedium,
-                            color = TextPrimary
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                         Spacer(modifier = Modifier.height(2.dp))
                         Text(
                             text = if (hasLocationPermission) "Granted • Tap to manage system permissions" else "Denied • Tap to open system app settings",
                             style = MaterialTheme.typography.bodySmall,
-                            color = if (hasLocationPermission) SafetyGreen else WarningAmber
+                            color = if (hasLocationPermission) MaterialTheme.tourSafe.safe else MaterialTheme.tourSafe.warning
                         )
                     }
-                    Icon(imageVector = Icons.Default.ChevronRight, contentDescription = null, tint = TextSecondary)
+                    Icon(imageVector = Icons.Default.ChevronRight, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }
@@ -189,7 +189,7 @@ private fun SwitchSettingRow(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(SurfaceNavy, RoundedCornerShape(14.dp))
+            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(14.dp))
             .padding(16.dp)
     ) {
         Row(
@@ -201,13 +201,13 @@ private fun SwitchSettingRow(
                 Text(
                     text = title,
                     style = MaterialTheme.typography.titleMedium,
-                    color = TextPrimary
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(
                     text = subtitle,
                     style = MaterialTheme.typography.bodySmall,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
             Spacer(modifier = Modifier.width(12.dp))
@@ -215,8 +215,8 @@ private fun SwitchSettingRow(
                 checked = checked,
                 onCheckedChange = onCheckedChange,
                 colors = SwitchDefaults.colors(
-                    checkedThumbColor = Color.Black,
-                    checkedTrackColor = AccentCyan
+                    checkedThumbColor = MaterialTheme.colorScheme.onPrimary,
+                    checkedTrackColor = MaterialTheme.colorScheme.primary
                 )
             )
         }

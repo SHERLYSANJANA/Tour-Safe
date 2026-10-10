@@ -31,8 +31,8 @@ fun AccommodationCard(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(SurfaceNavy)
-            .border(1.dp, SurfaceVariantNavy, RoundedCornerShape(16.dp))
+            .background(MaterialTheme.colorScheme.surface)
+            .border(1.dp, MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(16.dp))
             .clickable { onClick() }
             .padding(16.dp)
     ) {
@@ -46,21 +46,21 @@ fun AccommodationCard(
                     Icon(
                         imageVector = if (accommodation.isEmergencyShelter) Icons.Default.Shield else Icons.Default.Hotel,
                         contentDescription = null,
-                        tint = if (accommodation.isEmergencyShelter) SafetyGreen else AccentCyan,
+                        tint = if (accommodation.isEmergencyShelter) MaterialTheme.tourSafe.safe else MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(22.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = accommodation.type,
                         style = MaterialTheme.typography.labelSmall,
-                        color = if (accommodation.isEmergencyShelter) SafetyGreen else AccentCyan
+                        color = if (accommodation.isEmergencyShelter) MaterialTheme.tourSafe.safe else MaterialTheme.colorScheme.primary
                     )
                 }
 
                 Text(
                     text = stringResource(R.string.km_away, accommodation.distanceKm),
                     style = MaterialTheme.typography.bodySmall,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -69,12 +69,12 @@ fun AccommodationCard(
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(6.dp))
-                        .background(WarningAmberBg)
+                        .background(MaterialTheme.tourSafe.warningContainer)
                         .padding(horizontal = 8.dp, vertical = 2.dp)
                 ) {
                     Text(
                         text = "Unverified Demo Record",
-                        color = WarningAmber,
+                        color = MaterialTheme.tourSafe.warning,
                         style = MaterialTheme.typography.labelSmall
                     )
                 }
@@ -85,13 +85,13 @@ fun AccommodationCard(
             Text(
                 text = accommodation.name,
                 style = MaterialTheme.typography.titleMedium,
-                color = TextPrimary
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             Text(
                 text = accommodation.address,
                 style = MaterialTheme.typography.bodySmall,
-                color = TextSecondary
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -108,14 +108,14 @@ fun AccommodationCard(
                         Text(
                             text = stringResource(R.string.reviews_count, accommodation.rating, accommodation.reviewCount),
                             style = MaterialTheme.typography.bodySmall,
-                            color = TextSecondary
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 } else {
                     Text(
                         text = "Rating Unlisted (Demo)",
                         style = MaterialTheme.typography.bodySmall,
-                        color = TextMuted
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
 
@@ -123,7 +123,7 @@ fun AccommodationCard(
                     Text(
                         text = price,
                         style = MaterialTheme.typography.titleSmall,
-                        color = SafetyGreen
+                        color = MaterialTheme.tourSafe.safe
                     )
                 }
             }
@@ -133,7 +133,7 @@ fun AccommodationCard(
                 Text(
                     text = stringResource(R.string.available_capacity, accommodation.capacityAvailable, accommodation.maxCapacity),
                     style = MaterialTheme.typography.labelSmall,
-                    color = TextMuted
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }

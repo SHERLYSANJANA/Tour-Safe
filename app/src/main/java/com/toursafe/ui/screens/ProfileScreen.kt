@@ -49,7 +49,7 @@ fun ProfileScreen(
                 title = stringResource(R.string.traveler_profile_title)
             )
         },
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
@@ -63,7 +63,7 @@ fun ProfileScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(SurfaceNavy, RoundedCornerShape(16.dp))
+                    .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(16.dp))
                     .clickable { showEditProfileDialog = true }
                     .padding(20.dp)
             ) {
@@ -76,13 +76,13 @@ fun ProfileScreen(
                         Box(
                             modifier = Modifier
                                 .size(60.dp)
-                                .background(AccentCyan.copy(alpha = 0.2f), CircleShape),
+                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.2f), CircleShape),
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Person,
                                 contentDescription = null,
-                                tint = AccentCyan,
+                                tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(36.dp)
                             )
                         }
@@ -91,13 +91,13 @@ fun ProfileScreen(
                             Text(
                                 text = profileName.ifBlank { "Tap to Set Profile Name" },
                                 style = MaterialTheme.typography.titleLarge,
-                                color = if (profileName.isBlank()) TextMuted else TextPrimary
+                                color = if (profileName.isBlank()) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface
                             )
                         }
                     }
 
                     IconButton(onClick = { showEditProfileDialog = true }) {
-                        Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit Profile", tint = AccentCyan)
+                        Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit Profile", tint = MaterialTheme.colorScheme.primary)
                     }
                 }
             }
@@ -106,7 +106,7 @@ fun ProfileScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(SurfaceNavy, RoundedCornerShape(14.dp))
+                    .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(14.dp))
                     .clickable { onNavigateToSettings() }
                     .padding(16.dp)
             ) {
@@ -119,19 +119,19 @@ fun ProfileScreen(
                         Icon(
                             imageVector = Icons.Default.Settings,
                             contentDescription = null,
-                            tint = TextPrimary
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
                             text = stringResource(R.string.settings_preferences),
                             style = MaterialTheme.typography.titleMedium,
-                            color = TextPrimary
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                     Text(
                         text = stringResource(R.string.configure),
                         style = MaterialTheme.typography.labelMedium,
-                        color = AccentCyan
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
             }
@@ -145,14 +145,14 @@ fun ProfileScreen(
                 Text(
                     text = stringResource(R.string.emergency_contacts_title),
                     style = MaterialTheme.typography.titleLarge,
-                    color = TextPrimary
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Button(
                     onClick = { showAddContactDialog = true },
-                    colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                     shape = RoundedCornerShape(10.dp)
                 ) {
-                    Text(stringResource(R.string.add_contact_btn), color = Color.Black, style = MaterialTheme.typography.labelSmall)
+                    Text(stringResource(R.string.add_contact_btn), color = MaterialTheme.colorScheme.onPrimary, style = MaterialTheme.typography.labelSmall)
                 }
             }
 
@@ -162,14 +162,14 @@ fun ProfileScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(SurfaceNavy, RoundedCornerShape(12.dp))
+                            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(12.dp))
                             .padding(16.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = "No emergency contacts added yet.",
                             style = MaterialTheme.typography.bodyMedium,
-                            color = TextSecondary
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 } else {
@@ -214,7 +214,7 @@ private fun ContactRow(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(SurfaceNavy, RoundedCornerShape(14.dp))
+            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(14.dp))
             .padding(16.dp)
     ) {
         Row(
@@ -226,12 +226,12 @@ private fun ContactRow(
                 Text(
                     text = contact.name + if (contact.isPrimary) " " + stringResource(R.string.primary_tag) else "",
                     style = MaterialTheme.typography.titleMedium,
-                    color = if (contact.isPrimary) SafetyGreen else TextPrimary
+                    color = if (contact.isPrimary) MaterialTheme.tourSafe.safe else MaterialTheme.colorScheme.onSurface
                 )
                 Text(
                     text = "${contact.relationship} • ${contact.phoneNumber}",
                     style = MaterialTheme.typography.bodySmall,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
 
@@ -239,7 +239,7 @@ private fun ContactRow(
                 Icon(
                     imageVector = Icons.Default.Delete,
                     contentDescription = stringResource(R.string.delete),
-                    tint = AlertRed
+                    tint = MaterialTheme.colorScheme.error
                 )
             }
         }
@@ -256,27 +256,27 @@ private fun EditProfileNameDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        containerColor = SurfaceNavy,
-        title = { Text("Profile Name", color = TextPrimary) },
+        containerColor = MaterialTheme.colorScheme.surface,
+        title = { Text("Profile Name", color = MaterialTheme.colorScheme.onSurface) },
         text = {
             OutlinedTextField(
                 value = nameInput,
                 onValueChange = { nameInput = it },
-                label = { Text("Full Name", color = TextSecondary) },
-                colors = OutlinedTextFieldDefaults.colors(focusedTextColor = TextPrimary, unfocusedTextColor = TextPrimary)
+                label = { Text("Full Name", color = MaterialTheme.colorScheme.onSurfaceVariant) },
+                colors = OutlinedTextFieldDefaults.colors(focusedTextColor = MaterialTheme.colorScheme.onSurface, unfocusedTextColor = MaterialTheme.colorScheme.onSurface)
             )
         },
         confirmButton = {
             Button(
                 onClick = { onSave(nameInput.trim()) },
-                colors = ButtonDefaults.buttonColors(containerColor = AccentCyan)
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
-                Text("Save", color = Color.Black)
+                Text("Save", color = MaterialTheme.colorScheme.onPrimary)
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.cancel), color = TextSecondary)
+                Text(stringResource(R.string.cancel), color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     )
@@ -293,32 +293,32 @@ private fun AddContactDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        containerColor = SurfaceNavy,
-        title = { Text(stringResource(R.string.add_contact_dialog_title), color = TextPrimary) },
+        containerColor = MaterialTheme.colorScheme.surface,
+        title = { Text(stringResource(R.string.add_contact_dialog_title), color = MaterialTheme.colorScheme.onSurface) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text(stringResource(R.string.full_name_label), color = TextSecondary) },
+                    label = { Text(stringResource(R.string.full_name_label), color = MaterialTheme.colorScheme.onSurfaceVariant) },
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = TextPrimary, unfocusedTextColor = TextPrimary
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface, unfocusedTextColor = MaterialTheme.colorScheme.onSurface
                     )
                 )
                 OutlinedTextField(
                     value = relation,
                     onValueChange = { relation = it },
-                    label = { Text(stringResource(R.string.relationship_label), color = TextSecondary) },
+                    label = { Text(stringResource(R.string.relationship_label), color = MaterialTheme.colorScheme.onSurfaceVariant) },
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = TextPrimary, unfocusedTextColor = TextPrimary
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface, unfocusedTextColor = MaterialTheme.colorScheme.onSurface
                     )
                 )
                 OutlinedTextField(
                     value = phone,
                     onValueChange = { phone = it },
-                    label = { Text(stringResource(R.string.phone_number_label), color = TextSecondary) },
+                    label = { Text(stringResource(R.string.phone_number_label), color = MaterialTheme.colorScheme.onSurfaceVariant) },
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedTextColor = TextPrimary, unfocusedTextColor = TextPrimary
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface, unfocusedTextColor = MaterialTheme.colorScheme.onSurface
                     )
                 )
             }
@@ -330,14 +330,14 @@ private fun AddContactDialog(
                         onAdd(name, relation, phone)
                     }
                 },
-                colors = ButtonDefaults.buttonColors(containerColor = AccentCyan)
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
-                Text(stringResource(R.string.add_contact_btn), color = Color.Black)
+                Text(stringResource(R.string.add_contact_btn), color = MaterialTheme.colorScheme.onPrimary)
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text(stringResource(R.string.cancel), color = TextSecondary)
+                Text(stringResource(R.string.cancel), color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     )

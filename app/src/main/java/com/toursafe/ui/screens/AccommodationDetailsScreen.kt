@@ -68,7 +68,7 @@ fun AccommodationDetailsScreen(
                 onBackClick = onBackClick
             )
         },
-        containerColor = BackgroundNavy
+        containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         if (currentAcc == null) {
             Box(
@@ -80,7 +80,7 @@ fun AccommodationDetailsScreen(
                 Text(
                     text = stringResource(R.string.accommodation_not_found),
                     style = MaterialTheme.typography.bodyLarge,
-                    color = TextSecondary
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         } else {
@@ -97,8 +97,8 @@ fun AccommodationDetailsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(16.dp))
-                        .background(SurfaceNavy)
-                        .border(1.dp, SurfaceVariantNavy, RoundedCornerShape(16.dp))
+                        .background(MaterialTheme.colorScheme.surface)
+                        .border(1.dp, MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(16.dp))
                         .padding(20.dp)
                 ) {
                     Column {
@@ -110,12 +110,12 @@ fun AccommodationDetailsScreen(
                             Text(
                                 text = currentAcc.type,
                                 style = MaterialTheme.typography.labelSmall,
-                                color = if (currentAcc.isEmergencyShelter) SafetyGreen else AccentCyan
+                                color = if (currentAcc.isEmergencyShelter) MaterialTheme.tourSafe.safe else MaterialTheme.colorScheme.primary
                             )
                             Text(
                                 text = stringResource(R.string.km_away, currentAcc.distanceKm),
                                 style = MaterialTheme.typography.bodySmall,
-                                color = TextSecondary
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
 
@@ -124,12 +124,12 @@ fun AccommodationDetailsScreen(
                             Box(
                                 modifier = Modifier
                                     .clip(RoundedCornerShape(6.dp))
-                                    .background(WarningAmberBg)
+                                    .background(MaterialTheme.tourSafe.warningContainer)
                                     .padding(horizontal = 8.dp, vertical = 2.dp)
                             ) {
                                 Text(
                                     text = "Unverified Demo Record",
-                                    color = WarningAmber,
+                                    color = MaterialTheme.tourSafe.warning,
                                     style = MaterialTheme.typography.labelSmall
                                 )
                             }
@@ -140,13 +140,13 @@ fun AccommodationDetailsScreen(
                         Text(
                             text = currentAcc.name,
                             style = MaterialTheme.typography.headlineMedium,
-                            color = TextPrimary
+                            color = MaterialTheme.colorScheme.onSurface
                         )
 
                         Text(
                             text = currentAcc.address,
                             style = MaterialTheme.typography.bodyMedium,
-                            color = TextSecondary
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
 
                         if (currentAcc.rating != null) {
@@ -157,7 +157,7 @@ fun AccommodationDetailsScreen(
                                 Text(
                                     text = stringResource(R.string.reviews_count, currentAcc.rating, currentAcc.reviewCount),
                                     style = MaterialTheme.typography.bodyMedium,
-                                    color = TextSecondary
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
                         }
@@ -167,7 +167,7 @@ fun AccommodationDetailsScreen(
                             Text(
                                 text = stringResource(R.string.rate_label, price),
                                 style = MaterialTheme.typography.titleLarge,
-                                color = SafetyGreen
+                                color = MaterialTheme.tourSafe.safe
                             )
                         }
                     }
@@ -178,7 +178,7 @@ fun AccommodationDetailsScreen(
                     Text(
                         text = stringResource(R.string.resilience_amenities_title),
                         style = MaterialTheme.typography.titleLarge,
-                        color = TextPrimary
+                        color = MaterialTheme.colorScheme.onSurface
                     )
 
                     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -186,21 +186,21 @@ fun AccommodationDetailsScreen(
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .background(SurfaceNavy, RoundedCornerShape(12.dp))
+                                    .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(12.dp))
                                     .padding(14.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.CheckCircle,
                                     contentDescription = null,
-                                    tint = SafetyGreen,
+                                    tint = MaterialTheme.tourSafe.safe,
                                     modifier = Modifier.size(20.dp)
                                 )
                                 Spacer(modifier = Modifier.width(12.dp))
                                 Text(
                                     text = amenity,
                                     style = MaterialTheme.typography.bodyMedium,
-                                    color = TextPrimary
+                                    color = MaterialTheme.colorScheme.onSurface
                                 )
                             }
                         }
@@ -211,7 +211,7 @@ fun AccommodationDetailsScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(SurfaceNavy, RoundedCornerShape(16.dp))
+                        .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(16.dp))
                         .padding(16.dp)
                 ) {
                     Column {
@@ -219,13 +219,13 @@ fun AccommodationDetailsScreen(
                             Text(
                                 text = stringResource(R.string.available_capacity, currentAcc.capacityAvailable, currentAcc.maxCapacity),
                                 style = MaterialTheme.typography.titleMedium,
-                                color = TextPrimary
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                         } else {
                             Text(
                                 text = "Capacity Unlisted (Demo)",
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = TextMuted
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
 
@@ -234,7 +234,7 @@ fun AccommodationDetailsScreen(
                             Text(
                                 text = stringResource(R.string.emergency_phone_label, currentAcc.contactPhone),
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = AccentCyan
+                                color = MaterialTheme.colorScheme.primary
                             )
                         }
                     }
@@ -250,12 +250,12 @@ fun AccommodationDetailsScreen(
                         modifier = Modifier
                             .weight(1f)
                             .height(52.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = SurfaceVariantNavy),
+                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
                         shape = RoundedCornerShape(14.dp)
                     ) {
                         Text(
                             text = stringResource(R.string.reviews),
-                            color = TextPrimary,
+                            color = MaterialTheme.colorScheme.onSurface,
                             style = MaterialTheme.typography.titleMedium
                         )
                     }
@@ -273,18 +273,18 @@ fun AccommodationDetailsScreen(
                         modifier = Modifier
                             .weight(1f)
                             .height(52.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = if (currentAcc.isDemo) SurfaceVariantNavy else AccentCyan),
+                        colors = ButtonDefaults.buttonColors(containerColor = if (currentAcc.isDemo) MaterialTheme.colorScheme.surfaceVariant else MaterialTheme.colorScheme.primary),
                         shape = RoundedCornerShape(14.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.Directions,
                             contentDescription = null,
-                            tint = if (currentAcc.isDemo) TextMuted else Color.Black
+                            tint = if (currentAcc.isDemo) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onPrimary
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
                             text = stringResource(R.string.directions),
-                            color = if (currentAcc.isDemo) TextMuted else Color.Black,
+                            color = if (currentAcc.isDemo) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onPrimary,
                             style = MaterialTheme.typography.titleMedium
                         )
                     }

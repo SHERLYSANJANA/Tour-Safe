@@ -72,7 +72,7 @@
 
     <!-- Emergency Check-In Screen -->
     <string name="check_in_screen_title">Control de Emergencia</string>
-    <string name="check_in_screen_desc">Transmita su estado de seguridad instantáneamente a sus contactos de emergencia y autoridades locales.</string>
+    <string name="check_in_screen_desc">Prepare su mensaje de estado de seguridad para compartirlo con sus contactos de emergencia.</string>
     <string name="status_im_safe">Estoy a Salvo</string>
     <string name="status_im_safe_desc">Estoy en un lugar seguro y no necesito asistencia.</string>
     <string name="status_moving_to_safety">Moviéndome a Lugar Seguro</string>
@@ -81,7 +81,7 @@
     <string name="status_i_need_help_desc">Requiero rescate de emergencia o asistencia médica inmediata.</string>
     <string name="status_critical_warning">Zona de Peligro Crítico</string>
     <string name="add_optional_note_label">Añadir nota opcional (ej. Habitación de Hotel 302, 2 personas)</string>
-    <string name="broadcast_status_now">Transmitir Estado Ahora</string>
+    <string name="broadcast_status_now">Actualizar estado de seguridad</string>
 
     <!-- Onboarding Screen -->
     <string name="welcome_title">Bienvenido a TourSafe</string>
@@ -96,8 +96,6 @@
 
     <!-- Profile Screen -->
     <string name="traveler_profile_title">Perfil del Viajero</string>
-    <string name="passport_blood_type">Pasaporte: EE.UU. • Grupo Sanguíneo: O+</string>
-    <string name="current_trip">Viaje Actual: Tailandia (Phuket)</string>
     <string name="settings_preferences">Ajustes y Preferencias</string>
     <string name="configure">Configurar</string>
     <string name="emergency_contacts_title">Contactos de Emergencia</string>
@@ -179,4 +177,6 @@
     <string name="google_maps_link_label">Enlace de Google Maps: %1$s</string>
     <string name="no_verified_source_title">Sin Registros Verificados en Ubicación Actual</string>
     <string name="no_verified_source_desc">No hay refugios ni alertas verificadas oficiales en sus coordenadas GPS actuales. Active el Modo Demo en Ajustes para ver datos simulados de demostración.</string>
+    <string name="sos_open_sms">Abrir app de mensajes (SMS)</string>
+    <string name="sos_call_emergency">Llamar al número de emergencias (112)</string>
 </resources>

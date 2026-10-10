@@ -16,7 +16,7 @@ class CheckInViewModel : ViewModel() {
     private val _customNote = MutableStateFlow("")
     val customNote: StateFlow<String> = _customNote.asStateFlow()
 
-    private val _emergencyContacts = MutableStateFlow(MockData.initialEmergencyContacts)
+    private val _emergencyContacts = MutableStateFlow<List<EmergencyContact>>(emptyList())
     val emergencyContacts: StateFlow<List<EmergencyContact>> = _emergencyContacts.asStateFlow()
 
     private val _lastUpdatedMessage = MutableStateFlow<String?>(null)

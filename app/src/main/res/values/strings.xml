@@ -98,8 +98,6 @@
 
     <!-- Profile Screen -->
     <string name="traveler_profile_title">Traveler Profile</string>
-    <string name="passport_blood_type">Passport: US • Blood Type: O+</string>
-    <string name="current_trip">Current Trip: Thailand (Phuket)</string>
     <string name="settings_preferences">Settings &amp; Preferences</string>
     <string name="configure">Configure</string>
     <string name="emergency_contacts_title">Emergency Contacts</string>
@@ -158,7 +156,7 @@
     <string name="location_permission_title">Share GPS Location</string>
     <string name="location_permission_desc">Include exact GPS coordinates with your emergency message to help rescue teams locate you.</string>
     <string name="shared_gps_coords">📍 Your Shared GPS Coordinates:</string>
-    <string name="send_emergency_message">Send Emergency Message</string>
+    <string name="send_emergency_message">Prepare Emergency Message</string>
     <string name="confirm_send_msg_title">Prepare Emergency Message?</string>
     <string name="confirm_send_msg_desc">Review your message before handing off to your messaging app or phone dialer. Nothing will be sent automatically without your explicit action in your messaging app.</string>
 
@@ -179,4 +177,6 @@
     <string name="approximate_gps_badge">Approximate Location</string>
     <string name="location_accuracy">Accuracy: %1$dm</string>
     <string name="google_maps_link_label">Google Maps Link: %1$s</string>
+    <string name="sos_open_sms">Open Messaging App (SMS)</string>
+    <string name="sos_call_emergency">Call Emergency Number (112)</string>
 </resources>

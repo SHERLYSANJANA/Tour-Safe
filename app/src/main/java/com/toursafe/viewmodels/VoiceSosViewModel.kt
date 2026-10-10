@@ -106,7 +106,7 @@ class VoiceSosViewModel : ViewModel() {
 
         _handOffState.value = SosHandOffState.Prepared(
             message = formattedMsg,
-            smsNumbers = numbers.ifBlank { "112" },
+            smsNumbers = numbers, // empty when the user has no saved contacts; they pick a recipient in their SMS app
             mapsLink = mapsLink
         )
     }

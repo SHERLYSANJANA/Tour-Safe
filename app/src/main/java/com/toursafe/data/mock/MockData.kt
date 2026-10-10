@@ -112,11 +112,6 @@ object MockData {
         MapMarker("m-demo-2", "Demo Safe Evacuation Resort", MarkerType.EMERGENCY_SHELTER, 1.2, "Demo shelter record", 0.58f, 0.52f, latitude = 7.8842, longitude = 98.3891, isDemo = true, isVerified = false)
     )
 
-    val initialEmergencyContacts = listOf(
-        EmergencyContact("c-1", "Emergency Contact 1", "Family", "+1 (555) 019-2834", isPrimary = true),
-        EmergencyContact("c-2", "Emergency Contact 2", "Travel Partner", "+1 (555) 234-5678", isPrimary = false)
-    )
-
     val propertyReviews = listOf(
         PropertyReview(
             id = "rev-1",

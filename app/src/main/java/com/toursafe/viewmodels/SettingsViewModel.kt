@@ -13,6 +13,12 @@ import org.json.JSONObject
 
 class SettingsViewModel : ViewModel() {
 
+    companion object {
+        const val THEME_SYSTEM = "system"
+        const val THEME_LIGHT = "light"
+        const val THEME_DARK = "dark"
+    }
+
     private val isDebugBuild: Boolean
         get() = try {
             val clazz = Class.forName("com.toursafe.BuildConfig")
@@ -37,6 +43,10 @@ class SettingsViewModel : ViewModel() {
     private val _selectedLanguageCode = MutableStateFlow("en")
     val selectedLanguageCode: StateFlow<String> = _selectedLanguageCode.asStateFlow()
 
+    /** "system" | "light" | "dark" */
+    private val _themeMode = MutableStateFlow(THEME_SYSTEM)
+    val themeMode: StateFlow<String> = _themeMode.asStateFlow()
+
     private val _profileName = MutableStateFlow("")
     val profileName: StateFlow<String> = _profileName.asStateFlow()
 
@@ -48,6 +58,8 @@ class SettingsViewModel : ViewModel() {
         _priorityAlertsEnabled.value = prefs.getBoolean("priority_alerts", true)
         _selectedLanguageCode.value = LocaleManager.getPersistedLanguage(context)
         _profileName.value = prefs.getString("profile_name", "") ?: ""
+        _themeMode.value = prefs.getString("theme_mode", THEME_SYSTEM)
+            ?.takeIf { it == THEME_LIGHT || it == THEME_DARK } ?: THEME_SYSTEM
 
         // Load emergency contacts JSON
         val contactsJson = prefs.getString("emergency_contacts_json", null)
@@ -79,6 +91,15 @@ class SettingsViewModel : ViewModel() {
     fun selectLanguage(code: String, context: Context) {
         _selectedLanguageCode.value = code
         LocaleManager.setLocale(context, code)
+    }
+
+    fun setThemeMode(context: Context, mode: String) {
+        val safe = if (mode == THEME_LIGHT || mode == THEME_DARK) mode else THEME_SYSTEM
+        _themeMode.value = safe
+        context.getSharedPreferences("toursafe_settings", Context.MODE_PRIVATE)
+            .edit()
+            .putString("theme_mode", safe)
+            .apply()
     }
 
     fun toggleDemoMode(context: Context, enabled: Boolean) {

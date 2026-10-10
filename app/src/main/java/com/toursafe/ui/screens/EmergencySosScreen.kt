@@ -265,7 +265,7 @@ fun EmergencySosScreen(
                             IconButton(onClick = { voiceViewModel.startListening() }) {
                                 Icon(
                                     imageVector = Icons.Default.Refresh,
-                                    contentDescription = "Retry",
+                                    contentDescription = stringResource(R.string.retry_voice),
                                     tint = MaterialTheme.colorScheme.primary
                                 )
                             }
@@ -337,7 +337,7 @@ fun EmergencySosScreen(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Icon(
                                 imageVector = Icons.Default.Warning,
-                                contentDescription = "SOS",
+                                contentDescription = stringResource(R.string.emergency_sos),
                                 tint = MaterialTheme.colorScheme.error,
                                 modifier = Modifier.size(54.dp)
                             )
@@ -428,7 +428,7 @@ fun EmergencySosScreen(
                             }
                             else -> {
                                 Text(
-                                    text = "GPS Location unavailable. Message will be prepared without coordinates.",
+                                    text = stringResource(R.string.sos_gps_unavailable_note),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )

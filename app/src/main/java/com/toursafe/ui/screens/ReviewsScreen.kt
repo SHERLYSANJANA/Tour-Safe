@@ -1,5 +1,9 @@
 package com.toursafe.ui.screens
 
+import com.toursafe.R
+
+import androidx.compose.ui.res.stringResource
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -43,7 +47,7 @@ fun ReviewsScreen(
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary
             ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Add Review")
+                Icon(imageVector = Icons.Default.Add, contentDescription = stringResource(R.string.cd_add_review))
             }
         },
         containerColor = MaterialTheme.colorScheme.background
@@ -96,7 +100,7 @@ private fun ReviewCard(review: PropertyReview) {
                         color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
-                        text = "Verified Traveler • ${review.userCountry}",
+                        text = stringResource(R.string.verified_traveler, review.userCountry),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -135,20 +139,20 @@ private fun AddReviewDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         containerColor = MaterialTheme.colorScheme.surface,
-        title = { Text("Write Safety Review", color = MaterialTheme.colorScheme.onSurface) },
+        title = { Text(stringResource(R.string.write_review), color = MaterialTheme.colorScheme.onSurface) },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("Your Name", color = MaterialTheme.colorScheme.onSurfaceVariant) },
+                    label = { Text(stringResource(R.string.your_name_label), color = MaterialTheme.colorScheme.onSurfaceVariant) },
                     singleLine = true,
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedTextColor = MaterialTheme.colorScheme.onSurface, unfocusedTextColor = MaterialTheme.colorScheme.onSurface
                     )
                 )
 
-                Text("Rating:", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurface)
+                Text(stringResource(R.string.rating_label), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurface)
                 StarRatingBar(
                     rating = userRating,
                     starSize = 28.dp,
@@ -158,7 +162,7 @@ private fun AddReviewDialog(
                 OutlinedTextField(
                     value = comment,
                     onValueChange = { comment = it },
-                    label = { Text("Safety Comments & Experience", color = MaterialTheme.colorScheme.onSurfaceVariant) },
+                    label = { Text(stringResource(R.string.safety_comments_label), color = MaterialTheme.colorScheme.onSurfaceVariant) },
                     maxLines = 3,
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedTextColor = MaterialTheme.colorScheme.onSurface, unfocusedTextColor = MaterialTheme.colorScheme.onSurface
@@ -175,12 +179,12 @@ private fun AddReviewDialog(
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
-                Text("Submit Review", color = MaterialTheme.colorScheme.onPrimary)
+                Text(stringResource(R.string.submit_review), color = MaterialTheme.colorScheme.onPrimary)
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Cancel", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(stringResource(R.string.cancel), color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         }
     )

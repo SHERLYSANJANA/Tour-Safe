@@ -197,4 +197,30 @@
     <string name="alerts_sources_note">情報源：USGS地震災害プログラム、GDACS（国連／欧州委員会）。</string>
     <string name="alerts_filter_no_match">このフィルターに一致する警報はありません。</string>
     <string name="legend_emergency_service">緊急施設</string>
+
+    <!-- UI redesign v2 -->
+    <string name="nav_sos">SOS</string>
+    <string name="home_sos_explainer">緊急画面を開きます。メッセージと位置情報を先に確認でき、あなたが確定するまで送信も発信も行われません。</string>
+    <string name="home_safety_tip">ヒント：出発前に現地の緊急電話番号を保存し、予定を信頼できる人に共有しましょう。</string>
+    <string name="theme_title">外観</string>
+    <string name="theme_system">システムの設定に従う</string>
+    <string name="theme_light">ライト</string>
+    <string name="theme_dark">ダーク</string>
+    <string name="cd_back">戻る</string>
+    <string name="demo_unverified_record">未確認のデモ記録</string>
+    <string name="demo_rating_unlisted">評価なし（デモ）</string>
+    <string name="demo_capacity_unlisted">収容人数なし（デモ）</string>
+    <string name="profile_edit">プロフィールを編集</string>
+    <string name="no_contacts_yet">緊急連絡先はまだ追加されていません。</string>
+    <string name="profile_name_title">プロフィール名</string>
+    <string name="save">保存</string>
+    <string name="notification_history_empty">通知履歴はありません。</string>
+    <string name="demo_mode_title">デモデータモード</string>
+    <string name="demo_mode_desc">テスト用の模擬の避難所とアラートを表示します。デモデータにはラベルが付き、実際のものではありません。</string>
+    <string name="gps_permission_title">GPS位置情報の権限</string>
+    <string name="gps_permission_granted">許可済み • タップしてシステム権限を管理</string>
+    <string name="gps_permission_denied">拒否 • タップしてシステム設定を開く</string>
+    <string name="sos_gps_unavailable_note">GPS位置情報を取得できません。メッセージは座標なしで作成されます。</string>
+    <string name="gps_location_label">GPS位置情報</string>
+    <string name="cd_add_review">レビューを追加</string>
 </resources>

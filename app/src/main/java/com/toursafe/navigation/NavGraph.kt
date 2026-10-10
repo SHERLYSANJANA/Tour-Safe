@@ -42,10 +42,15 @@ fun TourSafeNavGraph(
                 TourSafeBottomBar(
                     currentRoute = currentRoute,
                     onNavigate = { route ->
-                        navController.navigate(route) {
-                            popUpTo(Screen.Home.route) { saveState = true }
-                            launchSingleTop = true
-                            restoreState = true
+                        if (route == Screen.EmergencySos.route) {
+                            // Always open SOS fresh: never restore a half-finished emergency flow.
+                            navController.navigate(route) { launchSingleTop = true }
+                        } else {
+                            navController.navigate(route) {
+                                popUpTo(Screen.Home.route) { saveState = true }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
                         }
                     }
                 )

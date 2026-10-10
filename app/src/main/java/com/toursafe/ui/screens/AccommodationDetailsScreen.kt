@@ -128,7 +128,7 @@ fun AccommodationDetailsScreen(
                                     .padding(horizontal = 8.dp, vertical = 2.dp)
                             ) {
                                 Text(
-                                    text = "Unverified Demo Record",
+                                    text = stringResource(R.string.demo_unverified_record),
                                     color = MaterialTheme.tourSafe.warning,
                                     style = MaterialTheme.typography.labelSmall
                                 )
@@ -223,7 +223,7 @@ fun AccommodationDetailsScreen(
                             )
                         } else {
                             Text(
-                                text = "Capacity Unlisted (Demo)",
+                                text = stringResource(R.string.demo_capacity_unlisted),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )

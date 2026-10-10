@@ -181,4 +181,30 @@
     <string name="alerts_sources_note">数据来源：USGS 地震灾害计划和 GDACS（联合国/欧盟委员会）。</string>
     <string name="alerts_filter_no_match">没有符合此筛选条件的警报。</string>
     <string name="legend_emergency_service">紧急服务</string>
+
+    <!-- UI redesign v2 -->
+    <string name="nav_sos">SOS</string>
+    <string name="home_sos_explainer">打开紧急求助页面。您会先查看消息和位置；在您确认之前，不会发送任何内容或拨打电话。</string>
+    <string name="home_safety_tip">提示：出发前请保存当地紧急电话号码，并把行程告诉信任的人。</string>
+    <string name="theme_title">外观</string>
+    <string name="theme_system">跟随系统</string>
+    <string name="theme_light">浅色</string>
+    <string name="theme_dark">深色</string>
+    <string name="cd_back">返回</string>
+    <string name="demo_unverified_record">未经验证的演示记录</string>
+    <string name="demo_rating_unlisted">评分暂无（演示）</string>
+    <string name="demo_capacity_unlisted">容量暂无（演示）</string>
+    <string name="profile_edit">编辑个人资料</string>
+    <string name="no_contacts_yet">尚未添加紧急联系人。</string>
+    <string name="profile_name_title">个人资料名称</string>
+    <string name="save">保存</string>
+    <string name="notification_history_empty">暂无通知历史记录。</string>
+    <string name="demo_mode_title">演示数据模式</string>
+    <string name="demo_mode_desc">显示用于测试的模拟避难所和警报。演示数据带有标注，并非真实数据。</string>
+    <string name="gps_permission_title">GPS 定位权限</string>
+    <string name="gps_permission_granted">已授权 • 点按以管理系统权限</string>
+    <string name="gps_permission_denied">已拒绝 • 点按以打开系统设置</string>
+    <string name="sos_gps_unavailable_note">无法获取 GPS 位置。消息将在不含坐标的情况下准备。</string>
+    <string name="gps_location_label">GPS 位置</string>
+    <string name="cd_add_review">添加评价</string>
 </resources>

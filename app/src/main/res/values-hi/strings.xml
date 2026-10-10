@@ -181,4 +181,30 @@
     <string name="alerts_sources_note">स्रोत: USGS Earthquake Hazards Program और GDACS (संयुक्त राष्ट्र / यूरोपीय आयोग)।</string>
     <string name="alerts_filter_no_match">इस फ़िल्टर से मेल खाने वाला कोई अलर्ट नहीं है।</string>
     <string name="legend_emergency_service">आपातकालीन सेवा</string>
+
+    <!-- UI redesign v2 -->
+    <string name="nav_sos">SOS</string>
+    <string name="home_sos_explainer">आपातकालीन स्क्रीन खुलती है। पहले आप अपना संदेश और स्थान देखते हैं; आपकी पुष्टि के बिना कुछ भी भेजा या डायल नहीं किया जाता।</string>
+    <string name="home_safety_tip">सुझाव: निकलने से पहले स्थानीय आपातकालीन नंबर सहेजें और अपनी योजना किसी भरोसेमंद व्यक्ति को बताएं।</string>
+    <string name="theme_title">दिखावट</string>
+    <string name="theme_system">सिस्टम डिफ़ॉल्ट</string>
+    <string name="theme_light">हल्का</string>
+    <string name="theme_dark">गहरा</string>
+    <string name="cd_back">वापस</string>
+    <string name="demo_unverified_record">असत्यापित डेमो रिकॉर्ड</string>
+    <string name="demo_rating_unlisted">रेटिंग उपलब्ध नहीं (डेमो)</string>
+    <string name="demo_capacity_unlisted">क्षमता उपलब्ध नहीं (डेमो)</string>
+    <string name="profile_edit">प्रोफ़ाइल संपादित करें</string>
+    <string name="no_contacts_yet">अभी तक कोई आपातकालीन संपर्क नहीं जोड़ा गया।</string>
+    <string name="profile_name_title">प्रोफ़ाइल का नाम</string>
+    <string name="save">सहेजें</string>
+    <string name="notification_history_empty">कोई सूचना इतिहास दर्ज नहीं है।</string>
+    <string name="demo_mode_title">डेमो डेटा मोड</string>
+    <string name="demo_mode_desc">परीक्षण के लिए नकली आश्रय और अलर्ट दिखाता है। डेमो डेटा पर लेबल होता है और यह वास्तविक नहीं है।</string>
+    <string name="gps_permission_title">GPS स्थान अनुमति</string>
+    <string name="gps_permission_granted">अनुमति दी गई • सिस्टम अनुमतियां प्रबंधित करने के लिए टैप करें</string>
+    <string name="gps_permission_denied">अनुमति अस्वीकृत • सिस्टम सेटिंग खोलने के लिए टैप करें</string>
+    <string name="sos_gps_unavailable_note">GPS स्थान उपलब्ध नहीं है। संदेश बिना निर्देशांक के तैयार किया जाएगा।</string>
+    <string name="gps_location_label">GPS स्थान</string>
+    <string name="cd_add_review">समीक्षा जोड़ें</string>
 </resources>

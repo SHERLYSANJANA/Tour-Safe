@@ -181,4 +181,30 @@
     <string name="alerts_sources_note">แหล่งข้อมูล: USGS Earthquake Hazards Program และ GDACS (สหประชาชาติ / คณะกรรมาธิการยุโรป)</string>
     <string name="alerts_filter_no_match">ไม่มีการแจ้งเตือนที่ตรงกับตัวกรองนี้</string>
     <string name="legend_emergency_service">บริการฉุกเฉิน</string>
+
+    <!-- UI redesign v2 -->
+    <string name="nav_sos">SOS</string>
+    <string name="home_sos_explainer">เปิดหน้าจอฉุกเฉิน คุณจะได้ตรวจสอบข้อความและตำแหน่งก่อน และจะไม่มีการส่งหรือโทรจนกว่าคุณจะยืนยัน</string>
+    <string name="home_safety_tip">เคล็ดลับ: บันทึกเบอร์โทรฉุกเฉินในท้องถิ่น และแจ้งแผนการเดินทางให้คนที่ไว้ใจก่อนออกเดินทาง</string>
+    <string name="theme_title">การแสดงผล</string>
+    <string name="theme_system">ตามค่าเริ่มต้นของระบบ</string>
+    <string name="theme_light">สว่าง</string>
+    <string name="theme_dark">มืด</string>
+    <string name="cd_back">ย้อนกลับ</string>
+    <string name="demo_unverified_record">ข้อมูลเดโมที่ยังไม่ได้ยืนยัน</string>
+    <string name="demo_rating_unlisted">ไม่มีคะแนน (เดโม)</string>
+    <string name="demo_capacity_unlisted">ไม่มีข้อมูลความจุ (เดโม)</string>
+    <string name="profile_edit">แก้ไขโปรไฟล์</string>
+    <string name="no_contacts_yet">ยังไม่ได้เพิ่มผู้ติดต่อฉุกเฉิน</string>
+    <string name="profile_name_title">ชื่อโปรไฟล์</string>
+    <string name="save">บันทึก</string>
+    <string name="notification_history_empty">ไม่มีประวัติการแจ้งเตือน</string>
+    <string name="demo_mode_title">โหมดข้อมูลเดโม</string>
+    <string name="demo_mode_desc">แสดงที่พักพิงและการแจ้งเตือนจำลองเพื่อการทดสอบ ข้อมูลเดโมมีป้ายกำกับและไม่ใช่ข้อมูลจริง</string>
+    <string name="gps_permission_title">สิทธิ์ตำแหน่ง GPS</string>
+    <string name="gps_permission_granted">อนุญาตแล้ว • แตะเพื่อจัดการสิทธิ์ของระบบ</string>
+    <string name="gps_permission_denied">ปฏิเสธ • แตะเพื่อเปิดการตั้งค่าระบบ</string>
+    <string name="sos_gps_unavailable_note">ไม่สามารถใช้ตำแหน่ง GPS ได้ ข้อความจะถูกเตรียมโดยไม่มีพิกัด</string>
+    <string name="gps_location_label">ตำแหน่ง GPS</string>
+    <string name="cd_add_review">เพิ่มรีวิว</string>
 </resources>

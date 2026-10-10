@@ -31,10 +31,10 @@ fun StatusBanner(
     onCheckInClick: () -> Unit
 ) {
     val (bgColor, borderColor, statusText, iconVector) = when (status.level) {
-        SafetyLevel.SAFE -> Quadruple(MaterialTheme.tourSafe.safeContainer, MaterialTheme.tourSafe.safe, "I'm Safe", Icons.Default.CheckCircle)
-        SafetyLevel.MOVING_TO_SAFETY -> Quadruple(MaterialTheme.tourSafe.warningContainer, MaterialTheme.tourSafe.warning, "Moving to Safety", Icons.AutoMirrored.Filled.DirectionsRun)
-        SafetyLevel.NEED_HELP -> Quadruple(MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.error, "I Need Help", Icons.Default.Warning)
-        SafetyLevel.CRITICAL_WARNING -> Quadruple(MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.error, "Critical Hazard Zone", Icons.Default.Warning)
+        SafetyLevel.SAFE -> Quadruple(MaterialTheme.tourSafe.safeContainer, MaterialTheme.tourSafe.safe, stringResource(R.string.status_im_safe), Icons.Default.CheckCircle)
+        SafetyLevel.MOVING_TO_SAFETY -> Quadruple(MaterialTheme.tourSafe.warningContainer, MaterialTheme.tourSafe.warning, stringResource(R.string.status_moving_to_safety), Icons.AutoMirrored.Filled.DirectionsRun)
+        SafetyLevel.NEED_HELP -> Quadruple(MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.error, stringResource(R.string.status_i_need_help), Icons.Default.Warning)
+        SafetyLevel.CRITICAL_WARNING -> Quadruple(MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.error, stringResource(R.string.status_critical_warning), Icons.Default.Warning)
     }
 
     Box(

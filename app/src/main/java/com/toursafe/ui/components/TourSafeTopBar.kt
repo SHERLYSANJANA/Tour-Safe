@@ -1,5 +1,9 @@
 package com.toursafe.ui.components
 
+import com.toursafe.R
+
+import androidx.compose.ui.res.stringResource
+
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Notifications
@@ -29,7 +33,7 @@ fun TourSafeTopBar(
                 IconButton(onClick = onBackClick) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back",
+                        contentDescription = stringResource(R.string.cd_back),
                         tint = MaterialTheme.colorScheme.onSurface
                     )
                 }
@@ -40,7 +44,7 @@ fun TourSafeTopBar(
                 IconButton(onClick = onNotificationClick) {
                     Icon(
                         imageVector = Icons.Default.Notifications,
-                        contentDescription = "Notifications",
+                        contentDescription = stringResource(R.string.notification_history_title),
                         tint = MaterialTheme.colorScheme.onSurface
                     )
                 }

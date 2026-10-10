@@ -97,7 +97,7 @@ fun ProfileScreen(
                     }
 
                     IconButton(onClick = { showEditProfileDialog = true }) {
-                        Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit Profile", tint = MaterialTheme.colorScheme.primary)
+                        Icon(imageVector = Icons.Default.Edit, contentDescription = stringResource(R.string.profile_edit), tint = MaterialTheme.colorScheme.primary)
                     }
                 }
             }
@@ -167,7 +167,7 @@ fun ProfileScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "No emergency contacts added yet.",
+                            text = stringResource(R.string.no_contacts_yet),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -257,12 +257,12 @@ private fun EditProfileNameDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         containerColor = MaterialTheme.colorScheme.surface,
-        title = { Text("Profile Name", color = MaterialTheme.colorScheme.onSurface) },
+        title = { Text(stringResource(R.string.profile_name_title), color = MaterialTheme.colorScheme.onSurface) },
         text = {
             OutlinedTextField(
                 value = nameInput,
                 onValueChange = { nameInput = it },
-                label = { Text("Full Name", color = MaterialTheme.colorScheme.onSurfaceVariant) },
+                label = { Text(stringResource(R.string.full_name_label), color = MaterialTheme.colorScheme.onSurfaceVariant) },
                 colors = OutlinedTextFieldDefaults.colors(focusedTextColor = MaterialTheme.colorScheme.onSurface, unfocusedTextColor = MaterialTheme.colorScheme.onSurface)
             )
         },
@@ -271,7 +271,7 @@ private fun EditProfileNameDialog(
                 onClick = { onSave(nameInput.trim()) },
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
-                Text("Save", color = MaterialTheme.colorScheme.onPrimary)
+                Text(stringResource(R.string.save), color = MaterialTheme.colorScheme.onPrimary)
             }
         },
         dismissButton = {

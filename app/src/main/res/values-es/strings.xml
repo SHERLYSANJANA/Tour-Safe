@@ -197,4 +197,30 @@
     <string name="alerts_sources_note">Fuentes: USGS Earthquake Hazards Program y GDACS (ONU / Comisión Europea).</string>
     <string name="alerts_filter_no_match">Ninguna alerta coincide con este filtro.</string>
     <string name="legend_emergency_service">Servicio de emergencia</string>
+
+    <!-- UI redesign v2 -->
+    <string name="nav_sos">SOS</string>
+    <string name="home_sos_explainer">Abre la pantalla de emergencia. Primero revisas tu mensaje y ubicación; no se envía ni se llama a nada hasta que confirmes.</string>
+    <string name="home_safety_tip">Consejo: guarda el número de emergencias local y comparte tus planes con alguien de confianza antes de salir.</string>
+    <string name="theme_title">Apariencia</string>
+    <string name="theme_system">Predeterminado del sistema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="cd_back">Atrás</string>
+    <string name="demo_unverified_record">Registro de demostración sin verificar</string>
+    <string name="demo_rating_unlisted">Valoración no disponible (demo)</string>
+    <string name="demo_capacity_unlisted">Capacidad no disponible (demo)</string>
+    <string name="profile_edit">Editar perfil</string>
+    <string name="no_contacts_yet">Aún no has añadido contactos de emergencia.</string>
+    <string name="profile_name_title">Nombre del perfil</string>
+    <string name="save">Guardar</string>
+    <string name="notification_history_empty">No hay historial de notificaciones.</string>
+    <string name="demo_mode_title">Modo de datos de demostración</string>
+    <string name="demo_mode_desc">Muestra refugios y alertas simulados para pruebas. Los datos de demostración están etiquetados y no son reales.</string>
+    <string name="gps_permission_title">Permiso de ubicación GPS</string>
+    <string name="gps_permission_granted">Concedido • Toca para gestionar los permisos del sistema</string>
+    <string name="gps_permission_denied">Denegado • Toca para abrir los ajustes del sistema</string>
+    <string name="sos_gps_unavailable_note">Ubicación GPS no disponible. El mensaje se preparará sin coordenadas.</string>
+    <string name="gps_location_label">Ubicación GPS</string>
+    <string name="cd_add_review">Añadir reseña</string>
 </resources>

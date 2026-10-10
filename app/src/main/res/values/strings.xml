@@ -197,4 +197,30 @@
     <string name="alerts_sources_note">Sources: USGS Earthquake Hazards Program and GDACS (UN / European Commission).</string>
     <string name="alerts_filter_no_match">No alerts match this filter.</string>
     <string name="legend_emergency_service">Emergency Service</string>
+
+    <!-- UI redesign v2 -->
+    <string name="nav_sos">SOS</string>
+    <string name="home_sos_explainer">Opens the emergency screen. You review your message and location first; nothing is sent or dialed until you confirm.</string>
+    <string name="home_safety_tip">Tip: save the local emergency number and share your plans with someone you trust before you head out.</string>
+    <string name="theme_title">Appearance</string>
+    <string name="theme_system">System default</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="cd_back">Back</string>
+    <string name="demo_unverified_record">Unverified Demo Record</string>
+    <string name="demo_rating_unlisted">Rating Unlisted (Demo)</string>
+    <string name="demo_capacity_unlisted">Capacity Unlisted (Demo)</string>
+    <string name="profile_edit">Edit Profile</string>
+    <string name="no_contacts_yet">No emergency contacts added yet.</string>
+    <string name="profile_name_title">Profile Name</string>
+    <string name="save">Save</string>
+    <string name="notification_history_empty">No notification history recorded.</string>
+    <string name="demo_mode_title">Demo Data Mode</string>
+    <string name="demo_mode_desc">Show simulated shelters and alerts for testing. Demo data is labelled and is not real.</string>
+    <string name="gps_permission_title">GPS Location Permission</string>
+    <string name="gps_permission_granted">Granted • Tap to manage system permissions</string>
+    <string name="gps_permission_denied">Denied • Tap to open system app settings</string>
+    <string name="sos_gps_unavailable_note">GPS location unavailable. The message will be prepared without coordinates.</string>
+    <string name="gps_location_label">GPS Location</string>
+    <string name="cd_add_review">Add Review</string>
 </resources>

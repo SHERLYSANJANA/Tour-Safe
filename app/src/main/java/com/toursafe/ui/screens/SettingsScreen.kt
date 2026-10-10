@@ -1,5 +1,11 @@
 package com.toursafe.ui.screens
 
+import androidx.compose.ui.semantics.Role
+
+import androidx.compose.foundation.selection.selectableGroup
+
+import androidx.compose.foundation.selection.selectable
+
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -43,6 +49,7 @@ fun SettingsScreen(
     val pushEnabled by viewModel.pushNotificationsEnabled.collectAsState()
     val priorityAlertsEnabled by viewModel.priorityAlertsEnabled.collectAsState()
     val demoModeEnabled by viewModel.demoModeEnabled.collectAsState()
+    val themeMode by viewModel.themeMode.collectAsState()
 
     var hasLocationPermission by remember {
         mutableStateOf(
@@ -109,10 +116,39 @@ fun SettingsScreen(
                 }
             }
 
+            // Appearance
+            Text(
+                text = stringResource(R.string.theme_title),
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.surface, MaterialTheme.shapes.medium)
+                    .selectableGroup()
+            ) {
+                ThemeModeRow(
+                    label = stringResource(R.string.theme_system),
+                    selected = themeMode == SettingsViewModel.THEME_SYSTEM,
+                    onSelect = { viewModel.setThemeMode(context, SettingsViewModel.THEME_SYSTEM) }
+                )
+                ThemeModeRow(
+                    label = stringResource(R.string.theme_light),
+                    selected = themeMode == SettingsViewModel.THEME_LIGHT,
+                    onSelect = { viewModel.setThemeMode(context, SettingsViewModel.THEME_LIGHT) }
+                )
+                ThemeModeRow(
+                    label = stringResource(R.string.theme_dark),
+                    selected = themeMode == SettingsViewModel.THEME_DARK,
+                    onSelect = { viewModel.setThemeMode(context, SettingsViewModel.THEME_DARK) }
+                )
+            }
+
             // Demo Mode Toggle
             SwitchSettingRow(
-                title = "Demo Data Mode",
-                subtitle = "Enable to view simulated shelters and disaster alerts for testing UI",
+                title = stringResource(R.string.demo_mode_title),
+                subtitle = stringResource(R.string.demo_mode_desc),
                 checked = demoModeEnabled,
                 onCheckedChange = { viewModel.toggleDemoMode(context, it) }
             )
@@ -161,13 +197,13 @@ fun SettingsScreen(
                 ) {
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "GPS Location Permission",
+                            text = stringResource(R.string.gps_permission_title),
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface
                         )
                         Spacer(modifier = Modifier.height(2.dp))
                         Text(
-                            text = if (hasLocationPermission) "Granted • Tap to manage system permissions" else "Denied • Tap to open system app settings",
+                            text = stringResource(if (hasLocationPermission) R.string.gps_permission_granted else R.string.gps_permission_denied),
                             style = MaterialTheme.typography.bodySmall,
                             color = if (hasLocationPermission) MaterialTheme.tourSafe.safe else MaterialTheme.tourSafe.warning
                         )
@@ -220,5 +256,29 @@ private fun SwitchSettingRow(
                 )
             )
         }
+    }
+}
+
+@Composable
+private fun ThemeModeRow(
+    label: String,
+    selected: Boolean,
+    onSelect: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = Dimens.MinTouchTarget)
+            .selectable(selected = selected, onClick = onSelect, role = Role.RadioButton)
+            .padding(horizontal = 16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        RadioButton(selected = selected, onClick = null)
+        Spacer(modifier = Modifier.width(12.dp))
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurface
+        )
     }
 }

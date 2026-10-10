@@ -47,7 +47,7 @@ fun AlertDetailsScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Alert details not found.",
+                    text = stringResource(R.string.alert_not_found),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

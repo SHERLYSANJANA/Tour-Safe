@@ -48,7 +48,7 @@ fun NotificationHistoryScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "No notification history recorded.",
+                    text = stringResource(R.string.notification_history_empty),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

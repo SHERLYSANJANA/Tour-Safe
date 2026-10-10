@@ -1,21 +1,21 @@
-# TourSafe 🛡️
+# TourSafe 
 
 **Your travel safety companion.**
 
 TourSafe is an Android application designed to help travelers access safety information, locate nearby emergency assistance, and prepare emergency messages when they need help.
 
-## ✨ Features
+## Features
 
-- 🌍 **Multilingual Support** — English, Spanish, French, German, Simplified Chinese, Japanese, Thai, and Hindi.
-- 📍 **GPS Location** — Access the user's location with permission and calculate distances to nearby places.
-- 🗺️ **Interactive Maps** — Help users locate emergency services and safe places.
-- 🚨 **Disaster Alerts** — Display safety alerts with severity levels and relevant instructions.
-- 🎙️ **Voice SOS** — Convert spoken emergency messages into text for review and sharing.
-- 🏥 **Safe Places** — Browse hospitals, police stations, shelters, and other supported emergency locations.
-- 🆘 **Emergency Check-ins** — Support safety check-in workflows.
-- 🔐 **Privacy-Aware Design** — Handle location and microphone permissions explicitly.
+-  **Multilingual Support** — English, Spanish, French, German, Simplified Chinese, Japanese, Thai, and Hindi.
+-  **GPS Location** — Access the user's location with permission and calculate distances to nearby places.
+-  **Interactive Maps** — Help users locate emergency services and safe places.
+-  **Disaster Alerts** — Display safety alerts with severity levels and relevant instructions.
+-  **Voice SOS** — Convert spoken emergency messages into text for review and sharing.
+-  **Safe Places** — Browse hospitals, police stations, shelters, and other supported emergency locations.
+-  **Emergency Check-ins** — Support safety check-in workflows.
+-  **Privacy-Aware Design** — Handle location and microphone permissions explicitly.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Language:** Kotlin
 - **UI Framework:** Jetpack Compose
@@ -24,7 +24,7 @@ TourSafe is an Android application designed to help travelers access safety info
 - **Build System:** Gradle with Kotlin DSL
 - **Platform:** Android
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -48,7 +48,7 @@ TourSafe is an Android application designed to help travelers access safety info
 
 Replace `<YOUR_GITHUB_REPOSITORY_URL>` with your repository's actual clone URL.
 
-## 🌐 Supported Languages
+##  Supported Languages
 
 TourSafe is designed to support the following languages:
 
@@ -63,7 +63,7 @@ TourSafe is designed to support the following languages:
 | Thai | ไทย |
 | Hindi | हिन्दी |
 
-## 📍 Location and Permissions
+##  Location and Permissions
 
 TourSafe may request location permission to display the user's position and calculate distances to emergency locations.
 
@@ -74,7 +74,7 @@ Voice SOS may use microphone and speech-recognition capabilities to convert spok
 - Speech recognition availability and processing behavior depend on the device and configured recognition service.
 - The app should provide a text-entry fallback when speech recognition is unavailable.
 
-## 🚨 Emergency Data and Safety
+##  Emergency Data and Safety
 
 TourSafe is intended to support access to safety information, not replace official emergency services.
 
@@ -86,7 +86,7 @@ TourSafe is intended to support access to safety information, not replace offici
 
 Always follow official local emergency instructions and contact the appropriate emergency service directly when needed.
 
-## 🔧 Development
+##  Development
 
 To keep development organized:
 
@@ -104,7 +104,7 @@ git checkout -b feature/your-feature
 git status
 ```
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions, suggestions, and bug reports are welcome.
 
@@ -117,11 +117,11 @@ When reporting a bug, include:
 
 Do not include API secrets, access tokens, or private user information in issues or commits.
 
-## 📌 Project Status
+##  Project Status
 
 TourSafe is under active development. Features, integrations, and emergency-data sources may be incomplete or subject to change.
 
-## 📄 License
+##  License
 
 No license has been specified yet. A license should be added before the project is presented as open source or redistributed under specific terms.
 

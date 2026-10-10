@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Black Pin Head Centered in Adaptive Viewport -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M54,16 C38,16 25,29 25,45 C25,64 48,79 54,85 C60,79 83,64 83,45 C83,29 70,16 54,16 Z" />
+
+    <!-- Inner White Circle -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,26 C43.5,26 35,34.5 35,45 C35,55.5 43.5,64 54,64 C64.5,64 73,55.5 73,45 C73,34.5 64.5,26 54,26 Z" />
+
+    <!-- Black "S" Curve -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M48,44 C48,39 60,40.5 60,46 C60,49.5 56.5,52 52,52 C48.5,52 45.5,49.5 45.5,46.5 L39.5,46.5 C39.5,53 45,57.5 52,57.5 C60,57.5 66.5,52 66.5,46 C66.5,38 50.5,38.5 50.5,34 C50.5,31.5 54,30 58.5,30 C62,30 65,31.5 66,34 L72,34 C70.5,28 65,24.5 58.5,24.5 C50,24.5 44,29.5 44,34.5 C44,40 48,44 48,44 Z" />
+
+</vector>

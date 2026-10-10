@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Crisp White Rounded Card Background -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M12,0 h76 a12,12 0 0,1 12,12 v76 a12,12 0 0,1 -12,12 h-76 a12,12 0 0,1 -12,-12 v-76 a12,12 0 0,1 12,-12 Z" />
+
+    <!-- Pure Black Pin Outer Outline with Sharp Tip -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M50,12 C32.33,12 18,26.33 18,44 C18,65 42,82 50,88 C58,82 82,65 82,44 C82,26.33 67.67,12 50,12 Z" />
+
+    <!-- Inner White Pin Head Core -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,23 C38.4,23 29,32.4 29,44 C29,55.6 38.4,65 50,65 C61.6,65 71,55.6 71,44 C71,32.4 61.6,23 50,23 Z" />
+
+    <!-- Smooth Black S-Curve Wave inside Pin Head -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M43,43 C43,37.5 57,39 57,45 C57,49 53,52 48,52 C44,52 41,49.5 41,46 L34,46 C34,53 40,58 48,58 C57,58 64,52 64,45 C64,36 46,36.5 46,31.5 C46,28.5 50,27 55,27 C59,27 62.5,28.5 63.5,31.5 L70.5,31.5 C69,24.5 63,21 55,21 C45.5,21 39,26.5 39,32 C39,38 43,43 43,43 Z" />
+
+</vector>

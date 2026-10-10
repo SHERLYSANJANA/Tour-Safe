@@ -56,7 +56,9 @@ fun LanguageSelectionScreen(
                 .padding(20.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Column {
+            // weight(1f) is required: without it the LazyColumn takes all the height and the
+            // Confirm button below it is pushed off-screen, so the user can never continue.
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = stringResource(R.string.select_language_desc),
                     style = MaterialTheme.typography.bodyMedium,
@@ -73,8 +75,14 @@ fun LanguageSelectionScreen(
                             language = lang,
                             onSelect = {
                                 selectedLangCode = lang.code
-                                LocaleManager.setLocale(context, lang.code)
-                                (context as? Activity)?.recreate()
+                                // Same flow as before: pick a language -> save it -> continue.
+                                viewModel.selectLanguage(lang.code, context)
+                                onLanguageConfirmed()
+                                // Android 13+ re-applies the locale by itself; older versions
+                                // need the activity restarted so the new language shows.
+                                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.TIRAMISU) {
+                                    (context as? Activity)?.recreate()
+                                }
                             }
                         )
                     }
@@ -85,6 +93,7 @@ fun LanguageSelectionScreen(
                 onClick = onLanguageConfirmed,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(top = 12.dp)
                     .height(54.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
                 shape = RoundedCornerShape(16.dp)

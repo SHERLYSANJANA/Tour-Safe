@@ -86,7 +86,7 @@
     <string name="location_permission_explanation_title">Permission de Localisation Requise</string>
     <string name="location_permission_explanation_desc">TourSafe a besoin de la permission de localisation pour afficher votre position sur la carte des risques et joindre des coordonnées GPS exactes aux messages SOS d\'urgence.</string>
     <string name="use_my_location">Utiliser Ma Position</string>
-    <string name="refresh_location">Actualiser la Position</string>
+    <string name="refresh_location">Actualiser la position</string>
     <string name="recenter_map">Recentrer la Carte</string>
     <string name="gps_acquiring">Acquisition des coordonnées GPS...</string>
     <string name="gps_disabled_title">Services de Localisation GPS Désactivés</string>
@@ -127,8 +127,8 @@
     <string name="emergency_phone_label">Téléphone d\'urgence : %1$s</string>
     <string name="rate_label">Tarif : %1$s</string>
     <string name="reviews_count">%1$.1f (%2$d avis)</string>
-    <string name="verified_reviews_title">Avis vérifiés</string>
-    <string name="verified_traveler">Voyageur vérifié • %1$s</string>
+    <string name="verified_reviews_title">Avis des voyageurs</string>
+    <string name="verified_traveler">Voyageur • %1$s</string>
     <string name="add_review_title">Rédiger un avis sur la sécurité</string>
     <string name="your_name_label">Votre nom</string>
     <string name="rating_label">Note :</string>
@@ -144,12 +144,12 @@
     <string name="add_optional_note_label">Ajouter une note facultative (ex. chambre 302, 2 personnes)</string>
     <string name="welcome_title">Bienvenue sur TourSafe</string>
     <string name="welcome_desc">Votre compagnon intelligent pour la sécurité en voyage et la réponse aux catastrophes.</string>
-    <string name="feature_alerts_title">Alertes de catastrophe en temps réel</string>
-    <string name="feature_alerts_desc">Recevez des notifications instantanées sur les alertes tsunami, les crues soudaines et les intempéries.</string>
-    <string name="feature_places_title">Lieux sûrs vérifiés</string>
-    <string name="feature_places_desc">Trouvez à proximité des abris certifiés et des hébergements sûrs en hauteur.</string>
-    <string name="feature_map_title">Carte interactive des risques</string>
-    <string name="feature_map_desc">Consultez en temps réel les zones à risque côtières, les abris d\'urgence et les itinéraires d\'évacuation.</string>
+    <string name="feature_alerts_title">Alertes de catastrophe</string>
+    <string name="feature_alerts_desc">Restez informé des alertes tsunami, inondation et intempéries dans votre région.</string>
+    <string name="feature_places_title">Lieux sûrs</string>
+    <string name="feature_places_desc">Trouvez des abris d\'urgence et des hébergements sûrs près de vous.</string>
+    <string name="feature_map_title">Carte de sécurité</string>
+    <string name="feature_map_desc">Consultez les zones à risque, les abris et les lieux sûrs autour de vous.</string>
     <string name="get_started">Commencer</string>
     <string name="traveler_profile_title">Profil du voyageur</string>
     <string name="settings_preferences">Paramètres &amp; préférences</string>
@@ -163,4 +163,6 @@
     <string name="phone_number_label">Numéro de téléphone</string>
     <string name="delete">Supprimer</string>
     <string name="notification_history_title">Historique des notifications</string>
+    <string name="splash_tagline">Sécurité des voyageurs et préparation aux catastrophes</string>
+    <string name="location_updated">Mis à jour : %1$s</string>
 </resources>

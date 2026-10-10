@@ -59,8 +59,8 @@
     <string name="directions">経路案内</string>
 
     <!-- Reviews Screen -->
-    <string name="verified_reviews_title">認証済みレビュー</string>
-    <string name="verified_traveler">認証済み旅行者 • %1$s</string>
+    <string name="verified_reviews_title">旅行者のレビュー</string>
+    <string name="verified_traveler">旅行者 • %1$s</string>
     <string name="add_review_title">安全レビューを投稿</string>
     <string name="write_review">安全レビューを書く</string>
     <string name="your_name_label">お名前</string>
@@ -84,12 +84,12 @@
     <!-- Onboarding Screen -->
     <string name="welcome_title">TourSafeへようこそ</string>
     <string name="welcome_desc">グローバルな旅行の安全と災害対策をサポートするスマートパートナー。</string>
-    <string name="feature_alerts_title">リアルタイム災害警報</string>
-    <string name="feature_alerts_desc">津波警報、集中豪雨、台風などの緊急通知を即座に受信。</string>
-    <string name="feature_places_title">認証済み避難場所</string>
-    <string name="feature_places_desc">近くの公認避難所や高台にある安全なホテルを素早く検索。</string>
-    <string name="feature_map_title">インタラクティブハザードマップ</string>
-    <string name="feature_map_desc">沿岸浸水区域、緊急避難所、避難経路を地図上で確認。</string>
+    <string name="feature_alerts_title">災害アラート</string>
+    <string name="feature_alerts_desc">お住まいの地域の津波・洪水・悪天候の警報についての情報を確認できます。</string>
+    <string name="feature_places_title">安全な場所</string>
+    <string name="feature_places_desc">近くの緊急避難所や安全な宿泊施設を探せます。</string>
+    <string name="feature_map_title">安全マップ</string>
+    <string name="feature_map_desc">周辺の危険区域、避難所、安全な場所を確認できます。</string>
     <string name="get_started">今すぐ始める</string>
 
     <!-- Profile Screen -->
@@ -179,4 +179,6 @@
     <string name="no_verified_source_desc">現在のGPS座標には公式の検証済み避難所や警報データがありません。設定で「デモモード」を有効にすると模擬デモデータを閲覧できます。</string>
     <string name="sos_open_sms">メッセージアプリを開く（SMS）</string>
     <string name="sos_call_emergency">緊急番号に発信（112）</string>
+    <string name="splash_tagline">旅行者の安全と災害への備え</string>
+    <string name="location_updated">更新: %1$s</string>
 </resources>

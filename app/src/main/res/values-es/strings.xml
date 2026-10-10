@@ -61,8 +61,8 @@
     <string name="directions">Direcciones</string>
 
     <!-- Reviews Screen -->
-    <string name="verified_reviews_title">Reseñas Verificadas</string>
-    <string name="verified_traveler">Viajero Verificado • %1$s</string>
+    <string name="verified_reviews_title">Reseñas de viajeros</string>
+    <string name="verified_traveler">Viajero • %1$s</string>
     <string name="add_review_title">Escribir Reseña de Seguridad</string>
     <string name="write_review">Escribir Reseña de Seguridad</string>
     <string name="your_name_label">Su Nombre</string>
@@ -86,12 +86,12 @@
     <!-- Onboarding Screen -->
     <string name="welcome_title">Bienvenido a TourSafe</string>
     <string name="welcome_desc">Su compañero inteligente para la seguridad en viajes globales y respuesta ante desastres.</string>
-    <string name="feature_alerts_title">Alertas de Desastre en Tiempo Real</string>
-    <string name="feature_alerts_desc">Reciba notificaciones instantáneas sobre avisos de tsunami, inundaciones y clima extremo.</string>
-    <string name="feature_places_title">Lugares Seguros Verificados</string>
-    <string name="feature_places_desc">Encuentre refugios certificados y alojamientos seguros en zonas elevadas cercanas.</string>
-    <string name="feature_map_title">Mapa Interactivo de Peligros</string>
-    <string name="feature_map_desc">Consulte zonas de riesgo costero, refugios de emergencia y rutas de evacuación en tiempo real.</string>
+    <string name="feature_alerts_title">Alertas de desastre</string>
+    <string name="feature_alerts_desc">Manténgase informado sobre alertas de tsunami, inundaciones y clima severo en su zona.</string>
+    <string name="feature_places_title">Lugares seguros</string>
+    <string name="feature_places_desc">Encuentre refugios de emergencia y alojamiento seguro cerca de usted.</string>
+    <string name="feature_map_title">Mapa de seguridad</string>
+    <string name="feature_map_desc">Vea zonas de peligro, refugios y lugares seguros a su alrededor.</string>
     <string name="get_started">Comenzar</string>
 
     <!-- Profile Screen -->
@@ -165,7 +165,7 @@
     <string name="location_permission_explanation_title">Permiso de Ubicación Requerido</string>
     <string name="location_permission_explanation_desc">TourSafe necesita permiso de ubicación para mostrar su posición en el mapa de peligros y adjuntar coordenadas GPS exactas a los mensajes de emergencia SOS.</string>
     <string name="use_my_location">Usar Mi Ubicación</string>
-    <string name="refresh_location">Actualizar Ubicación</string>
+    <string name="refresh_location">Actualizar ubicación</string>
     <string name="recenter_map">Reorientar Mapa</string>
     <string name="gps_acquiring">Obteniendo coordenadas GPS...</string>
     <string name="gps_disabled_title">Servicios de Ubicación GPS Desactivados</string>
@@ -179,4 +179,6 @@
     <string name="no_verified_source_desc">No hay refugios ni alertas verificadas oficiales en sus coordenadas GPS actuales. Active el Modo Demo en Ajustes para ver datos simulados de demostración.</string>
     <string name="sos_open_sms">Abrir app de mensajes (SMS)</string>
     <string name="sos_call_emergency">Llamar al número de emergencias (112)</string>
+    <string name="splash_tagline">Seguridad turística y preparación ante desastres</string>
+    <string name="location_updated">Actualizado: %1$s</string>
 </resources>

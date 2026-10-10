@@ -63,8 +63,8 @@
     <string name="directions">Directions</string>
 
     <!-- Reviews Screen -->
-    <string name="verified_reviews_title">Verified Reviews</string>
-    <string name="verified_traveler">Verified Traveler • %1$s</string>
+    <string name="verified_reviews_title">Traveler Reviews</string>
+    <string name="verified_traveler">Traveler • %1$s</string>
     <string name="add_review_title">Write Safety Review</string>
     <string name="write_review">Write Safety Review</string>
     <string name="your_name_label">Your Name</string>
@@ -88,12 +88,12 @@
     <!-- Onboarding Screen -->
     <string name="welcome_title">Welcome to TourSafe</string>
     <string name="welcome_desc">Your intelligent companion for global travel safety and disaster response.</string>
-    <string name="feature_alerts_title">Real-Time Disaster Alerts</string>
-    <string name="feature_alerts_desc">Get instant notifications on tsunami warnings, flash floods, and severe weather.</string>
-    <string name="feature_places_title">Verified Safe Places</string>
-    <string name="feature_places_desc">Find disaster-certified shelters and high-elevation safe accommodations nearby.</string>
-    <string name="feature_map_title">Interactive Hazard Map</string>
-    <string name="feature_map_desc">View real-time coastal hazard zones, emergency shelters, and evacuation routes.</string>
+    <string name="feature_alerts_title">Disaster Alerts</string>
+    <string name="feature_alerts_desc">Stay informed about tsunami, flood and severe weather warnings for your area.</string>
+    <string name="feature_places_title">Safe Places</string>
+    <string name="feature_places_desc">Find emergency shelters and safe accommodation near you.</string>
+    <string name="feature_map_title">Safety Map</string>
+    <string name="feature_map_desc">See hazard zones, shelters and safe places around you.</string>
     <string name="get_started">Get Started</string>
 
     <!-- Profile Screen -->
@@ -167,7 +167,7 @@
     <string name="location_permission_explanation_title">Location Permission Required</string>
     <string name="location_permission_explanation_desc">TourSafe needs location permission to display your position on the hazard map and attach exact GPS coordinates to emergency SOS messages.</string>
     <string name="use_my_location">Use My Location</string>
-    <string name="refresh_location">Refresh Location</string>
+    <string name="refresh_location">Refresh location</string>
     <string name="recenter_map">Recenter Map</string>
     <string name="gps_acquiring">Acquiring GPS coordinates...</string>
     <string name="gps_disabled_title">GPS Location Services Disabled</string>
@@ -179,4 +179,6 @@
     <string name="google_maps_link_label">Google Maps Link: %1$s</string>
     <string name="sos_open_sms">Open Messaging App (SMS)</string>
     <string name="sos_call_emergency">Call Emergency Number (112)</string>
+    <string name="splash_tagline">Tourist Safety &amp; Disaster Preparedness</string>
+    <string name="location_updated">Updated: %1$s</string>
 </resources>

@@ -127,8 +127,8 @@
     <string name="emergency_phone_label">紧急电话：%1$s</string>
     <string name="rate_label">价格：%1$s</string>
     <string name="reviews_count">%1$.1f（%2$d 条评价）</string>
-    <string name="verified_reviews_title">已验证评价</string>
-    <string name="verified_traveler">已验证旅客 • %1$s</string>
+    <string name="verified_reviews_title">旅客评价</string>
+    <string name="verified_traveler">旅客 • %1$s</string>
     <string name="add_review_title">撰写安全评价</string>
     <string name="your_name_label">您的姓名</string>
     <string name="rating_label">评分：</string>
@@ -144,12 +144,12 @@
     <string name="add_optional_note_label">添加备注（可选，例如：酒店房间 302，2 人）</string>
     <string name="welcome_title">欢迎使用 TourSafe</string>
     <string name="welcome_desc">您的全球旅行安全与灾害应对智能伙伴。</string>
-    <string name="feature_alerts_title">实时灾害警报</string>
-    <string name="feature_alerts_desc">即时获取海啸预警、山洪和恶劣天气通知。</string>
-    <string name="feature_places_title">已验证的安全地点</string>
-    <string name="feature_places_desc">查找附近经灾害认证的避难所和高地安全住宿。</string>
-    <string name="feature_map_title">交互式危险地图</string>
-    <string name="feature_map_desc">实时查看沿海危险区域、紧急避难所和疏散路线。</string>
+    <string name="feature_alerts_title">灾害警报</string>
+    <string name="feature_alerts_desc">随时了解您所在地区的海啸、洪水和恶劣天气预警。</string>
+    <string name="feature_places_title">安全地点</string>
+    <string name="feature_places_desc">查找附近的紧急避难所和安全住宿。</string>
+    <string name="feature_map_title">安全地图</string>
+    <string name="feature_map_desc">查看您周围的危险区域、避难所和安全地点。</string>
     <string name="get_started">开始使用</string>
     <string name="traveler_profile_title">旅客资料</string>
     <string name="settings_preferences">设置与偏好</string>
@@ -163,4 +163,6 @@
     <string name="phone_number_label">电话号码</string>
     <string name="delete">删除</string>
     <string name="notification_history_title">通知记录</string>
+    <string name="splash_tagline">游客安全与灾害防范</string>
+    <string name="location_updated">更新时间：%1$s</string>
 </resources>

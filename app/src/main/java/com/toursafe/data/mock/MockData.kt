@@ -1,6 +1,7 @@
 package com.toursafe.data.mock
 
 import com.toursafe.data.models.*
+import com.toursafe.util.LocationUtils
 
 object MockData {
 
@@ -15,128 +16,242 @@ object MockData {
         LanguageOption("hi", "Hindi", "हिन्दी", "🇮🇳")
     )
 
-    val alerts = listOf(
-        DisasterAlert(
-            id = "alert-001",
-            title = "Coastal Tsunami Advisory",
-            disasterType = "Tsunami / High Wave Warning",
-            severity = AlertSeverity.CRITICAL,
-            affectedArea = "Phuket West Coast beaches (Patong, Kata, Karon)",
-            distanceKm = 3.2,
-            latitude = 7.8920,
-            longitude = 98.2980,
-            timestamp = "10 mins ago • 14:32 Local Time",
-            sourceLabel = "[SIMULATED DISASTER ALERT] National Disaster Warning Center",
-            description = "Earthquake magnitude 7.2 registered off Sumatra coast. Coastal areas along Phuket shoreline are urged to evacuate immediately to elevated safe ground above 15 meters.",
-            officialInstructions = listOf(
-                "Move inland and climb higher ground immediately.",
-                "Do not go near beaches to watch the waves.",
-                "Follow designated emergency evacuation route signs on main roads.",
-                "Stay tuned to official emergency radio broadcasts."
-            ),
-            recommendedActions = listOf(
-                "Check-in on TourSafe as 'Safe' or 'Moving to Safety'.",
-                "Locate nearest safe certified shelter in Safe Places tab.",
-                "Keep emergency bag with essential document copies and water."
-            )
-        ),
-        DisasterAlert(
-            id = "alert-002",
-            title = "Severe Flash Flood Watch",
-            disasterType = "Heavy Rainfall & Landslide Hazard",
-            severity = AlertSeverity.WARNING,
-            affectedArea = "Kathu District & Hillside Slopes",
-            distanceKm = 8.5,
-            latitude = 7.9250,
-            longitude = 98.3310,
-            timestamp = "1 hour ago • 13:40 Local Time",
-            sourceLabel = "[SIMULATED DISASTER ALERT] Hydro Meteorological Dept",
-            description = "Persistent heavy rainfall exceeding 120mm in hillside areas causes elevated risk of rapid flash flooding and mudslides across low-lying roads.",
-            officialInstructions = listOf(
-                "Avoid driving across flooded roads or low water bridges.",
-                "Secure valuables above floor level if in hillside valleys.",
-                "Be prepared for potential short power outages."
-            ),
-            recommendedActions = listOf(
-                "Charge phone battery and power bank.",
-                "Check vehicle fuel level and park on high ground."
-            )
-        ),
-        DisasterAlert(
-            id = "alert-003",
-            title = "Tropical Storm Wind Advisory",
-            disasterType = "High Winds & Gale",
-            severity = AlertSeverity.ADVISORY,
-            affectedArea = "Southern Coastal Islands",
-            distanceKm = 14.0,
-            latitude = 7.7850,
-            longitude = 98.3210,
-            timestamp = "3 hours ago • 11:15 Local Time",
-            sourceLabel = "[SIMULATED DISASTER ALERT] Regional Weather Center",
-            description = "Sustained wind speeds up to 55 km/h with gusts up to 75 km/h expected through late evening. Ferry services temporarily suspended.",
-            officialInstructions = listOf(
-                "Secure loose outdoor objects and balcony items.",
-                "Avoid standing near tall trees or unsecured scaffolding."
-            ),
-            recommendedActions = listOf(
-                "Confirm local transit schedules before departing."
-            )
-        )
-    )
+    fun getAnchoredAlerts(userLat: Double = 0.0, userLng: Double = 0.0): List<DisasterAlert> {
+        val baseLat = if (userLat != 0.0) userLat else 7.8804
+        val baseLng = if (userLng != 0.0) userLng else 98.3923
 
-    val accommodations = listOf(
-        SafeAccommodation(
-            id = "acc-101",
-            name = "Old Town Safe Haven Resort",
-            type = "Certified Disaster Evacuation Partner",
-            address = "42 Dibuk Road, Old Phuket Town",
-            distanceKm = 1.2,
-            latitude = 7.8842,
-            longitude = 98.3891,
-            pricePerNight = "$45 / night",
-            rating = 4.9,
-            reviewCount = 128,
-            capacityAvailable = 18,
-            maxCapacity = 120,
-            isEmergencyShelter = true,
-            emergencyAmenities = listOf("Backup Diesel Generator", "24/7 First Aid Staff", "Clean Water Purification", "Concrete Earthquake Structure"),
-            contactPhone = "+66 76 340 112"
-        ),
-        SafeAccommodation(
-            id = "acc-102",
-            name = "Highland Hilltop Eco Hotel",
-            type = "High-Elevation Safe Hotel",
-            address = "188 Phuket Hill Ridge, Kathu",
-            distanceKm = 4.8,
-            latitude = 7.9124,
-            longitude = 98.3512,
-            pricePerNight = "$65 / night",
-            rating = 4.8,
-            reviewCount = 94,
-            capacityAvailable = 8,
-            maxCapacity = 80,
-            isEmergencyShelter = false,
-            emergencyAmenities = listOf("High Altitude Elevation (85m above sea level)", "Solar Backup Power", "Satellite Internet", "Emergency Rations"),
-            contactPhone = "+66 76 892 400"
-        ),
-        SafeAccommodation(
-            id = "acc-103",
-            name = "Phuket Central Evacuation Center",
-            type = "Government Designated Free Shelter",
-            address = "Municipal Sports Complex, Amphoe Mueang",
-            distanceKm = 2.5,
-            latitude = 7.8885,
-            longitude = 98.3970,
-            pricePerNight = "FREE Emergency Shelter",
-            rating = 4.6,
-            reviewCount = 210,
-            capacityAvailable = 150,
-            maxCapacity = 500,
-            isEmergencyShelter = true,
-            emergencyAmenities = listOf("Red Cross Medical Triage", "Free Emergency Meals", "Multilingual Interpreters", "Child Safety Zone"),
-            contactPhone = "1784 (Disaster Hotline)"
+        val baseAlerts = listOf(
+            DisasterAlert(
+                id = "alert-001",
+                title = "Coastal / High Surge Advisory",
+                disasterType = "Coastal Hazard & High Waves",
+                severity = AlertSeverity.CRITICAL,
+                affectedArea = "Coastal & Low-lying Shoreline Areas",
+                distanceKm = 0.0,
+                latitude = baseLat + 0.018,
+                longitude = baseLng - 0.012,
+                timestamp = "10 mins ago • Local Time",
+                sourceLabel = "[SIMULATED DISASTER ALERT] National Disaster Warning Center",
+                description = "High surge warning issued for low-lying coastal areas. Residents and tourists are urged to move inland to elevated safe ground above 15 meters.",
+                officialInstructions = listOf(
+                    "Move inland and climb higher ground immediately.",
+                    "Do not go near beaches or low-lying shorelines.",
+                    "Follow designated emergency evacuation route signs.",
+                    "Stay tuned to official emergency radio broadcasts."
+                ),
+                recommendedActions = listOf(
+                    "Check-in on TourSafe as 'Safe' or 'Moving to Safety'.",
+                    "Locate nearest safe certified shelter in Safe Places tab.",
+                    "Keep emergency bag with essential document copies and water."
+                )
+            ),
+            DisasterAlert(
+                id = "alert-002",
+                title = "Severe Flash Flood Watch",
+                disasterType = "Heavy Rainfall & Landslide Hazard",
+                severity = AlertSeverity.WARNING,
+                affectedArea = "District Hillsides & Low-lying Valleys",
+                distanceKm = 0.0,
+                latitude = baseLat + 0.035,
+                longitude = baseLng + 0.022,
+                timestamp = "1 hour ago • Local Time",
+                sourceLabel = "[SIMULATED DISASTER ALERT] Hydro Meteorological Dept",
+                description = "Persistent heavy rainfall exceeding 120mm in hillside areas causes elevated risk of rapid flash flooding and mudslides across low-lying roads.",
+                officialInstructions = listOf(
+                    "Avoid driving across flooded roads or low water bridges.",
+                    "Secure valuables above floor level if in hillside valleys.",
+                    "Be prepared for potential short power outages."
+                ),
+                recommendedActions = listOf(
+                    "Charge phone battery and power bank.",
+                    "Check vehicle fuel level and park on high ground."
+                )
+            ),
+            DisasterAlert(
+                id = "alert-003",
+                title = "Tropical Storm Wind Advisory",
+                disasterType = "High Winds & Gale Warning",
+                severity = AlertSeverity.ADVISORY,
+                affectedArea = "Regional Coastal District",
+                distanceKm = 0.0,
+                latitude = baseLat - 0.042,
+                longitude = baseLng - 0.028,
+                timestamp = "3 hours ago • Local Time",
+                sourceLabel = "[SIMULATED DISASTER ALERT] Regional Weather Center",
+                description = "Sustained wind speeds up to 55 km/h with gusts up to 75 km/h expected through late evening.",
+                officialInstructions = listOf(
+                    "Secure loose outdoor objects and balcony items.",
+                    "Avoid standing near tall trees or unsecured scaffolding."
+                ),
+                recommendedActions = listOf(
+                    "Confirm local transit schedules before departing."
+                )
+            )
         )
-    )
+
+        return baseAlerts.map { alert ->
+            val dist = LocationUtils.calculateDistanceKm(baseLat, baseLng, alert.latitude, alert.longitude)
+            alert.copy(distanceKm = if (dist < 0.1) 0.8 else dist)
+        }.sortedBy { it.distanceKm }
+    }
+
+    fun getAnchoredAccommodations(userLat: Double = 0.0, userLng: Double = 0.0): List<SafeAccommodation> {
+        val baseLat = if (userLat != 0.0) userLat else 7.8804
+        val baseLng = if (userLng != 0.0) userLng else 98.3923
+
+        val baseAccs = listOf(
+            SafeAccommodation(
+                id = "acc-101",
+                name = "Safe Haven Evacuation Resort",
+                type = "Certified Disaster Evacuation Partner",
+                address = "Highland Safety Zone, District Center",
+                distanceKm = 0.0,
+                latitude = baseLat + 0.008,
+                longitude = baseLng + 0.006,
+                pricePerNight = "$45 / night",
+                rating = 4.9,
+                reviewCount = 128,
+                capacityAvailable = 18,
+                maxCapacity = 120,
+                isEmergencyShelter = true,
+                emergencyAmenities = listOf("Backup Diesel Generator", "24/7 First Aid Staff", "Clean Water Purification", "Concrete Earthquake Structure"),
+                contactPhone = "+1 800 555 0199"
+            ),
+            SafeAccommodation(
+                id = "acc-102",
+                name = "Central Civic Free Shelter",
+                type = "Government Designated Free Shelter",
+                address = "Municipal Sports Complex & Safety Hub",
+                distanceKm = 0.0,
+                latitude = baseLat - 0.012,
+                longitude = baseLng + 0.010,
+                pricePerNight = "FREE Emergency Shelter",
+                rating = 4.7,
+                reviewCount = 210,
+                capacityAvailable = 150,
+                maxCapacity = 500,
+                isEmergencyShelter = true,
+                emergencyAmenities = listOf("Red Cross Medical Triage", "Free Emergency Meals", "Multilingual Interpreters", "Child Safety Zone"),
+                contactPhone = "1784 (Emergency Hotline)"
+            ),
+            SafeAccommodation(
+                id = "acc-103",
+                name = "Highland Hilltop Eco Hotel",
+                type = "High-Elevation Safe Hotel",
+                address = "High Elevation Ridge Road",
+                distanceKm = 0.0,
+                latitude = baseLat + 0.022,
+                longitude = baseLng - 0.015,
+                pricePerNight = "$65 / night",
+                rating = 4.8,
+                reviewCount = 94,
+                capacityAvailable = 8,
+                maxCapacity = 80,
+                isEmergencyShelter = false,
+                emergencyAmenities = listOf("High Altitude Elevation (85m above sea level)", "Solar Backup Power", "Satellite Internet", "Emergency Rations"),
+                contactPhone = "+1 800 555 0288"
+            )
+        )
+
+        return baseAccs.map { acc ->
+            val dist = LocationUtils.calculateDistanceKm(baseLat, baseLng, acc.latitude, acc.longitude)
+            acc.copy(distanceKm = if (dist < 0.1) 0.9 else dist)
+        }.sortedBy { it.distanceKm }
+    }
+
+    fun getAnchoredMapMarkers(userLat: Double = 0.0, userLng: Double = 0.0): List<MapMarker> {
+        val baseLat = if (userLat != 0.0) userLat else 7.8804
+        val baseLng = if (userLng != 0.0) userLng else 98.3923
+
+        val accs = getAnchoredAccommodations(baseLat, baseLng)
+        val alerts = getAnchoredAlerts(baseLat, baseLng)
+
+        val markers = mutableListOf<MapMarker>()
+
+        // 1. User Marker at center
+        markers.add(
+            MapMarker(
+                id = "m-user",
+                title = "Your Real GPS Location",
+                type = MarkerType.USER_LOCATION,
+                distanceKm = 0.0,
+                description = "Lat: ${"%.4f".format(baseLat)}, Lng: ${"%.4f".format(baseLng)}",
+                normX = 0.50f,
+                normY = 0.50f,
+                latitude = baseLat,
+                longitude = baseLng
+            )
+        )
+
+        // 2. Map Accommodations around user
+        accs.forEach { acc ->
+            val dLat = acc.latitude - baseLat
+            val dLng = acc.longitude - baseLng
+            val normX = (0.5 + (dLng * 12.0)).coerceIn(0.12, 0.88).toFloat()
+            val normY = (0.5 - (dLat * 12.0)).coerceIn(0.12, 0.88).toFloat()
+
+            markers.add(
+                MapMarker(
+                    id = acc.id,
+                    title = acc.name,
+                    type = if (acc.isEmergencyShelter) MarkerType.EMERGENCY_SHELTER else MarkerType.SAFE_ACCOMMODATION,
+                    distanceKm = acc.distanceKm,
+                    description = "${acc.type} • ${acc.distanceKm} km away",
+                    normX = normX,
+                    normY = normY,
+                    latitude = acc.latitude,
+                    longitude = acc.longitude
+                )
+            )
+        }
+
+        // 3. Map Hazard Alert Marker
+        alerts.firstOrNull()?.let { alert ->
+            val dLat = alert.latitude - baseLat
+            val dLng = alert.longitude - baseLng
+            val normX = (0.5 + (dLng * 12.0)).coerceIn(0.12, 0.88).toFloat()
+            val normY = (0.5 - (dLat * 12.0)).coerceIn(0.12, 0.88).toFloat()
+
+            markers.add(
+                MapMarker(
+                    id = alert.id,
+                    title = alert.title,
+                    type = MarkerType.HAZARD_ZONE,
+                    distanceKm = alert.distanceKm,
+                    description = "${alert.affectedArea} (${alert.distanceKm} km)",
+                    normX = normX,
+                    normY = normY,
+                    latitude = alert.latitude,
+                    longitude = alert.longitude
+                )
+            )
+        }
+
+        return markers
+    }
+
+    fun getAnchoredHazardZones(userLat: Double = 0.0, userLng: Double = 0.0): List<HazardZone> {
+        val baseLat = if (userLat != 0.0) userLat else 7.8804
+        val baseLng = if (userLng != 0.0) userLng else 98.3923
+
+        return listOf(
+            HazardZone(
+                id = "hz-1",
+                title = "Coastal Hazard Zone",
+                riskType = "Tsunami / Coastal Surge Risk",
+                normCenterX = 0.32f,
+                normCenterY = 0.38f,
+                radiusNormalized = 0.16f,
+                latitude = baseLat + 0.018,
+                longitude = baseLng - 0.012
+            )
+        )
+    }
+
+    val alerts = getAnchoredAlerts()
+    val accommodations = getAnchoredAccommodations()
+    val mapMarkers = getAnchoredMapMarkers()
+    val hazardZones = getAnchoredHazardZones()
 
     val propertyReviews = listOf(
         PropertyReview(
@@ -146,7 +261,7 @@ object MockData {
             userCountry = "Australia",
             rating = 5.0,
             date = "Yesterday",
-            comment = "During the sudden coastal advisory, the staff at Old Town Safe Haven was incredible! They instantly alerted all guests and had clear evacuation maps in 4 languages."
+            comment = "During the sudden coastal advisory, the staff was incredible! They instantly alerted all guests and had clear evacuation maps."
         ),
         PropertyReview(
             id = "rev-2",
@@ -155,7 +270,7 @@ object MockData {
             userCountry = "Italy",
             rating = 4.8,
             date = "3 days ago",
-            comment = "Very sturdy building, high elevation from the beach, and great backup power when the heavy storms cut the city grid."
+            comment = "Very sturdy building, high elevation, and great backup power during severe weather."
         ),
         PropertyReview(
             id = "rev-3",
@@ -164,33 +279,20 @@ object MockData {
             userCountry = "Japan",
             rating = 5.0,
             date = "1 week ago",
-            comment = "An ideal safe spot if you are looking for high elevation away from tsunami surge zones. Extremely clean and professional staff."
+            comment = "An ideal safe spot away from surge zones. Extremely clean and professional staff."
         )
-    )
-
-    val hazardZones = listOf(
-        HazardZone("hz-1", "Patong Beach Surge Zone", "Tsunami Coastal Hazard Zone", 0.35f, 0.45f, 0.18f, latitude = 7.8920, longitude = 98.2980),
-        HazardZone("hz-2", "Kathu Slope Mudslide Risk", "Hillside Flash Flood Area", 0.65f, 0.28f, 0.14f, latitude = 7.9250, longitude = 98.3310)
-    )
-
-    val mapMarkers = listOf(
-        MapMarker("m-1", "Current Location (Phuket Town)", MarkerType.USER_LOCATION, 0.0, "Your real-time GPS location", 0.52f, 0.58f, latitude = 7.8804, longitude = 98.3923),
-        MapMarker("m-2", "Old Town Safe Haven Resort", MarkerType.SAFE_ACCOMMODATION, 1.2, "Elevation 25m - Safe Certified", 0.58f, 0.52f, latitude = 7.8842, longitude = 98.3891),
-        MapMarker("m-3", "Highland Hilltop Eco Hotel", MarkerType.SAFE_ACCOMMODATION, 4.8, "Elevation 85m - High Ground", 0.72f, 0.35f, latitude = 7.9124, longitude = 98.3512),
-        MapMarker("m-4", "Phuket Central Free Shelter", MarkerType.EMERGENCY_SHELTER, 2.5, "Designated Primary Civic Shelter", 0.45f, 0.65f, latitude = 7.8885, longitude = 98.3970),
-        MapMarker("m-5", "Coastal Hazard Zone", MarkerType.HAZARD_ZONE, 3.2, "Evacuation Zone A", 0.32f, 0.48f, latitude = 7.8920, longitude = 98.2980)
     )
 
     val initialEmergencyContacts = listOf(
         EmergencyContact("c-1", "Emma Watson", "Spouse / Family", "+1 (555) 019-2834", isPrimary = true),
-        EmergencyContact("c-2", "David Miller", "Travel Partner", "+66 81 234 5678", isPrimary = false),
-        EmergencyContact("c-3", "Embassy Emergency Line", "Official Embassy", "+66 2 205 4000", isPrimary = false)
+        EmergencyContact("c-2", "David Miller", "Travel Partner", "+1 (555) 234-5678", isPrimary = false),
+        EmergencyContact("c-3", "Embassy Emergency Line", "Official Embassy", "+1 (800) 555-4000", isPrimary = false)
     )
 
     val initialNotifications = listOf(
-        "SIMULATED: Coastal Tsunami Advisory issued for West Phuket - 10 mins ago",
-        "SIMULATED: Emergency Shelter opened at Municipal Sports Complex - 45 mins ago",
-        "System: TourSafe downloaded offline safety guides for Thailand - 2 hours ago",
-        "System: Language preference set to English - Yesterday"
+        "SIMULATED: Coastal Advisory issued for nearby region - 10 mins ago",
+        "SIMULATED: Emergency Shelter opened at Municipal Center - 45 mins ago",
+        "System: TourSafe downloaded offline safety guides - 2 hours ago",
+        "System: Language preference set - Yesterday"
     )
 }

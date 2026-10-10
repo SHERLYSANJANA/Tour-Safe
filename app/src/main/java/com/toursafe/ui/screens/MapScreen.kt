@@ -44,10 +44,20 @@ fun MapScreen(
 
     LaunchedEffect(Unit) {
         locationViewModel.initLocationManager(context)
+        if (locationViewModel.hasPermission()) {
+            locationViewModel.fetchLocation()
+        }
     }
 
     val locationState by locationViewModel.locationState.collectAsState()
     var showPermissionExplanation by remember { mutableStateOf(false) }
+
+    val userLat = (locationState as? LocationState.Success)?.location?.latitude ?: 0.0
+    val userLng = (locationState as? LocationState.Success)?.location?.longitude ?: 0.0
+
+    val markers = remember(userLat, userLng) { MockData.getAnchoredMapMarkers(userLat, userLng) }
+    val hazardZones = remember(userLat, userLng) { MockData.getAnchoredHazardZones(userLat, userLng) }
+    var selectedMarker by remember(markers) { mutableStateOf<MapMarker?>(markers.firstOrNull()) }
 
     val locationPermissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions()
@@ -58,10 +68,6 @@ fun MapScreen(
             locationViewModel.fetchLocation()
         }
     }
-
-    val markers = remember { MockData.mapMarkers }
-    val hazardZones = remember { MockData.hazardZones }
-    var selectedMarker by remember { mutableStateOf<MapMarker?>(markers.firstOrNull()) }
 
     Scaffold(
         topBar = {

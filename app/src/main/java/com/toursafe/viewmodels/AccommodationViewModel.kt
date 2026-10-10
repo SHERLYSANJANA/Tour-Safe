@@ -4,14 +4,13 @@ import androidx.lifecycle.ViewModel
 import com.toursafe.data.mock.MockData
 import com.toursafe.data.models.PropertyReview
 import com.toursafe.data.models.SafeAccommodation
-import com.toursafe.util.LocationUtils
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class AccommodationViewModel : ViewModel() {
 
-    private val _accommodations = MutableStateFlow(MockData.accommodations)
+    private val _accommodations = MutableStateFlow(MockData.getAnchoredAccommodations())
     val accommodations: StateFlow<List<SafeAccommodation>> = _accommodations.asStateFlow()
 
     private val _searchQuery = MutableStateFlow("")
@@ -25,11 +24,7 @@ class AccommodationViewModel : ViewModel() {
 
     fun updateGpsLocation(userLat: Double, userLng: Double) {
         if (userLat == 0.0 && userLng == 0.0) return
-        val updated = MockData.accommodations.map { acc ->
-            val dist = LocationUtils.calculateDistanceKm(userLat, userLng, acc.latitude, acc.longitude)
-            acc.copy(distanceKm = dist)
-        }.sortedBy { it.distanceKm }
-        _accommodations.value = updated
+        _accommodations.value = MockData.getAnchoredAccommodations(userLat, userLng)
     }
 
     fun updateSearchQuery(query: String) {

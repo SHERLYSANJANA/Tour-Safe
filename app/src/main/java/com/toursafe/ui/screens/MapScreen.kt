@@ -350,7 +350,7 @@ private fun GpsControlPanel(
                             )
                         }
                         IconButton(onClick = onRefreshClick) {
-                            Icon(imageVector = Icons.Default.Refresh, contentDescription = "Refresh", tint = AccentCyan)
+                            Icon(imageVector = Icons.Default.Refresh, contentDescription = stringResource(R.string.refresh_location), tint = AccentCyan)
                         }
                     }
                     Spacer(modifier = Modifier.height(6.dp))
@@ -361,6 +361,18 @@ private fun GpsControlPanel(
                     )
                     Text(
                         text = stringResource(R.string.location_accuracy, loc.accuracyMeters),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = TextSecondary
+                    )
+                    Text(
+                        text = stringResource(
+                            R.string.location_updated,
+                            android.text.format.DateUtils.getRelativeTimeSpanString(
+                                loc.timestampMs,
+                                System.currentTimeMillis(),
+                                android.text.format.DateUtils.MINUTE_IN_MILLIS
+                            ).toString()
+                        ),
                         style = MaterialTheme.typography.bodySmall,
                         color = TextSecondary
                     )

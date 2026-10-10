@@ -1,0 +1,135 @@
+package com.toursafe.ui.screens
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import com.toursafe.data.models.LanguageOption
+import com.toursafe.ui.components.TourSafeTopBar
+import com.toursafe.ui.theme.*
+import com.toursafe.viewmodels.SettingsViewModel
+
+@Composable
+fun LanguageSelectionScreen(
+    viewModel: SettingsViewModel,
+    onLanguageConfirmed: () -> Unit
+) {
+    val languages by viewModel.languages.collectAsState()
+
+    Scaffold(
+        topBar = {
+            TourSafeTopBar(
+                title = "Select Language"
+            )
+        },
+        containerColor = BackgroundNavy
+    ) { padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .padding(20.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column {
+                Text(
+                    text = "Choose your preferred language for official disaster alerts and emergency instructions.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = TextSecondary
+                )
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    items(languages) { lang ->
+                        LanguageItemCard(
+                            language = lang,
+                            onSelect = { viewModel.selectLanguage(lang.code) }
+                        )
+                    }
+                }
+            }
+
+            Button(
+                onClick = onLanguageConfirmed,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(54.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = AccentCyan),
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Text(
+                    text = "Confirm Language",
+                    color = Color.Black,
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun LanguageItemCard(
+    language: LanguageOption,
+    onSelect: () -> Unit
+) {
+    val isSelected = language.isSelected
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(SurfaceNavy, RoundedCornerShape(14.dp))
+            .border(
+                width = if (isSelected) 2.dp else 1.dp,
+                color = if (isSelected) AccentCyan else SurfaceVariantNavy,
+                shape = RoundedCornerShape(14.dp)
+            )
+            .clickable { onSelect() }
+            .padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = language.flagEmoji,
+                style = MaterialTheme.typography.headlineMedium
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Column {
+                Text(
+                    text = language.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = TextPrimary
+                )
+                Text(
+                    text = language.nativeName,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = TextSecondary
+                )
+            }
+        }
+
+        if (isSelected) {
+            Icon(
+                imageVector = Icons.Default.Check,
+                contentDescription = null,
+                tint = AccentCyan,
+                modifier = Modifier.size(24.dp)
+            )
+        }
+    }
+}

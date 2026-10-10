@@ -1,5 +1,6 @@
 package com.toursafe.ui.screens
 
+import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -10,9 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,9 +19,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.toursafe.R
+import com.toursafe.data.mock.MockData
 import com.toursafe.data.models.LanguageOption
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
+import com.toursafe.util.LocaleManager
 import com.toursafe.viewmodels.SettingsViewModel
 
 @Composable
@@ -30,8 +31,15 @@ fun LanguageSelectionScreen(
     viewModel: SettingsViewModel,
     onLanguageConfirmed: () -> Unit
 ) {
-    val languages by viewModel.languages.collectAsState()
     val context = LocalContext.current
+
+    var selectedLangCode by remember { mutableStateOf(LocaleManager.getPersistedLanguage(context)) }
+
+    val languages = remember(selectedLangCode) {
+        MockData.languages.map { l ->
+            l.copy(isSelected = l.code == selectedLangCode)
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -64,8 +72,9 @@ fun LanguageSelectionScreen(
                         LanguageItemCard(
                             language = lang,
                             onSelect = {
-                                viewModel.selectLanguage(lang.code, context)
-                                onLanguageConfirmed()
+                                selectedLangCode = lang.code
+                                LocaleManager.setLocale(context, lang.code)
+                                (context as? Activity)?.recreate()
                             }
                         )
                     }

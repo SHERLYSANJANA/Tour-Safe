@@ -11,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -26,13 +28,34 @@ import com.toursafe.navigation.Screen
 import com.toursafe.ui.components.AlertCard
 import com.toursafe.ui.components.StatusBanner
 import com.toursafe.ui.theme.*
+import com.toursafe.util.LocationState
+import com.toursafe.viewmodels.GpsLocationViewModel
 import com.toursafe.viewmodels.HomeViewModel
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory),
+    locationViewModel: GpsLocationViewModel = viewModel(),
     onNavigate: (String) -> Unit
 ) {
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        locationViewModel.initLocationManager(context)
+        if (locationViewModel.hasPermission()) {
+            locationViewModel.fetchLocation()
+        }
+    }
+
+    val locationState by locationViewModel.locationState.collectAsState()
+
+    LaunchedEffect(locationState) {
+        if (locationState is LocationState.Success) {
+            val loc = (locationState as LocationState.Success).location
+            viewModel.updateGpsLocation(loc.latitude, loc.longitude, context)
+        }
+    }
+
     val status by viewModel.userStatus.collectAsState()
     val alerts by viewModel.alerts.collectAsState()
 

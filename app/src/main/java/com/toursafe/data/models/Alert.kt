@@ -19,5 +19,7 @@ data class DisasterAlert(
     val description: String,
     val officialInstructions: List<String>,
     val recommendedActions: List<String>,
+    val latitude: Double = 7.8920,
+    val longitude: Double = 98.2980,
     val isSimulated: Boolean = true
 )

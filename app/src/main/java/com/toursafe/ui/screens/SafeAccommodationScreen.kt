@@ -9,24 +9,48 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.toursafe.R
 import com.toursafe.ui.components.AccommodationCard
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
+import com.toursafe.util.LocationState
 import com.toursafe.viewmodels.AccommodationViewModel
+import com.toursafe.viewmodels.GpsLocationViewModel
 
 @Composable
 fun SafeAccommodationScreen(
     viewModel: AccommodationViewModel,
+    locationViewModel: GpsLocationViewModel = viewModel(),
     onAccommodationClick: (String) -> Unit
 ) {
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        locationViewModel.initLocationManager(context)
+        if (locationViewModel.hasPermission()) {
+            locationViewModel.fetchLocation()
+        }
+    }
+
+    val locationState by locationViewModel.locationState.collectAsState()
+
+    LaunchedEffect(locationState) {
+        if (locationState is LocationState.Success) {
+            val loc = (locationState as LocationState.Success).location
+            viewModel.updateGpsLocation(loc.latitude, loc.longitude)
+        }
+    }
+
     val searchQuery by viewModel.searchQuery.collectAsState()
     val onlyShelters by viewModel.onlyShelters.collectAsState()
     val filteredList = viewModel.getFilteredAccommodations()

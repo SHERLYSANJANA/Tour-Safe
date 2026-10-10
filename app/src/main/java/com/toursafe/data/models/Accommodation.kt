@@ -14,5 +14,7 @@ data class SafeAccommodation(
     val isEmergencyShelter: Boolean,
     val emergencyAmenities: List<String>, // e.g. "Backup Generator", "First Aid", "Clean Water Storage"
     val contactPhone: String,
+    val latitude: Double = 7.8842,
+    val longitude: Double = 98.3891,
     val imageUrl: String = ""
 )

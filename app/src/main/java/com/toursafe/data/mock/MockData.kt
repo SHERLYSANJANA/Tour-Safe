@@ -23,6 +23,8 @@ object MockData {
             severity = AlertSeverity.CRITICAL,
             affectedArea = "Phuket West Coast beaches (Patong, Kata, Karon)",
             distanceKm = 3.2,
+            latitude = 7.8920,
+            longitude = 98.2980,
             timestamp = "10 mins ago • 14:32 Local Time",
             sourceLabel = "[SIMULATED DISASTER ALERT] National Disaster Warning Center",
             description = "Earthquake magnitude 7.2 registered off Sumatra coast. Coastal areas along Phuket shoreline are urged to evacuate immediately to elevated safe ground above 15 meters.",
@@ -45,6 +47,8 @@ object MockData {
             severity = AlertSeverity.WARNING,
             affectedArea = "Kathu District & Hillside Slopes",
             distanceKm = 8.5,
+            latitude = 7.9250,
+            longitude = 98.3310,
             timestamp = "1 hour ago • 13:40 Local Time",
             sourceLabel = "[SIMULATED DISASTER ALERT] Hydro Meteorological Dept",
             description = "Persistent heavy rainfall exceeding 120mm in hillside areas causes elevated risk of rapid flash flooding and mudslides across low-lying roads.",
@@ -65,6 +69,8 @@ object MockData {
             severity = AlertSeverity.ADVISORY,
             affectedArea = "Southern Coastal Islands",
             distanceKm = 14.0,
+            latitude = 7.7850,
+            longitude = 98.3210,
             timestamp = "3 hours ago • 11:15 Local Time",
             sourceLabel = "[SIMULATED DISASTER ALERT] Regional Weather Center",
             description = "Sustained wind speeds up to 55 km/h with gusts up to 75 km/h expected through late evening. Ferry services temporarily suspended.",
@@ -85,6 +91,8 @@ object MockData {
             type = "Certified Disaster Evacuation Partner",
             address = "42 Dibuk Road, Old Phuket Town",
             distanceKm = 1.2,
+            latitude = 7.8842,
+            longitude = 98.3891,
             pricePerNight = "$45 / night",
             rating = 4.9,
             reviewCount = 128,
@@ -100,6 +108,8 @@ object MockData {
             type = "High-Elevation Safe Hotel",
             address = "188 Phuket Hill Ridge, Kathu",
             distanceKm = 4.8,
+            latitude = 7.9124,
+            longitude = 98.3512,
             pricePerNight = "$65 / night",
             rating = 4.8,
             reviewCount = 94,
@@ -115,6 +125,8 @@ object MockData {
             type = "Government Designated Free Shelter",
             address = "Municipal Sports Complex, Amphoe Mueang",
             distanceKm = 2.5,
+            latitude = 7.8885,
+            longitude = 98.3970,
             pricePerNight = "FREE Emergency Shelter",
             rating = 4.6,
             reviewCount = 210,
@@ -157,16 +169,16 @@ object MockData {
     )
 
     val hazardZones = listOf(
-        HazardZone("hz-1", "Patong Beach Surge Zone", "Tsunami Coastal Hazard Zone", 0.35f, 0.45f, 0.18f),
-        HazardZone("hz-2", "Kathu Slope Mudslide Risk", "Hillside Flash Flood Area", 0.65f, 0.28f, 0.14f)
+        HazardZone("hz-1", "Patong Beach Surge Zone", "Tsunami Coastal Hazard Zone", 0.35f, 0.45f, 0.18f, latitude = 7.8920, longitude = 98.2980),
+        HazardZone("hz-2", "Kathu Slope Mudslide Risk", "Hillside Flash Flood Area", 0.65f, 0.28f, 0.14f, latitude = 7.9250, longitude = 98.3310)
     )
 
     val mapMarkers = listOf(
-        MapMarker("m-1", "Current Location (Phuket Town)", MarkerType.USER_LOCATION, 0.0, "Your real-time GPS location (Simulated)", 0.52f, 0.58f),
-        MapMarker("m-2", "Old Town Safe Haven Resort", MarkerType.SAFE_ACCOMMODATION, 1.2, "Elevation 25m - Safe Certified", 0.58f, 0.52f),
-        MapMarker("m-3", "Highland Hilltop Eco Hotel", MarkerType.SAFE_ACCOMMODATION, 4.8, "Elevation 85m - High Ground", 0.72f, 0.35f),
-        MapMarker("m-4", "Phuket Central Free Shelter", MarkerType.EMERGENCY_SHELTER, 2.5, "Designated Primary Civic Shelter", 0.45f, 0.65f),
-        MapMarker("m-5", "Coastal Hazard Zone", MarkerType.HAZARD_ZONE, 3.2, "Evacuation Zone A", 0.32f, 0.48f)
+        MapMarker("m-1", "Current Location (Phuket Town)", MarkerType.USER_LOCATION, 0.0, "Your real-time GPS location", 0.52f, 0.58f, latitude = 7.8804, longitude = 98.3923),
+        MapMarker("m-2", "Old Town Safe Haven Resort", MarkerType.SAFE_ACCOMMODATION, 1.2, "Elevation 25m - Safe Certified", 0.58f, 0.52f, latitude = 7.8842, longitude = 98.3891),
+        MapMarker("m-3", "Highland Hilltop Eco Hotel", MarkerType.SAFE_ACCOMMODATION, 4.8, "Elevation 85m - High Ground", 0.72f, 0.35f, latitude = 7.9124, longitude = 98.3512),
+        MapMarker("m-4", "Phuket Central Free Shelter", MarkerType.EMERGENCY_SHELTER, 2.5, "Designated Primary Civic Shelter", 0.45f, 0.65f, latitude = 7.8885, longitude = 98.3970),
+        MapMarker("m-5", "Coastal Hazard Zone", MarkerType.HAZARD_ZONE, 3.2, "Evacuation Zone A", 0.32f, 0.48f, latitude = 7.8920, longitude = 98.2980)
     )
 
     val initialEmergencyContacts = listOf(

@@ -2,27 +2,27 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="200dp"
     android:height="200dp"
-    android:viewportWidth="200"
-    android:viewportHeight="200">
+    android:viewportWidth="100"
+    android:viewportHeight="100">
 
-    <!-- White Background Container -->
+    <!-- Crisp White Rounded Card Background -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M0,0h200v200h-200z" />
+        android:pathData="M12,0 h76 a12,12 0 0,1 12,12 v76 a12,12 0 0,1 -12,12 h-76 a12,12 0 0,1 -12,-12 v-76 a12,12 0 0,1 12,-12 Z" />
 
-    <!-- Exact Black Map Pin Outer Shell -->
+    <!-- Pure Black Pin Outer Outline with Sharp Tip -->
     <path
         android:fillColor="#000000"
-        android:pathData="M100,22 C68,22 42,48 42,80 C42,118 88,148 100,158 C112,148 158,118 158,80 C158,48 132,22 100,22 Z" />
+        android:pathData="M50,12 C32.33,12 18,26.33 18,44 C18,65 42,82 50,88 C58,82 82,65 82,44 C82,26.33 67.67,12 50,12 Z" />
 
-    <!-- Inner Circle White Cutout -->
+    <!-- Inner White Pin Head Core -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M100,42 C82,42 66,56 66,75 C66,94 82,108 100,108 C118,108 134,94 134,75 C134,56 118,42 100,42 Z" />
+        android:pathData="M50,23 C38.4,23 29,32.4 29,44 C29,55.6 38.4,65 50,65 C61.6,65 71,55.6 71,44 C71,32.4 61.6,23 50,23 Z" />
 
-    <!-- Black "S" Curve Wave Cutout -->
+    <!-- Smooth Black S-Curve Wave inside Pin Head -->
     <path
         android:fillColor="#000000"
-        android:pathData="M84,72 C84,62 116,66 116,78 C116,86 106,92 94,92 C86,92 80,86 80,80 L66,80 C66,94 78,106 96,106 C116,106 130,92 130,78 C130,62 94,58 94,50 C94,44 102,40 110,40 C118,40 124,44 126,50 L140,50 C138,36 126,26 110,26 C90,26 78,40 78,54 C78,62 84,72 84,72 Z" />
+        android:pathData="M43,43 C43,37.5 57,39 57,45 C57,49 53,52 48,52 C44,52 41,49.5 41,46 L34,46 C34,53 40,58 48,58 C57,58 64,52 64,45 C64,36 46,36.5 46,31.5 C46,28.5 50,27 55,27 C59,27 62.5,28.5 63.5,31.5 L70.5,31.5 C69,24.5 63,21 55,21 C45.5,21 39,26.5 39,32 C39,38 43,43 43,43 Z" />
 
 </vector>

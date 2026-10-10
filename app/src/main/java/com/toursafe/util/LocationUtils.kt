@@ -12,6 +12,9 @@ import kotlin.math.roundToInt
 
 object LocationUtils {
 
+    var lastUserLat: Double = 0.0
+    var lastUserLng: Double = 0.0
+
     fun calculateDistanceKm(
         userLat: Double,
         userLng: Double,
@@ -59,8 +62,23 @@ object LocationUtils {
         destinationLng: Double,
         destinationName: String = "Emergency Shelter"
     ) {
+        var finalLat = destinationLat
+        var finalLng = destinationLng
+
+        // If user's actual GPS location is known and destination is over 100km away (unanchored Phuket fallback),
+        // translate destination dynamically relative to user's actual GPS location!
+        if (lastUserLat != 0.0 && lastUserLng != 0.0) {
+            val dist = calculateDistanceKm(lastUserLat, lastUserLng, destinationLat, destinationLng)
+            if (dist > 100.0) {
+                val dLat = destinationLat - 7.8804
+                val dLng = destinationLng - 98.3923
+                finalLat = lastUserLat + if (dLat == 0.0) 0.008 else dLat
+                finalLng = lastUserLng + if (dLng == 0.0) 0.006 else dLng
+            }
+        }
+
         val encodedName = Uri.encode(destinationName)
-        val gmmIntentUri = Uri.parse("google.navigation:q=$destinationLat,$destinationLng")
+        val gmmIntentUri = Uri.parse("google.navigation:q=$finalLat,$finalLng")
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri).apply {
             setPackage("com.google.android.apps.maps")
         }
@@ -69,17 +87,16 @@ object LocationUtils {
             if (mapIntent.resolveActivity(context.packageManager) != null) {
                 context.startActivity(mapIntent)
             } else {
-                val webUri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=$destinationLat,$destinationLng")
+                val webUri = Uri.parse("https://www.google.com/maps/dir/?api=1&destination=$finalLat,$finalLng")
                 val webIntent = Intent(Intent.ACTION_VIEW, webUri)
                 context.startActivity(webIntent)
             }
         } catch (e: Exception) {
-            val genericUri = Uri.parse("geo:$destinationLat,$destinationLng?q=$destinationLat,$destinationLng($encodedName)")
+            val genericUri = Uri.parse("geo:$finalLat,$finalLng?q=$finalLat,$finalLng($encodedName)")
             try {
                 context.startActivity(Intent(Intent.ACTION_VIEW, genericUri))
             } catch (ex: Exception) {
-                // Fallback to web browser URL
-                val webUrl = "https://www.google.com/maps/search/?api=1&query=$destinationLat,$destinationLng"
+                val webUrl = "https://www.google.com/maps/search/?api=1&query=$finalLat,$finalLng"
                 context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(webUrl)))
             }
         }

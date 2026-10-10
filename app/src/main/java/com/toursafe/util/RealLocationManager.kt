@@ -83,6 +83,8 @@ class RealLocationManager(private val context: Context) {
         }
 
         if (bestLast != null && (System.currentTimeMillis() - bestLast.time) < 60000) {
+            LocationUtils.lastUserLat = bestLast.latitude
+            LocationUtils.lastUserLng = bestLast.longitude
             val gpsLoc = UserGpsLocation(
                 latitude = bestLast.latitude,
                 longitude = bestLast.longitude,
@@ -113,6 +115,8 @@ class RealLocationManager(private val context: Context) {
                 if (!hasReceivedLocation) {
                     hasReceivedLocation = true
                     try { lm.removeUpdates(this) } catch (e: SecurityException) {}
+                    LocationUtils.lastUserLat = location.latitude
+                    LocationUtils.lastUserLng = location.longitude
                     val gpsLoc = UserGpsLocation(
                         latitude = location.latitude,
                         longitude = location.longitude,
@@ -141,6 +145,8 @@ class RealLocationManager(private val context: Context) {
                 hasReceivedLocation = true
                 try { lm.removeUpdates(listener) } catch (e: SecurityException) {}
                 if (bestLast != null) {
+                    LocationUtils.lastUserLat = bestLast.latitude
+                    LocationUtils.lastUserLng = bestLast.longitude
                     val gpsLoc = UserGpsLocation(
                         latitude = bestLast.latitude,
                         longitude = bestLast.longitude,
@@ -160,6 +166,8 @@ class RealLocationManager(private val context: Context) {
             onResult(LocationState.PermissionDenied)
         } catch (e: Exception) {
             if (bestLast != null) {
+                LocationUtils.lastUserLat = bestLast.latitude
+                LocationUtils.lastUserLng = bestLast.longitude
                 val gpsLoc = UserGpsLocation(
                     latitude = bestLast.latitude,
                     longitude = bestLast.longitude,

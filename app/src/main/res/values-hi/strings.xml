@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">TourSafe</string>
+
+    <!-- Navigation Bar -->
+    <string name="nav_home">होम</string>
+    <string name="nav_map">मानचित्र</string>
+    <string name="nav_alerts">अलर्ट</string>
+    <string name="nav_safe_places">सुरक्षित स्थान</string>
+    <string name="nav_profile">प्रोफाइल</string>
+
+    <!-- General Actions & Headers -->
+    <string name="dashboard_title">टूरसेफ डैशबोर्ड</string>
+    <string name="safety_status_header">सुरक्षा स्थिति</string>
+    <string name="update">अद्यतन करें</string>
+    <string name="quick_actions_header">त्वरित सुरक्षा कार्य</string>
+    <string name="emergency_sos">आपातकालीन SOS</string>
+    <string name="sos_subtitle">त्वरित संकेत</string>
+    <string name="safe_places">सुरक्षित स्थान</string>
+    <string name="shelters_hotels_subtitle">आश्रय और सुरक्षित होटल</string>
+    <string name="active_disaster_alerts">सक्रिय आपदा चेतावनी</string>
+    <string name="view_all">सभी देखें</string>
+    <string name="view_action_plan">कार्य योजना देखें</string>
+    <string name="km_away">%1$.1f किमी दूर</string>
+
+    <!-- Language Selector & Settings -->
+    <string name="select_language">भाषा चुनें</string>
+    <string name="select_language_desc">आधिकारिक आपदा अलर्ट और आपातकालीन निर्देशों के लिए अपनी पसंदीदा भाषा चुनें।</string>
+    <string name="confirm_language">भाषा की पुष्टि करें</string>
+    <string name="app_settings">ऐप सेटिंग्स</string>
+    <string name="preferences_regional">प्राथमिकताएं और क्षेत्र</string>
+    <string name="change_app_language">ऐप भाषा बदलें</string>
+    <string name="notifications_permissions">अधिसूचनाएं और अनुमतियां</string>
+    <string name="push_notifications">पुश अधिसूचनाएं</string>
+    <string name="push_notifications_desc">सामान्य सुरक्षा सलाह पर अपडेट प्राप्त करें</string>
+    <string name="priority_disaster_alerts">उच्च प्राथमिकता आपदा अलर्ट</string>
+    <string name="priority_disaster_alerts_desc">सुनामी या गंभीर मौसम अलर्ट के लिए साइलेंट मोड को ओवरराइड करें</string>
+    <string name="gps_permission_simulated">GPS स्थान अनुमति (सिम्युलेटेड)</string>
+    <string name="gps_permission_desc">TourSafe को स्थानीय खतरे के मानचित्र चेतावनियां प्रदान करने की अनुमति दें</string>
+
+    <!-- Emergency SOS & Voice SOS -->
+    <string name="emergency_sos_title">आपातकालीन SOS</string>
+    <string name="disaster_sos_assistance">आपदा SOS सहायता</string>
+    <string name="sos_explanation">अपनी रीयल-टाइम स्थिति को बचाव दलों और प्राथमिक संपर्कों तक भेजने के लिए नीचे दिए गए बटन को दबाकर रखें।</string>
+    <string name="tap_for_sos">SOS के लिए टैप करें</string>
+    <string name="signal_sent">संकेत भेजा गया</string>
+    <string name="confirm_sos_title">क्या आपातकालीन SOS संकेत की पुष्टि करें?</string>
+    <string name="confirm_sos_msg">यह तुरंत स्थानीय बचाव दल और संपर्कों को आपका आपातकालीन सिग्नल और स्थान भेजेगा।</string>
+    <string name="confirm_sos_btn">SOS पुष्टि करें</string>
+    <string name="cancel">रद्द करें</string>
+
+    <string name="voice_sos_tab">वॉयस SOS</string>
+    <string name="type_sos_tab">टेक्स्ट SOS</string>
+    <string name="voice_sos_instruction">अपनी पसंदीदा भाषा में अपना आपातकालीन संदेश बोलें। TourSafe तुरंत समीक्षा के लिए आवाज़ को टेक्स्ट में बदलता है।</string>
+    <string name="speech_language_spoken">बोली जाने वाली भाषा</string>
+    <string name="start_voice_sos">वॉयस SOS शुरू करें</string>
+    <string name="stop_listening">सुनना बंद करें</string>
+    <string name="retry_voice">पुनः प्रयास करें</string>
+    <string name="status_listening">आपका संदेश सुना जा रहा है...</string>
+    <string name="status_processing">आवाज़ को टेक्स्ट में बदला जा रहा है...</string>
+    <string name="status_idle">आपातकालीन संदेश बोलने के लिए वॉयस SOS शुरू करें पर टैप करें।</string>
+    <string name="review_emergency_msg">आपातकालीन संदेश समीक्षा एवं संपादन</string>
+    <string name="speech_processing_note">यदि ऑफ़लाइन भाषा पैक इंस्टॉल हैं तो स्पीच पहचान डिवाइस पर संसाधित होती है, या एंड्रॉइड स्पीच सेवाओं का उपयोग करती है।</string>
+    <string name="mic_permission_title">माइक अनुमति आवश्यक है</string>
+    <string name="mic_permission_desc">TourSafe को आपके आपातकालीन संदेश को टेक्स्ट में बदलने के लिए माइक्रोफोन अनुमति की आवश्यकता है।</string>
+    <string name="grant_mic_permission">माइक्रोफोन एक्सेस दें</string>
+    <string name="location_permission_title">GPS स्थान साझा करें</string>
+    <string name="location_permission_desc">बचाव टीमों को आपका स्थान खोजने में मदद करने के लिए संदेश में सटीक GPS निर्देशांक शामिल करें।</string>
+    <string name="shared_gps_coords">📍 आपके साझा किए गए GPS निर्देशांक:</string>
+    <string name="send_emergency_message">आपातकालीन संदेश भेजें</string>
+    <string name="confirm_send_msg_title">क्या अब आपातकालीन संदेश भेजें?</string>
+    <string name="confirm_send_msg_desc">भेजने से पहले अपने संदेश और स्थान की समीक्षा करें। आपकी स्पष्ट कार्रवाई के बिना आपातकालीन सेवाओं से स्वचालित रूप से संपर्क नहीं किया जाएगा।</string>
+
+    <string name="error_speech_not_available">इस डिवाइस पर स्पीच पहचान सेवा उपलब्ध नहीं है। कृपया नीचे दिए गए टेक्स्ट मोड का उपयोग करें।</string>
+    <string name="error_no_speech">कोई आवाज़ नहीं मिली। कृपया पुनः प्रयास करें पर टैप करें और स्पष्ट बोलें।</string>
+    <string name="error_mic_missing">माइक्रोफोन अनुमति अस्वीकार कर दी गई थी। सेटिंग्स में अनुमति सक्षम करें या टेक्स्ट मोड का उपयोग करें।</string>
+
+    <!-- Safe Accommodations & Reviews -->
+    <string name="safe_accommodations">सुरक्षित आवास</string>
+    <string name="search_placeholder">सुरक्षित होटल, आश्रय, स्थान खोजें...</string>
+    <string name="show_free_shelters_only">केवल निःशुल्क आपातकालीन आश्रय दिखाएं</string>
+    <string name="directions">दिशा-निर्देश</string>
+    <string name="reviews">समीक्षाएं</string>
+    <string name="write_review">सुरक्षा समीक्षा लिखें</string>
+    <string name="submit_review">समीक्षा सबमिट करें</string>
+</resources>

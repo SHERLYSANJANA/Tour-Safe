@@ -14,8 +14,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.toursafe.navigation.Screen
+import com.toursafe.R
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
 import com.toursafe.viewmodels.SettingsViewModel
@@ -33,7 +34,7 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TourSafeTopBar(
-                title = "App Settings",
+                title = stringResource(R.string.app_settings),
                 showBackButton = true,
                 onBackClick = onBackClick
             )
@@ -49,7 +50,7 @@ fun SettingsScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = "Preferences & Regional",
+                text = stringResource(R.string.preferences_regional),
                 style = MaterialTheme.typography.titleLarge,
                 color = TextPrimary
             )
@@ -75,7 +76,7 @@ fun SettingsScreen(
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
-                            text = "Change App Language",
+                            text = stringResource(R.string.change_app_language),
                             style = MaterialTheme.typography.titleMedium,
                             color = TextPrimary
                         )
@@ -89,31 +90,31 @@ fun SettingsScreen(
             }
 
             Text(
-                text = "Notifications & Permissions",
+                text = stringResource(R.string.notifications_permissions),
                 style = MaterialTheme.typography.titleLarge,
                 color = TextPrimary
             )
 
             // Toggle 1: Push Notifications
             SwitchSettingRow(
-                title = "Push Notifications",
-                subtitle = "Receive updates on general app safety advice",
+                title = stringResource(R.string.push_notifications),
+                subtitle = stringResource(R.string.push_notifications_desc),
                 checked = pushEnabled,
                 onCheckedChange = { viewModel.togglePushNotifications(it) }
             )
 
             // Toggle 2: High Priority Disaster Alerts
             SwitchSettingRow(
-                title = "High Priority Disaster Alerts",
-                subtitle = "Override silent mode for critical tsunami or weather alerts",
+                title = stringResource(R.string.priority_disaster_alerts),
+                subtitle = stringResource(R.string.priority_disaster_alerts_desc),
                 checked = disasterAlertsEnabled,
                 onCheckedChange = { viewModel.toggleDisasterAlerts(it) }
             )
 
             // Toggle 3: Location Access
             SwitchSettingRow(
-                title = "GPS Location Permission (Simulated)",
-                subtitle = "Allow TourSafe to provide localized hazard map warnings",
+                title = stringResource(R.string.gps_permission_simulated),
+                subtitle = stringResource(R.string.gps_permission_desc),
                 checked = locationPermissionMock,
                 onCheckedChange = { viewModel.toggleLocationPermissionMock(it) }
             )

@@ -5,8 +5,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.DirectionsRun
 import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.DirectionsRun
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -18,7 +18,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toursafe.R
 import com.toursafe.data.models.SafetyLevel
 import com.toursafe.data.models.UserSafetyStatus
 import com.toursafe.ui.theme.*
@@ -30,7 +32,7 @@ fun StatusBanner(
 ) {
     val (bgColor, borderColor, statusText, iconVector) = when (status.level) {
         SafetyLevel.SAFE -> Quadruple(SafetyGreenBg, SafetyGreen, "I'm Safe", Icons.Default.CheckCircle)
-        SafetyLevel.MOVING_TO_SAFETY -> Quadruple(WarningAmberBg, WarningAmber, "Moving to Safety", Icons.Default.DirectionsRun)
+        SafetyLevel.MOVING_TO_SAFETY -> Quadruple(WarningAmberBg, WarningAmber, "Moving to Safety", Icons.AutoMirrored.Filled.DirectionsRun)
         SafetyLevel.NEED_HELP -> Quadruple(AlertRedBg, AlertRed, "I Need Help", Icons.Default.Warning)
         SafetyLevel.CRITICAL_WARNING -> Quadruple(AlertRedBg, AlertRed, "Critical Hazard Zone", Icons.Default.Warning)
     }
@@ -59,7 +61,7 @@ fun StatusBanner(
                     Spacer(modifier = Modifier.width(10.dp))
                     Column {
                         Text(
-                            text = "SAFETY STATUS",
+                            text = stringResource(R.string.safety_status_header),
                             style = MaterialTheme.typography.labelSmall,
                             color = TextSecondary
                         )
@@ -77,7 +79,7 @@ fun StatusBanner(
                     shape = RoundedCornerShape(12.dp)
                 ) {
                     Text(
-                        text = "Update",
+                        text = stringResource(R.string.update),
                         color = Color.Black,
                         style = MaterialTheme.typography.labelLarge
                     )

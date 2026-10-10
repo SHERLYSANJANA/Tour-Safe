@@ -1,11 +1,10 @@
 package com.toursafe.util
 
+import android.app.LocaleManager as SystemLocaleManager
 import android.content.Context
 import android.content.ContextWrapper
 import android.os.Build
 import android.os.LocaleList
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
 import java.util.Locale
 
 object LocaleManager {
@@ -22,8 +21,22 @@ object LocaleManager {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         prefs.edit().putString(KEY_LANGUAGE, languageCode).apply()
 
-        val appLocales = LocaleListCompat.forLanguageTags(languageCode)
-        AppCompatDelegate.setApplicationLocales(appLocales)
+        val locale = when (languageCode) {
+            "zh" -> Locale.SIMPLIFIED_CHINESE
+            "es" -> Locale("es")
+            "fr" -> Locale("fr")
+            "de" -> Locale("de")
+            "ja" -> Locale("ja")
+            "th" -> Locale("th")
+            "hi" -> Locale("hi")
+            else -> Locale.ENGLISH
+        }
+        Locale.setDefault(locale)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val systemLocaleManager = context.getSystemService(SystemLocaleManager::class.java)
+            systemLocaleManager?.applicationLocales = LocaleList(locale)
+        }
     }
 
     fun wrapContext(context: Context): ContextWrapper {

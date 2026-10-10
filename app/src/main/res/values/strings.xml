@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">TourSafe</string>
+
+    <!-- Navigation Bar -->
+    <string name="nav_home">Home</string>
+    <string name="nav_map">Map</string>
+    <string name="nav_alerts">Alerts</string>
+    <string name="nav_safe_places">Safe Places</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- General Actions & Headers -->
+    <string name="dashboard_title">TourSafe Dashboard</string>
+    <string name="safety_status_header">SAFETY STATUS</string>
+    <string name="update">Update</string>
+    <string name="quick_actions_header">Quick Safety Actions</string>
+    <string name="emergency_sos">Emergency SOS</string>
+    <string name="sos_subtitle">Instant Signal</string>
+    <string name="safe_places">Safe Places</string>
+    <string name="shelters_hotels_subtitle">Shelters &amp; Hotels</string>
+    <string name="active_disaster_alerts">Active Disaster Alerts</string>
+    <string name="view_all">View All</string>
+    <string name="view_action_plan">View Action Plan</string>
+    <string name="km_away">%1$.1f km away</string>
+
+    <!-- Language Selector & Settings -->
+    <string name="select_language">Select Language</string>
+    <string name="select_language_desc">Choose your preferred language for official disaster alerts and emergency instructions.</string>
+    <string name="confirm_language">Confirm Language</string>
+    <string name="app_settings">App Settings</string>
+    <string name="preferences_regional">Preferences &amp; Regional</string>
+    <string name="change_app_language">Change App Language</string>
+    <string name="notifications_permissions">Notifications &amp; Permissions</string>
+    <string name="push_notifications">Push Notifications</string>
+    <string name="push_notifications_desc">Receive updates on general app safety advice</string>
+    <string name="priority_disaster_alerts">High Priority Disaster Alerts</string>
+    <string name="priority_disaster_alerts_desc">Override silent mode for critical tsunami or weather alerts</string>
+    <string name="gps_permission_simulated">GPS Location Permission (Simulated)</string>
+    <string name="gps_permission_desc">Allow TourSafe to provide localized hazard map warnings</string>
+
+    <!-- Emergency SOS & Voice SOS -->
+    <string name="emergency_sos_title">Emergency SOS</string>
+    <string name="disaster_sos_assistance">DISASTER SOS ASSISTANCE</string>
+    <string name="sos_explanation">Press and hold the button below to dispatch your real-time coordinates to emergency responders and primary contacts.</string>
+    <string name="tap_for_sos">TAP FOR SOS</string>
+    <string name="signal_sent">SIGNAL SENT</string>
+    <string name="confirm_sos_title">Confirm Emergency SOS Signal?</string>
+    <string name="confirm_sos_msg">This will immediately transmit your emergency beacon and coordinates to local disaster response teams and emergency contacts.</string>
+    <string name="confirm_sos_btn">CONFIRM SOS</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="voice_sos_tab">Voice SOS</string>
+    <string name="type_sos_tab">Typed SOS</string>
+    <string name="voice_sos_instruction">Speak your emergency message in your preferred language. TourSafe converts speech to text for instant review.</string>
+    <string name="speech_language_spoken">Spoken Language</string>
+    <string name="start_voice_sos">Start Voice SOS</string>
+    <string name="stop_listening">Stop Listening</string>
+    <string name="retry_voice">Retry Voice Input</string>
+    <string name="status_listening">Listening for your speech...</string>
+    <string name="status_processing">Processing speech to text...</string>
+    <string name="status_idle">Tap Start Voice SOS to speak your emergency message.</string>
+    <string name="review_emergency_msg">Review &amp; Edit Emergency Message</string>
+    <string name="speech_processing_note">Speech recognition processes audio on-device when offline language packs are installed, or uses Android Speech Services securely.</string>
+    <string name="mic_permission_title">Microphone Permission Required</string>
+    <string name="mic_permission_desc">TourSafe needs access to your microphone to convert your spoken emergency message into text.</string>
+    <string name="grant_mic_permission">Grant Microphone Access</string>
+    <string name="location_permission_title">Share GPS Location</string>
+    <string name="location_permission_desc">Include exact GPS coordinates with your emergency message to help rescue teams locate you.</string>
+    <string name="shared_gps_coords">📍 Your Shared GPS Coordinates:</string>
+    <string name="send_emergency_message">Send Emergency Message</string>
+    <string name="confirm_send_msg_title">Send Emergency Message Now?</string>
+    <string name="confirm_send_msg_desc">Review your message and location before broadcasting to emergency services and primary contacts. Emergency services will NOT be contacted automatically without your explicit action.</string>
+
+    <string name="error_speech_not_available">Speech recognition service is unavailable on this device. Please use typing mode below.</string>
+    <string name="error_no_speech">No speech detected. Please tap Retry Voice Input and speak clearly.</string>
+    <string name="error_mic_missing">Microphone permission was denied. Enable permission in settings or use typed input.</string>
+
+    <!-- Safe Accommodations & Reviews -->
+    <string name="safe_accommodations">Safe Accommodations</string>
+    <string name="search_placeholder">Search safe hotel, shelter, location...</string>
+    <string name="show_free_shelters_only">Show Emergency Free Shelters Only</string>
+    <string name="directions">Directions</string>
+    <string name="reviews">Reviews</string>
+    <string name="write_review">Write Safety Review</string>
+    <string name="submit_review">Submit Review</string>
+</resources>

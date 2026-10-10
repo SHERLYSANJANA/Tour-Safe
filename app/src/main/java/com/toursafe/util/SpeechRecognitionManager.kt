@@ -71,7 +71,7 @@ class SpeechRecognitionManager(private val context: Context) {
                 override fun onPartialResults(partialResults: Bundle?) {
                     val matches = partialResults?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                     val text = matches?.firstOrNull()
-                    if (!text.isNull_or_blank()) {
+                    if (text != null && text.isNotBlank()) {
                         onStateChange(SpeechState.Success(text))
                     }
                 }
@@ -115,6 +115,4 @@ class SpeechRecognitionManager(private val context: Context) {
             speechRecognizer = null
         }
     }
-
-    private fun String?.isNull_or_blank(): Boolean = this == null || this.trim().isEmpty()
 }

@@ -15,9 +15,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.toursafe.R
 import com.toursafe.navigation.Screen
 import com.toursafe.ui.components.AlertCard
 import com.toursafe.ui.components.StatusBanner
@@ -26,7 +30,7 @@ import com.toursafe.viewmodels.HomeViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel,
+    viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory),
     onNavigate: (String) -> Unit
 ) {
     val status by viewModel.userStatus.collectAsState()
@@ -51,12 +55,12 @@ fun HomeScreen(
                 ) {
                     Column {
                         Text(
-                            text = "TourSafe Dashboard",
+                            text = stringResource(R.string.dashboard_title),
                             style = MaterialTheme.typography.headlineMedium,
                             color = TextPrimary
                         )
                         Text(
-                            text = "Location: ${status.locationName}",
+                            text = status.locationName,
                             style = MaterialTheme.typography.bodyMedium,
                             color = TextSecondary
                         )
@@ -86,7 +90,7 @@ fun HomeScreen(
             // Quick Actions Grid
             item {
                 Text(
-                    text = "Quick Safety Actions",
+                    text = stringResource(R.string.quick_actions_header),
                     style = MaterialTheme.typography.titleLarge,
                     color = TextPrimary
                 )
@@ -97,8 +101,8 @@ fun HomeScreen(
                 ) {
                     QuickActionButton(
                         modifier = Modifier.weight(1f),
-                        title = "Emergency SOS",
-                        subtitle = "Instant Signal",
+                        title = stringResource(R.string.emergency_sos),
+                        subtitle = stringResource(R.string.sos_subtitle),
                         icon = Icons.Default.Sos,
                         bgColor = AlertRedBg,
                         borderColor = AlertRed,
@@ -107,8 +111,8 @@ fun HomeScreen(
                     )
                     QuickActionButton(
                         modifier = Modifier.weight(1f),
-                        title = "Safe Places",
-                        subtitle = "Shelters & Hotels",
+                        title = stringResource(R.string.safe_places),
+                        subtitle = stringResource(R.string.shelters_hotels_subtitle),
                         icon = Icons.Default.Hotel,
                         bgColor = SurfaceNavy,
                         borderColor = AccentCyan,
@@ -126,12 +130,12 @@ fun HomeScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Active Disaster Alerts",
+                        text = stringResource(R.string.active_disaster_alerts),
                         style = MaterialTheme.typography.titleLarge,
                         color = TextPrimary
                     )
                     TextTextButton(
-                        text = "View All (${alerts.size})",
+                        text = "${stringResource(R.string.view_all)} (${alerts.size})",
                         onClick = { onNavigate(Screen.Alerts.route) }
                     )
                 }

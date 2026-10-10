@@ -1,20 +1,26 @@
 package com.toursafe.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.toursafe.data.mock.MockData
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.toursafe.data.models.DisasterAlert
 import com.toursafe.data.models.SafetyLevel
 import com.toursafe.data.models.UserSafetyStatus
+import com.toursafe.data.repository.MockSafetyRepository
+import com.toursafe.data.repository.SafetyRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(
+    private val repository: SafetyRepository = MockSafetyRepository()
+) : ViewModel() {
 
-    private val _userStatus = MutableStateFlow(UserSafetyStatus())
+    private val _userStatus = MutableStateFlow(repository.getUserStatus())
     val userStatus: StateFlow<UserSafetyStatus> = _userStatus.asStateFlow()
 
-    private val _alerts = MutableStateFlow(MockData.alerts)
+    private val _alerts = MutableStateFlow(repository.getAlerts())
     val alerts: StateFlow<List<DisasterAlert>> = _alerts.asStateFlow()
 
     fun updateSafetyLevel(newLevel: SafetyLevel, customMessage: String? = null) {
@@ -30,5 +36,13 @@ class HomeViewModel : ViewModel() {
             lastUpdatedText = "Just now",
             statusMessage = msg
         )
+    }
+
+    companion object {
+        val Factory: ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                HomeViewModel(MockSafetyRepository())
+            }
+        }
     }
 }

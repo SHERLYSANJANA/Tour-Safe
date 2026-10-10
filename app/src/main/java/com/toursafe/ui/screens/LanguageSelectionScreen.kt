@@ -16,7 +16,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.toursafe.R
 import com.toursafe.data.models.LanguageOption
 import com.toursafe.ui.components.TourSafeTopBar
 import com.toursafe.ui.theme.*
@@ -28,11 +31,12 @@ fun LanguageSelectionScreen(
     onLanguageConfirmed: () -> Unit
 ) {
     val languages by viewModel.languages.collectAsState()
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
             TourSafeTopBar(
-                title = "Select Language"
+                title = stringResource(R.string.select_language)
             )
         },
         containerColor = BackgroundNavy
@@ -46,7 +50,7 @@ fun LanguageSelectionScreen(
         ) {
             Column {
                 Text(
-                    text = "Choose your preferred language for official disaster alerts and emergency instructions.",
+                    text = stringResource(R.string.select_language_desc),
                     style = MaterialTheme.typography.bodyMedium,
                     color = TextSecondary
                 )
@@ -59,7 +63,10 @@ fun LanguageSelectionScreen(
                     items(languages) { lang ->
                         LanguageItemCard(
                             language = lang,
-                            onSelect = { viewModel.selectLanguage(lang.code) }
+                            onSelect = {
+                                viewModel.selectLanguage(lang.code, context)
+                                onLanguageConfirmed()
+                            }
                         )
                     }
                 }
@@ -74,7 +81,7 @@ fun LanguageSelectionScreen(
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Text(
-                    text = "Confirm Language",
+                    text = stringResource(R.string.confirm_language),
                     color = Color.Black,
                     style = MaterialTheme.typography.titleMedium
                 )
